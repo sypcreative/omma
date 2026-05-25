@@ -1,0 +1,101 @@
+// _bootstrap-variables.scss — Override de variables Bootstrap con !default.
+//
+// Este archivo SOLO se usa desde _bootstrap-loads.scss vía @import.
+// En ese contexto, las variables del tema ya están en scope global
+// (abstracts/functions y abstracts/variables-theme se importaron antes).
+//
+// NO añadir @use aquí: este archivo debe ser @importable por _bootstrap-loads.scss.
+
+// ─── Colores ──────────────────────────────────────────────────────────────────
+$white:        #ffffff;
+$black:        #000000;
+$body-color:   $color-charcoal;
+$body-bg:      $color-vanilla;
+
+$primary:      $color-pink;
+$secondary:    $color-purple;
+$success:      $color-green;
+$info:         $color-blue;
+$warning:      $color-orange;
+$danger:       $color-pink-800;
+$light:        $color-vanilla;
+$dark:         $color-charcoal;
+
+$link-color:       $color-charcoal;
+$link-hover-color: $color-pink;
+
+// ─── Tipografía ───────────────────────────────────────────────────────────────
+$font-family-sans-serif: $font-family-light;
+$font-size-base:         1rem;
+$line-height-base:       1.2;
+
+$h1-font-size: $font-h1;
+$h2-font-size: $font-h2;
+$h3-font-size: $font-h3;
+$h4-font-size: $font-h4;
+$h5-font-size: $font-h5;
+$h6-font-size: $font-h6;
+
+$headings-font-family:  $font-family-black;
+$headings-font-weight:  900;
+$headings-line-height:  $lh-h1;
+$headings-color:        inherit;
+
+// ─── Espaciado ────────────────────────────────────────────────────────────────
+$spacer: 1rem;
+
+// ─── Botones ──────────────────────────────────────────────────────────────────
+$btn-border-radius:    $radius-sm;
+$btn-border-radius-lg: $radius-sm;
+$btn-font-weight:      500;
+$btn-padding-y:        0.625rem;
+$btn-padding-x:        1.25rem;
+
+// ─── Bordes ───────────────────────────────────────────────────────────────────
+$border-radius:    $radius-sm;
+$border-radius-sm: $radius-sm;
+$border-radius-lg: $radius-lg;
+
+// ─── Sombras ──────────────────────────────────────────────────────────────────
+$box-shadow:    0px 2px 18px 0px rgba(0, 0, 0, 0.04);
+$box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+// ─── Cards ────────────────────────────────────────────────────────────────────
+$card-border-width:  0;
+$card-border-radius: 1.875rem;
+$card-bg:            $color-vanilla;
+$card-box-shadow:    $box-shadow;
+
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+$navbar-nav-link-padding-x: 0.94rem;
+
+// ─── Accordion ────────────────────────────────────────────────────────────────
+$accordion-bg:                     transparent;
+$accordion-border-width:           0;
+$accordion-padding-x:              0;
+$accordion-body-padding-x:         0;
+$accordion-button-active-bg:       transparent;
+$accordion-button-active-color:    $color-charcoal;
+$accordion-button-focus-box-shadow: 0;
+
+// ─── Dropdown ─────────────────────────────────────────────────────────────────
+$dropdown-border-width:  0;
+$dropdown-border-radius: 1.5rem;
+$dropdown-bg:            $white;
+$dropdown-color:         $color-charcoal;
+$dropdown-link-color:    $color-charcoal;
+$dropdown-link-hover-bg: rgba($color-charcoal, 0.08);
+
+// ─── $grid-breakpoints y $container-max-widths ────────────────────────────────
+// Ya definidos en abstracts/variables-theme.scss con nombres Bootstrap.
+// Bootstrap los hereda automáticamente vía la cadena @import.
+
+// ─── Dark mode deshabilitado ──────────────────────────────────────────────────
+$enable-dark-mode: false;
+
+// ─── Smooth scroll nativo deshabilitado ──────────────────────────────────────
+// Bootstrap añade scroll-behavior: smooth en :root, lo que interfiere con Lenis:
+// cada vez que Lenis mueve scrollTop un píxel, el browser aplica su propia
+// transición CSS encima → doble suavizado → scroll lento+rápido irregular.
+$enable-smooth-scroll: false;

@@ -1,0 +1,18 @@
+@use 'sass:math';
+@use 'sass:string';
+
+// Convierte px a rem tomando 16px como base.
+@function to-rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+// Reemplaza $search por $replace en $string (necesario para SVG inline en data URIs).
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  @if $index {
+    @return string.slice($string, 1, $index - 1)
+           + $replace
+           + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+  @return $string;
+}

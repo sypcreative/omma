@@ -1,0 +1,152 @@
+// =============================================================================
+// _typography.scss — Utility classes tipográficas
+// =============================================================================
+//
+// ÚNICA FUENTE DE VERDAD para font-size + line-height en todo el proyecto.
+// Ningún componente debe declarar font-size o font-family directamente:
+// debe componer estas clases o usar los mixins de _mixins.scss.
+//
+// -----------------------------------------------------------------------------
+// SISTEMA DE FUENTES
+// -----------------------------------------------------------------------------
+//
+// El proyecto tiene tres familias tipográficas definidas en _variables-theme.scss:
+//
+//   $font-family-light  → "PlusJakarta-Light"  weight 300  (cuerpo, texto corrido)
+//   $font-family-black  → "PlusJakarta-Bold"   weight 700  (titulares, énfasis fuerte)
+//   $font-family-relieo → "Relieo"             weight 400  (display decorativo)
+//
+// Cada familia tiene su $font-weight-* asociado. El mixin _type recibe ambos
+// para que el browser haga match exacto en el @font-face sin usar síntesis.
+//
+// Los archivos .woff2 / .woff de cada familia se declaran en _fonts.scss con
+// @font-face y se copian a assets/dist/fonts/ durante el build (tarea fonts()
+// del gulpfile con { encoding: false } para no corromper binarios).
+//
+// En el CSS crítico inlineado (critical.css → <head>) se usan rutas absolutas
+// mediante el placeholder OMMA_FONTS_URI, que PHP sustituye en tiempo de render
+// con get_template_directory_uri(). Esto evita que las URL relativas dentro de
+// un <style> inline se resuelvan contra la URL de la página en lugar del tema.
+//
+// -----------------------------------------------------------------------------
+// ESCALA TIPOGRÁFICA — $type-scale
+// -----------------------------------------------------------------------------
+//
+// El mapa $type-scale es el único lugar donde se define qué tamaño corresponde
+// a cada nivel. Está construido a partir de las variables de _variables-theme.scss:
+//
+//   $font-display / $lh-display → 128px / 0.95  (nivel display)
+//   $font-h1 / $lh-h1           →  72px / 0.95
+//   ...
+//   $font-small / $lh-small     →  14px / 1.35
+//
+// Para añadir un nuevo nivel (p. ej. 'xl-display'):
+//   1. Declara $font-xl-display y $lh-xl-display en _variables-theme.scss.
+//   2. Añade una entrada al mapa $type-scale aquí abajo.
+//   → Las clases .h-xl-display, .fs-xl-display y todas sus variantes
+//     responsive se generan automáticamente.
+//
+// -----------------------------------------------------------------------------
+// CLASES GENERADAS
+// -----------------------------------------------------------------------------
+//
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │ Familia    │ Prefijo │ Ejemplo          │ Descripción                   │
+// ├─────────────────────────────────────────────────────────────────────────┤
+// │ Black/Bold │ .h-     │ .h-1, .h-display │ PlusJakarta Bold + tamaño     │
+// │ Light/Reg  │ .fs-    │ .fs-3, .fs-small │ PlusJakarta Regular + tamaño  │
+// │ Relieo     │ .r-     │ .r-display       │ Relieo + tamaño display       │
+// └─────────────────────────────────────────────────────────────────────────┘
+//
+// Responsive (sm / md / lg / xl):
+//   .h-md-2      → en ≥768px aplica PlusJakarta Bold al tamaño h2
+//   .fs-lg-3     → en ≥992px aplica PlusJakarta Regular al tamaño h3
+//   .r-md-display → en ≥768px aplica Relieo al tamaño display
+//
+// =============================================================================
+
+@use 'mixins' as *;   // @forward de variables-theme (variables + bp-up mixin)
+@use 'sass:list';
+
+// ─── Escala tipográfica ───────────────────────────────────────────────────────
+// Añadir una entrada aquí es suficiente para generar todas las clases y
+// variantes responsive correspondientes.
+
+$type-scale: (
+  'display': ($font-display, $lh-display),
+  '0':       ($font-h0,      $lh-h0),
+  '1':       ($font-h1,      $lh-h1),
+  '2':       ($font-h2,      $lh-h2),
+  '3':       ($font-h3,      $lh-h3),
+  '4':       ($font-h4,      $lh-h4),
+  '5':       ($font-h5,      $lh-h5),
+  '6':       ($font-h6,      $lh-h6),
+  'small':   ($font-small,   $lh-small),
+);
+
+// Relieo: fuente decorativa para titulares, disponible de display hasta h6.
+$relieo-scale: (
+  'display': ($font-display, $lh-display),
+  '0':       ($font-h0,      $lh-h0),
+  '1':       ($font-h1,      $lh-h1),
+  '2':       ($font-h2,      $lh-h2),
+  '3':       ($font-h3,      $lh-h3),
+  '4':       ($font-h4,      $lh-h4),
+  '5':       ($font-h5,      $lh-h5),
+  '6':       ($font-h6,      $lh-h6),
+);
+
+// Breakpoints responsive (xs = base sin sufijo, xxl queda fuera del sistema de clases)
+$_type-bps: ('sm', 'md', 'lg', 'xl');
+
+// ─── Mixin interno ────────────────────────────────────────────────────────────
+// $weight debe coincidir con el font-weight declarado en @font-face (_fonts.scss)
+// para que el browser haga match exacto y no use síntesis de negrita/light.
+@mixin _type($size, $lh, $family, $weight) {
+  font-family:  $family;
+  font-weight:  $weight;
+  font-size:    $size;
+  line-height:  $lh;
+}
+
+// ─── Clases base: PlusJakarta ─────────────────────────────────────────────────
+@each $key, $values in $type-scale {
+  $size: list.nth($values, 1);
+  $lh:   list.nth($values, 2);
+
+  .h-#{$key}  { @include _type($size, $lh, $font-family-black,  $font-weight-black); }
+  .fs-#{$key} { @include _type($size, $lh, $font-family-light,  $font-weight-light); }
+}
+
+// ─── Clases base: Relieo ──────────────────────────────────────────────────────
+@each $key, $values in $relieo-scale {
+  $size: list.nth($values, 1);
+  $lh:   list.nth($values, 2);
+
+  .r-#{$key} { @include _type($size, $lh, $font-family-relieo, $font-weight-relieo); }
+}
+
+// ─── Clases responsive: PlusJakarta ──────────────────────────────────────────
+@each $bp in $_type-bps {
+  @include bp-up($bp) {
+    @each $key, $values in $type-scale {
+      $size: list.nth($values, 1);
+      $lh:   list.nth($values, 2);
+
+      .h-#{$bp}-#{$key}  { @include _type($size, $lh, $font-family-black,  $font-weight-black); }
+      .fs-#{$bp}-#{$key} { @include _type($size, $lh, $font-family-light,  $font-weight-light); }
+    }
+  }
+}
+
+// ─── Clases responsive: Relieo ────────────────────────────────────────────────
+@each $bp in $_type-bps {
+  @include bp-up($bp) {
+    @each $key, $values in $relieo-scale {
+      $size: list.nth($values, 1);
+      $lh:   list.nth($values, 2);
+
+      .r-#{$bp}-#{$key} { @include _type($size, $lh, $font-family-relieo, $font-weight-relieo); }
+    }
+  }
+}

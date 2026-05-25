@@ -1,0 +1,90 @@
+// _variables-theme.scss — Single source of truth para el design system.
+// @forward 'functions' re-exporta to-rem y str-replace a cualquier archivo
+// que haga @use '../abstracts/variables-theme' as *.
+
+@forward "functions";
+@use "functions" as *;
+
+// ─── Paleta ──────────────────────────────────────────────────────────────────
+$color-charcoal: #0e0e0c;
+$color-vanilla: #fffaee;
+$color-pink: #e02157;
+$color-purple: #6e6bae;
+$color-orange: #ee7a30;
+$color-blue: #2c90cf;
+$color-green: #49ae54;
+
+$color-green-200: #9bdda2;
+$color-green-800: #22702b;
+$color-pink-200: #e98da7;
+$color-pink-800: #af103d;
+$color-purple-200: #a9a7db;
+$color-purple-800: #3d3991;
+$color-orange-200: #fcbc93;
+$color-orange-800: #bd4f08;
+$color-blue-200: #a3d7f8;
+$color-blue-800: #0c6197;
+
+// ─── Familias tipográficas ────────────────────────────────────────────────────
+$font-family-light:  "PlusJakarta-Light", system-ui, sans-serif;
+$font-family-black:  "PlusJakarta-Bold",  system-ui, sans-serif;
+$font-family-relieo: "Relieo",            system-ui, sans-serif;
+
+// Pesos asociados a cada familia — deben coincidir con font-weight en _fonts.scss
+$font-weight-light:  300;
+$font-weight-black:  700;
+$font-weight-relieo: 400;
+
+// ─── Escala tipográfica (px → rem) ────────────────────────────────────────────
+$font-display: to-rem(128);
+$lh-display: 0.95;
+$font-h0: to-rem(88);
+$lh-h0: 0.95;
+$font-h1: to-rem(72);
+$lh-h1: 0.95;
+$font-h2: to-rem(56);
+$lh-h2: 1.05;
+$font-h3: to-rem(48);
+$lh-h3: 1.15;
+$font-h4: to-rem(32);
+$lh-h4: 1.35;
+$font-h5: to-rem(24);
+$lh-h5: 1.35;
+$font-h6: to-rem(16);
+$lh-h6: 1.35;
+$font-small: to-rem(14);
+$lh-small: 1.35;
+
+$ls-tight: -0.03em;
+$ls-normal: 0;
+
+// ─── Border radius ────────────────────────────────────────────────────────────
+$radius-sm: 10px; // botones y componentes pequeños
+$radius-lg: 20px; // componentes grandes
+
+// ─── Grid breakpoints (nombres Bootstrap para override directo) ───────────────
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1900px,
+  xxl: 2500px,
+);
+
+// ─── Container widths (nombres Bootstrap para override directo) ───────────────
+$container-max-widths: (
+  sm: 640px,
+  md: 864px,
+  lg: 1376px,
+  xl: 1664px,
+  xxl: 1712px,
+);
+
+// ─── Espacio base ─────────────────────────────────────────────────────────────
+$spacer: 1rem;
+
+// ─── Helpers para data URIs SVG (# → %23) ────────────────────────────────────
+$svg-color: str-replace(#{$color-charcoal}, "#", "%23");
+$svg-color-light: str-replace(#{$color-vanilla}, "#", "%23");
+$svg-color-pink: str-replace(#{$color-pink}, "#", "%23");

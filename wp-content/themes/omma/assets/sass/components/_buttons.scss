@@ -1,0 +1,103 @@
+// components/_buttons.scss — Botones custom del tema.
+//
+// Overrides y variantes propias sobre Bootstrap .btn.
+// Usar estas clases en lugar de las nativas de Bootstrap para mantener
+// consistencia con el design system de OMMA.
+//
+// Clases disponibles:
+//   .btn-omma          Base: fondo gris cálido / texto charcoal
+//   .btn-omma-primary  Fondo $color-pink / texto blanco
+//   .btn-omma-dark     Fondo $color-charcoal / texto vanilla
+//   .btn-omma-outline  Transparente con borde charcoal
+//
+// Todas incluyen la flecha ↗ mediante ::after y transición de 200ms.
+
+@use '../abstracts/mixins' as *;
+@use 'sass:color';
+
+// ─── Background base ──────────────────────────────────────────────────────────
+// Mezcla 8% de $color-charcoal sobre $color-vanilla → gris cálido ≈ #E8E6E1
+$_bg-base: color.mix($color-charcoal, $color-vanilla, 8%);
+
+// ─── Propiedades comunes a todas las variantes ────────────────────────────────
+%_btn-omma {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             0.375em;
+  padding:         0.75rem 2.25rem;
+  border-radius:   $radius-sm;
+  font-family:     $font-family-light;
+  font-weight:     $font-weight-light;
+  font-size:       inherit;
+  line-height:     1.2;
+  text-decoration: none;
+  cursor:          pointer;
+  transition:      background-color 200ms ease,
+                   color            200ms ease,
+                   border-color     200ms ease;
+
+  &::after {
+    content: '↗';
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+}
+
+// ─── .btn-omma — base (gris cálido / charcoal) ───────────────────────────────
+.btn-omma {
+  @extend %_btn-omma;
+  background-color: $_bg-base;
+  color:            $color-charcoal;
+  border:           none;
+
+  &:hover {
+    background-color: color.mix($color-charcoal, $_bg-base, 14%);
+    color:            $color-charcoal;
+    text-decoration:  none;
+  }
+}
+
+// ─── .btn-omma-primary — pink / blanco ───────────────────────────────────────
+.btn-omma-primary {
+  @extend %_btn-omma;
+  background-color: $color-pink;
+  color:            #fff;
+  border:           none;
+
+  &:hover {
+    background-color: color.scale($color-pink, $lightness: -12%);
+    color:            #fff;
+    text-decoration:  none;
+  }
+}
+
+// ─── .btn-omma-dark — charcoal / vanilla ─────────────────────────────────────
+.btn-omma-dark {
+  @extend %_btn-omma;
+  background-color: $color-charcoal;
+  color:            $color-vanilla;
+  border:           none;
+
+  &:hover {
+    background-color: color.scale($color-charcoal, $lightness: 18%);
+    color:            $color-vanilla;
+    text-decoration:  none;
+  }
+}
+
+// ─── .btn-omma-outline — transparente con borde charcoal ─────────────────────
+.btn-omma-outline {
+  @extend %_btn-omma;
+  background-color: transparent;
+  color:            $color-charcoal;
+  border:           1px solid $color-charcoal;
+
+  &:hover {
+    background-color: $color-charcoal;
+    color:            $color-vanilla;
+    text-decoration:  none;
+  }
+}

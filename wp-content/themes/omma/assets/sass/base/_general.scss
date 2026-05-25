@@ -1,0 +1,36 @@
+@use '../abstracts/mixins' as *;
+
+html,
+body {
+  height: auto;
+  overscroll-behavior-x: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  background-color: $color-vanilla;
+  color: $color-charcoal;
+  font-family: $font-family-light;
+}
+
+main {
+  overflow: clip;
+}
+
+footer {
+  margin-top: auto;
+}
+
+a {
+  color: $color-charcoal;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

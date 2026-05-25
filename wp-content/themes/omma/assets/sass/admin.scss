@@ -1,0 +1,29 @@
+// admin.scss — Estilos para el editor de bloques de WordPress.
+// Compilado a assets/dist/css/admin.css.
+//
+// Usa @import en todo el archivo. Restricción conocida: @use no puede
+// aparecer dentro de reglas CSS (@at-root), y Sass prohíbe mezclar @use
+// e @import en el mismo archivo.
+
+// ── Config del tema ───────────────────────────────────────────────────────────
+@import 'abstracts/functions';
+@import 'abstracts/variables-theme';
+@import 'abstracts/bootstrap-variables';
+
+// ── Config de Bootstrap (sin CSS) ─────────────────────────────────────────────
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/variables-dark';
+@import 'node_modules/bootstrap/scss/maps';
+@import 'node_modules/bootstrap/scss/mixins';
+@import 'node_modules/bootstrap/scss/utilities';
+
+// ── CSS custom properties de Bootstrap para el editor ─────────────────────────
+@import 'node_modules/bootstrap/scss/root';
+
+// ── Overrides del editor de bloques ───────────────────────────────────────────
+html {
+  :where(.wp-block) {
+    max-width: 95%;
+  }
+}

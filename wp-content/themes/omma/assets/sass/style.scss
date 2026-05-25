@@ -1,0 +1,25 @@
+// style.scss — Entrada principal. Compilado a assets/dist/css/all.css.
+// Usa @use en todo el código propio. Bootstrap se gestiona internamente
+// con @import en _bootstrap-loads.scss (silenciado en gulpfile).
+
+// ── Fuentes ───────────────────────────────────────────────────────────────────
+@use 'base/fonts' as *;
+
+// ── Bootstrap (componentes selectivos + overrides aplicados) ──────────────────
+@use 'bootstrap-loads' as *;
+
+// ── Tipografía utilitaria ─────────────────────────────────────────────────────
+@use 'abstracts/typography' as *;
+
+// ── Utilidades de color ───────────────────────────────────────────────────────
+@use 'abstracts/color-utilities' as *;
+
+// ── Base ──────────────────────────────────────────────────────────────────────
+@use 'base/reset' as *;
+@use 'base/general' as *;
+
+// ── Componentes ───────────────────────────────────────────────────────────────
+@use 'components/buttons' as *;
+
+// ── Animaciones (añadir cuando se creen en animations/) ───────────────────────
+// @use 'animations/...' as *;

@@ -1,0 +1,44 @@
+// Ruta base a las fuentes.
+// Por defecto: relativa desde assets/dist/css/ → funciona en all.css (CSS externo).
+// critical.scss la sobreescribe con 'OMMA_FONTS_URI' para que PHP inyecte la URL absoluta.
+$font-path: "../fonts" !default;
+
+@font-face {
+  font-family: "PlusJakarta-Regular";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("#{$font-path}/PlusJakartaRegular.woff2") format("woff2"),
+    url("#{$font-path}/PlusJakartaRegular.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PlusJakarta-Light";
+  font-style: normal;
+  font-weight: 300;
+  src:
+    url("#{$font-path}/PlusJakartaLight.woff2") format("woff2"),
+    url("#{$font-path}/PlusJakartaLight.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PlusJakarta-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url("#{$font-path}/PlusJakartaBold.woff2") format("woff2"),
+    url("#{$font-path}/PlusJakartaBold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Relieo";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("#{$font-path}/RelieoRegular.woff2") format("woff2"),
+    url("#{$font-path}/RelieoRegular.woff") format("woff");
+  font-display: swap;
+}

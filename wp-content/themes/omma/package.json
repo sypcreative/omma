@@ -1,0 +1,57 @@
+{
+  "name": "OM-MA",
+  "version": "1.0.0",
+  "description": "Proyecto principal de la web de OM-MA",
+  "author": ".SYP Creative",
+  "main": "index.html",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://www.sypcreative.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/_s.git"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cross-env NODE_ENV=dev gulp dev",
+    "build": "cross-env NODE_ENV=prod gulp build"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "bootstrap": "^5.3.3",
+    "cross-env": "^7.0.3",
+    "cssnano": "^7.0.7",
+    "esbuild": "^0.25.5",
+    "font-awesome": "^4.7.0",
+    "gulp": "^5.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^3.0.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.7.1",
+    "postcss": "^8.4.47",
+    "sass": "^1.71.1",
+    "sharp": "^0.34.5"
+  },
+  "dependencies": {
+    "@barba/core": "^2.10.3",
+    "@studio-freight/lenis": "^1.0.42",
+    "bootstrap-select": "^1.14.0-beta2",
+    "bs5-lightbox": "^1.8.3",
+    "gsap": "^3.13.0",
+    "hc-sticky": "^2.2.7",
+    "ion-rangeslider": "^2.3.1",
+    "isotope-layout": "^3.0.6",
+    "jquery-validation": "^1.20.0",
+    "jquery.marquee": "^1.6.0",
+    "split-type": "^0.3.4",
+    "three": "^0.152.2"
+  }
+}

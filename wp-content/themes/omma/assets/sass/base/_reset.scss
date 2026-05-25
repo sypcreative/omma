@@ -1,0 +1,6 @@
+// Bootstrap reboot already sets box-sizing and body margin.
+// Añadimos solo lo que reboot no cubre.
+
+p {
+  margin: 0;
+}

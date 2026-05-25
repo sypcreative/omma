@@ -1,0 +1,67 @@
+// _mixins.scss — Mixins del tema.
+// @forward 'variables-theme' re-exporta la paleta y tipografía a cualquier
+// archivo que haga @use '../abstracts/mixins' as *.
+
+@forward 'variables-theme';
+@use    'variables-theme' as *;
+@use    'sass:map';
+@use    'sass:math';
+
+// ─── Breakpoints ──────────────────────────────────────────────────────────────
+
+@mixin bp-up($name) {
+  $bp: map.get($grid-breakpoints, $name);
+  @if $bp == null { @error "Breakpoint desconocido: '#{$name}'."; }
+  @if $bp == 0 {
+    @content;
+  } @else {
+    @media (min-width: #{$bp}) { @content; }
+  }
+}
+
+@mixin bp-down($name) {
+  $bp: map.get($grid-breakpoints, $name);
+  @if $bp == null { @error "Breakpoint desconocido: '#{$name}'."; }
+  @if $bp > 0 {
+    $max: $bp - 0.02px;
+    @media (max-width: #{$max}) { @content; }
+  }
+}
+
+// ─── Tipografía ───────────────────────────────────────────────────────────────
+
+@mixin type-heading($level: 1) {
+  font-family: $font-family-black;
+  letter-spacing: $ls-tight;
+  @if      $level == 1 { font-size: $font-h1; line-height: $lh-h1; }
+  @else if $level == 2 { font-size: $font-h2; line-height: $lh-h2; }
+  @else if $level == 3 { font-size: $font-h3; line-height: $lh-h3; }
+  @else if $level == 4 { font-size: $font-h4; line-height: $lh-h4; font-weight: 700; }
+  @else if $level == 5 { font-size: $font-h5; line-height: $lh-h5; font-weight: 700; }
+  @else if $level == 6 { font-size: $font-h6; line-height: $lh-h6; font-weight: 700; }
+}
+
+@mixin type-display {
+  font-family: $font-family-black;
+  font-size:   $font-display;
+  line-height: $lh-display;
+  letter-spacing: $ls-tight;
+}
+
+// ─── Imágenes de fondo ────────────────────────────────────────────────────────
+
+@mixin bg-cover {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+// ─── Iconos SVG inline ────────────────────────────────────────────────────────
+
+@mixin icon-base {
+  content: '';
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

@@ -1,0 +1,65 @@
+# ============================================
+# WordPress core (no tocar nunca)
+# ============================================
+wp-admin/
+wp-includes/
+
+# ============================================
+# Claude
+# ============================================
+.claude/
+
+# ============================================
+# WordPress
+# ============================================
+wp-config.php
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+
+# ============================================
+# Plugins (no versionar, se instalan aparte)
+# ============================================
+wp-content/plugins/
+# Si quieres versionar algún plugin custom, excepción:
+# !wp-content/plugins/mi-plugin-custom/
+
+# ============================================
+# Temas (solo versionar el tuyo)
+# ============================================
+wp-content/themes/twenty*/
+# Deja libre el tuyo:
+# !wp-content/themes/omma/
+
+# ============================================
+# Node / Gulp / SCSS
+# ============================================
+node_modules/
+dist/
+*.map
+
+# ============================================
+# Sistema operativo
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================
+# IDEs
+# ============================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# Logs y temporales
+# ============================================
+*.log
+*.tmp
+*.bak
+error_log

@@ -1,0 +1,53 @@
+// abstracts/_color-utilities.scss — Utilidades de color del tema.
+//
+// Genera .text-{nombre} y .bg-{nombre} para toda la paleta.
+// Sin variantes responsive: los colores no cambian por breakpoint.
+//
+// Para añadir un color: declara la variable en _variables-theme.scss
+// y añade una entrada al mapa $_palette aquí abajo.
+
+@use 'variables-theme' as *;
+@use 'sass:color';
+
+$_palette: (
+  // ── Colores base ─────────────────────────────────────────────────────────────
+  'charcoal':   $color-charcoal,
+  'vanilla':    $color-vanilla,
+  'pink':       $color-pink,
+  'purple':     $color-purple,
+  'orange':     $color-orange,
+  'blue':       $color-blue,
+  'green':      $color-green,
+  // ── Paleta extendida ──────────────────────────────────────────────────────────
+  'green-200':  $color-green-200,
+  'green-800':  $color-green-800,
+  'pink-200':   $color-pink-200,
+  'pink-800':   $color-pink-800,
+  'purple-200': $color-purple-200,
+  'purple-800': $color-purple-800,
+  'orange-200': $color-orange-200,
+  'orange-800': $color-orange-800,
+  'blue-200':   $color-blue-200,
+  'blue-800':   $color-blue-800,
+);
+
+// Todas las utilidades exponen una variable CSS de opacidad compatible con
+// Bootstrap, para poder usarlas con .bg-opacity-*, .border-opacity-* o
+// un override inline (style="--bs-bg-opacity:.6").
+@each $name, $value in $_palette {
+  $r: color.red($value);
+  $g: color.green($value);
+  $b: color.blue($value);
+
+  .text-#{$name} { color: $value; }
+
+  .bg-#{$name} {
+    --bs-bg-opacity: 1;
+    background-color: rgba(#{$r}, #{$g}, #{$b}, var(--bs-bg-opacity));
+  }
+
+  .border-#{$name} {
+    --bs-border-opacity: 1;
+    border-color: rgba(#{$r}, #{$g}, #{$b}, var(--bs-border-opacity)) !important;
+  }
+}

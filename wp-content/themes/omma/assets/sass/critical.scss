@@ -1,0 +1,43 @@
+// critical.scss — CSS mínimo above-the-fold.
+// Compilado a assets/dist/css/critical.css e inlineado en <head>.
+// Contiene solo font-face y tokens de color para evitar FOUC.
+
+@use 'abstracts/variables-theme' as *;
+// $font-path se sustituye en PHP (omma_inline_critical_css) con la URL absoluta de WordPress.
+// Así las rutas de fuentes funcionan correctamente en un <style> inlineado en el HTML.
+@use 'base/fonts' as * with ($font-path: 'OMMA_FONTS_URI');
+
+// ── Tokens de color como CSS custom properties ────────────────────────────────
+:root {
+  --color-charcoal:   #{$color-charcoal};
+  --color-vanilla:    #{$color-vanilla};
+  --color-pink:       #{$color-pink};
+  --color-purple:     #{$color-purple};
+  --color-orange:     #{$color-orange};
+  --color-blue:       #{$color-blue};
+  --color-green:      #{$color-green};
+}
+
+// ── Mínimo para evitar flash de contenido ─────────────────────────────────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $color-vanilla;
+  color: $color-charcoal;
+  font-family: $font-family-light, system-ui, sans-serif;
+}
+
+// Oculta el contenido hasta que JS retire este atributo
+[data-load-reset] {
+  opacity: 0;
+}
