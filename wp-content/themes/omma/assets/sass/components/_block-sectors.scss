@@ -1,0 +1,52 @@
+@use '../abstracts/mixins' as *;
+
+// ── Image strip ───────────────────────────────────────────────────────────────
+
+.block-sectors__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.block-sectors__slide {
+  position: absolute;
+  inset: 0;
+}
+
+.block-sectors__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+// ── Directional hover tile ────────────────────────────────────────────────────
+
+.block-sectors__item {
+  position: relative;
+  overflow: hidden;
+}
+
+// Text elements sit above the tile
+.block-sectors__num,
+.block-sectors__name {
+  position: relative;
+  z-index: 1;
+}
+
+.block-sectors__hover-tile {
+  background-color: rgba($color-vanilla, 0.08);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+[data-directional-hover-tile] {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(-100%);
+  will-change: transform;
+}

@@ -18,20 +18,6 @@ $menu_principal = [
 	'fallback_cb'    => false,
 ];
 
-function barba_namespace()
-{
-	if (is_front_page() || is_home()) return 'home';
-	if (is_page_template('template-contacto.php') || is_page('contacto')) return 'contacto';
-	if (is_singular('proyectos')) return 'single-proyecto';
-	if (is_single()) return 'single';
-	if (is_archive()) return 'archive';
-	if (is_404()) return '404';
-	if (is_page()) {
-		$slug = get_post_field('post_name', get_post());
-		return $slug ?: 'page';
-	}
-	return 'default';
-}
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>

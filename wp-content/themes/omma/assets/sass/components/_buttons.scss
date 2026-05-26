@@ -1,103 +1,185 @@
 // components/_buttons.scss — Botones custom del tema.
 //
-// Overrides y variantes propias sobre Bootstrap .btn.
-// Usar estas clases en lugar de las nativas de Bootstrap para mantener
-// consistencia con el design system de OMMA.
+// Animación button-020: slide vertical del estado hover desde abajo.
+// Cada variante sobreescribe las custom properties de color.
 //
 // Clases disponibles:
-//   .btn-omma          Base: fondo gris cálido / texto charcoal
-//   .btn-omma-primary  Fondo $color-pink / texto blanco
-//   .btn-omma-dark     Fondo $color-charcoal / texto vanilla
-//   .btn-omma-outline  Transparente con borde charcoal
+//   .btn-omma          Fondo gris cálido / charcoal
+//   .btn-omma-primary  Fondo $color-pink / vanilla
+//   .btn-omma-dark     Fondo $color-charcoal / vanilla
+//   .btn-omma-outline  Borde charcoal / fill charcoal en hover
 //
-// Todas incluyen la flecha ↗ mediante ::after y transición de 200ms.
+// HTML requerido:
+//   <a class="btn-omma">
+//     <span class="button-020__inner">
+//       <span class="button-020__default">
+//         <span class="button-020__default-bg"></span>
+//         <span class="button-020__default-text">Texto</span>
+//       </span>
+//       <span aria-hidden="true" class="button-020__hover">
+//         <span class="button-020__hover-bg"></span>
+//         <span class="button-020__hover-text">Texto</span>
+//       </span>
+//     </span>
+//   </a>
 
 @use '../abstracts/mixins' as *;
 @use 'sass:color';
 
-// ─── Background base ──────────────────────────────────────────────────────────
-// Mezcla 8% de $color-charcoal sobre $color-vanilla → gris cálido ≈ #E8E6E1
-$_bg-base: color.mix($color-charcoal, $color-vanilla, 8%);
+$-bg-base: color.mix($color-charcoal, $color-vanilla, 8%);
+$-ease:    cubic-bezier(0.32, 0.72, 0, 1);
 
-// ─── Propiedades comunes a todas las variantes ────────────────────────────────
+// ─── Estructura base compartida ───────────────────────────────────────────────
 %_btn-omma {
-  display:         inline-flex;
-  align-items:     center;
-  gap:             0.375em;
-  padding:         0.75rem 2.25rem;
-  border-radius:   $radius-sm;
-  font-family:     $font-family-light;
-  font-weight:     $font-weight-light;
-  font-size:       inherit;
-  line-height:     1.2;
-  text-decoration: none;
-  cursor:          pointer;
-  transition:      background-color 200ms ease,
-                   color            200ms ease,
-                   border-color     200ms ease;
+  user-select:                none;
+  -webkit-tap-highlight-color: transparent;
+  background-color:           transparent;
+  outline-style:              none;
+  padding:                    0;
+  line-height:                1;
+  text-decoration:            none;
+  display:                    inline-grid;
+  position:                   relative;
+  cursor:                     pointer;
+  font-family:                $font-family-light;
+  font-weight:                $font-weight-light;
+  font-size:                  inherit;
 
+  // Anillo de foco
   &::after {
-    content: '↗';
+    content:       '';
+    display:       block;
+    position:      absolute;
+    inset:         -0.125em;
+    border-radius: $radius-sm;
+    transition:    box-shadow 0.3s $-ease;
+    pointer-events: none;
+    z-index:       1;
   }
 
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 3px;
+  &:focus-visible::after {
+    box-shadow: 0 0 0 0.125em var(--_btn-focus-color);
+  }
+
+  // ── Estructura interna ────────────────────────────────────────────────────
+  .button-020__inner {
+    pointer-events: none;
+    border-radius:  $radius-sm;
+    border:         var(--_btn-outer-border, none);
+    display:        grid;
+    overflow:       clip;
+  }
+
+  .button-020__default {
+    width:     100%;
+    height:    100%;
+    color:     var(--_btn-color);
+    grid-area: 1 / 1;
+    display:   grid;
+  }
+
+  .button-020__default-bg {
+    background-color: var(--_btn-bg);
+    border-radius:    $radius-sm;
+    grid-area:        1 / 1;
+    width:            100%;
+    height:           100%;
+  }
+
+  .button-020__default-text {
+    width:      100%;
+    height:     100%;
+    padding:    0.75em 1.5em;
+    grid-area:  1 / 1;
+    transition: translate 0.45s $-ease, scale 0.45s $-ease;
+  }
+
+  .button-020__hover {
+    width:      100%;
+    height:     100%;
+    color:      var(--_btn-hover-color);
+    grid-area:  1 / 1;
+    display:    grid;
+    translate:  0 calc(100% + 1px) 0;
+    transition: translate 0.45s $-ease;
+  }
+
+  .button-020__hover-bg {
+    background-color: var(--_btn-hover-bg);
+    grid-area:        1 / 1;
+    width:            100%;
+    height:           100%;
+  }
+
+  .button-020__hover-text {
+    width:      100%;
+    height:     100%;
+    padding:    0.75em 1.5em;
+    grid-area:  1 / 1;
+    translate:  0 25% 0;
+    transition: translate 0.45s $-ease;
+  }
+
+  // ── Hover / focus (solo dispositivos con puntero fino) ────────────────────
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    &:is(:hover, :focus-visible) .button-020__default-text,
+    [data-hover]:is(:hover, :focus-visible) & .button-020__default-text {
+      translate:  0 -25% 0;
+      scale:      0.85;
+      transition: translate 0.95s $-ease, scale 0.95s $-ease;
+    }
+
+    &:is(:hover, :focus-visible) .button-020__hover,
+    [data-hover]:is(:hover, :focus-visible) & .button-020__hover {
+      translate:         0 0 0;
+      transition-delay:  0.05s;
+    }
+
+    &:is(:hover, :focus-visible) .button-020__hover-text,
+    [data-hover]:is(:hover, :focus-visible) & .button-020__hover-text {
+      translate:         0 0 0;
+      transition-delay:  0.065s;
+    }
   }
 }
 
-// ─── .btn-omma — base (gris cálido / charcoal) ───────────────────────────────
+// ─── .btn-omma — gris cálido → charcoal ──────────────────────────────────────
 .btn-omma {
   @extend %_btn-omma;
-  background-color: $_bg-base;
-  color:            $color-charcoal;
-  border:           none;
-
-  &:hover {
-    background-color: color.mix($color-charcoal, $_bg-base, 14%);
-    color:            $color-charcoal;
-    text-decoration:  none;
-  }
+  --_btn-color:       #{$color-charcoal};
+  --_btn-bg:          #{$-bg-base};
+  --_btn-hover-color: #{$color-vanilla};
+  --_btn-hover-bg:    #{$color-charcoal};
+  --_btn-focus-color: #{$color-charcoal};
 }
 
-// ─── .btn-omma-primary — pink / blanco ───────────────────────────────────────
+// ─── .btn-omma-primary — pink → vanilla ──────────────────────────────────────
 .btn-omma-primary {
   @extend %_btn-omma;
-  background-color: $color-pink;
-  color:            #fff;
-  border:           none;
-
-  &:hover {
-    background-color: color.scale($color-pink, $lightness: -12%);
-    color:            #fff;
-    text-decoration:  none;
-  }
+  --_btn-color:       #{$color-vanilla};
+  --_btn-bg:          #{$color-pink};
+  --_btn-hover-color: #{$color-pink};
+  --_btn-hover-bg:    #{$color-vanilla};
+  --_btn-focus-color: #{$color-pink};
 }
 
-// ─── .btn-omma-dark — charcoal / vanilla ─────────────────────────────────────
+// ─── .btn-omma-dark — charcoal → vanilla ─────────────────────────────────────
 .btn-omma-dark {
   @extend %_btn-omma;
-  background-color: $color-charcoal;
-  color:            $color-vanilla;
-  border:           none;
-
-  &:hover {
-    background-color: color.scale($color-charcoal, $lightness: 18%);
-    color:            $color-vanilla;
-    text-decoration:  none;
-  }
+  --_btn-color:       #{$color-vanilla};
+  --_btn-bg:          #{$color-charcoal};
+  --_btn-hover-color: #{$color-charcoal};
+  --_btn-hover-bg:    #{$color-vanilla};
+  --_btn-focus-color: #{$color-vanilla};
 }
 
-// ─── .btn-omma-outline — transparente con borde charcoal ─────────────────────
+// ─── .btn-omma-outline — borde charcoal → fill charcoal ──────────────────────
 .btn-omma-outline {
   @extend %_btn-omma;
-  background-color: transparent;
-  color:            $color-charcoal;
-  border:           1px solid $color-charcoal;
-
-  &:hover {
-    background-color: $color-charcoal;
-    color:            $color-vanilla;
-    text-decoration:  none;
-  }
+  --_btn-color:        #{$color-charcoal};
+  --_btn-bg:           transparent;
+  --_btn-hover-color:  #{$color-vanilla};
+  --_btn-hover-bg:     #{$color-charcoal};
+  --_btn-focus-color:  #{$color-charcoal};
+  --_btn-outer-border: 1px solid #{$color-charcoal};
 }

@@ -12,21 +12,22 @@ if (! $items) {
 }
 ?>
 
-<section class="block-types py-5">
+<section class="block-types py-5 vh-100" id="about" data-progress-nav-anchor="" data-stack-section="">
 	<div class="container">
-		<div class="d-flex flex-column gap-4">
+		<div class="d-flex flex-column gap-4" data-stack-wrap="">
 
-			<?php foreach ($items as $item) :
+			<?php foreach ($items as $i => $item) :
 				$title    = $item['block_types_title']    ?? '';
 				$link     = $item['block_types_link']     ?? null;
 				$subtitle = $item['block_types_subtitle'] ?? '';
 				$cards    = $item['block_types_cards']    ?? [];
 			?>
 
-				<div class="block-types__item bg-blue-800 rounded-3 border border-blue-800 p-4 p-lg-5" style="--bs-bg-opacity: .6">
+				<div class="block-types__item bg-blue-800 rounded-3 border border-blue-800 p-4 p-lg-5" style="--bs-bg-opacity: .6"
+					data-stack-card="">
 
 					<!-- ── Fila 1: título + botón ─────────────────────────────── -->
-					<div class="row align-items-start mb-4 mb-lg-5">
+					<div class=" row align-items-start mb-4 mb-lg-5">
 						<div class="col">
 							<?php if ($title) : ?>
 								<h2 class="block-types__title r-3 text-vanilla m-0">
@@ -35,12 +36,22 @@ if (! $items) {
 							<?php endif; ?>
 						</div>
 						<?php if ($link) : ?>
+							<?php $label = esc_html($link['title']); ?>
 							<div class="col-auto">
 								<a
 									href="<?php echo esc_url($link['url']); ?>"
 									target="<?php echo esc_attr($link['target'] ?: '_self'); ?>"
-									class="btn btn-omma">
-									<?php echo esc_html($link['title']); ?>
+									class="btn-omma">
+									<span class="button-020__inner">
+										<span class="button-020__default">
+											<span class="button-020__default-bg"></span>
+											<span class="button-020__default-text"><?php echo $label; ?></span>
+										</span>
+										<span aria-hidden="true" class="button-020__hover">
+											<span class="button-020__hover-bg"></span>
+											<span class="button-020__hover-text"><?php echo $label; ?></span>
+										</span>
+									</span>
 								</a>
 							</div>
 						<?php endif; ?>
@@ -58,7 +69,7 @@ if (! $items) {
 						<?php if ($cards) : ?>
 							<div class="col-12 col-lg-7 mt-4 mt-lg-0">
 								<ul class="block-types__cards list-unstyled m-0">
-									<?php foreach ($cards as $card) :
+									<?php foreach ($cards as $c_i => $card) :
 										$text = $card['block_types_card_text'] ?? '';
 										if (! $text) continue;
 									?>

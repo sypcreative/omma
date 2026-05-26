@@ -12,11 +12,17 @@ if (! $text) {
 }
 ?>
 
-<section class="block-intro">
-	<div class="container">
+<section class="block-intro" id="intro" data-progress-nav-anchor="">
+	<div class=" container">
 		<div class="row">
-			<div class="col-12 col-lg-10 col-xl-8">
-				<div class="block-intro__text text-white fs-3">
+			<div class="col-12 col-lg-10 col-xl-8"
+				data-parallax="trigger"
+				data-parallax-start="6"
+				data-parallax-end="-6"
+				data-parallax-disable="mobile">
+				<div class="block-intro__text text-white fs-3"
+					data-anim="lines"
+					data-anim-stagger="0.1">
 					<?php echo wp_kses_post($text); ?>
 				</div>
 			</div>

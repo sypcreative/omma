@@ -2,7 +2,16 @@
 
 /**
  * Front Page
+ *
+ * Si la página de inicio tiene el template "Landing" asignado,
+ * delega completamente en template-landing.php.
+ * En cualquier otro caso, renderiza el home normal.
  */
+
+if ( is_page_template( 'template-landing.php' ) ) {
+	include( locate_template( 'template-landing.php' ) );
+	exit;
+}
 
 $hero = function_exists('get_field') ? get_field('hero_general_selector') : null;
 
@@ -19,7 +28,6 @@ get_header(); ?>
 	} else {
 		// echo '<div class="py-5"></div>';
 	}
-	// Contenido de la página
 	the_content();
 	?>
 

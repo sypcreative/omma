@@ -84,7 +84,7 @@ $offices = $has_acf ? get_field( 'site_offices', 'option' ) : [];
 
 	<!-- ── Icono decorativo fondo (aria-hidden, no semántico) ────────────────── -->
 	<?php if ( $icon ) : ?>
-		<div class="site-footer__deco position-absolute top-0 end-0 h-100" aria-hidden="true">
+		<div class="site-footer__deco position-absolute top-0 end-0 h-100 d-none d-lg-block" aria-hidden="true">
 			<img
 				src="<?php echo esc_url( $icon['url'] ); ?>"
 				alt=""

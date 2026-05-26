@@ -1,0 +1,12 @@
+@use "../abstracts/mixins" as *;
+
+@include bp-up(lg) {
+  .block-types {
+    display: flex;
+    align-items: center;
+
+    .container {
+      width: 100%;
+    }
+  }
+}

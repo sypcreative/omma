@@ -13,6 +13,26 @@
  *
  * @return array
  */
+/**
+ * Devuelve el namespace de Barba según el template actual.
+ * Usado en header.php y header-landing.php para data-barba-namespace.
+ */
+function barba_namespace(): string
+{
+	if (is_page_template('template-landing.php'))              return 'landing';
+	if (is_front_page() || is_home())                          return 'home';
+	if (is_page_template('template-contacto.php') || is_page('contacto')) return 'contacto';
+	if (is_singular('proyectos'))                              return 'single-proyecto';
+	if (is_single())                                           return 'single';
+	if (is_archive())                                          return 'archive';
+	if (is_404())                                              return '404';
+	if (is_page()) {
+		$slug = get_post_field('post_name', get_post());
+		return $slug ?: 'page';
+	}
+	return 'default';
+}
+
 function omma_body_classes($classes)
 {
 	// Agrega una clase de hfeed a páginas no singulares.

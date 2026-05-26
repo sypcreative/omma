@@ -1,0 +1,110 @@
+{
+    "key": "group_landing_header",
+    "title": "Landing — Navegación",
+    "fields": [
+        {
+            "key": "field_landing_nav_items",
+            "label": "Secciones del nav",
+            "name": "landing_nav_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Cada fila es un enlace del nav de progreso. El anchor debe coincidir con el id de la sección en la página (sin #).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Añadir sección",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_landing_nav_label",
+                    "label": "Etiqueta",
+                    "name": "landing_nav_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Texto que aparece en el botón del nav. Ej: Intro",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": 30,
+                    "allow_in_bindings": 1,
+                    "placeholder": "Ej: Intro",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_landing_nav_items"
+                },
+                {
+                    "key": "field_landing_nav_anchor",
+                    "label": "Anchor (id de sección)",
+                    "name": "landing_nav_anchor",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "ID de la sección destino, sin #. Ej: introduction",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": 60,
+                    "allow_in_bindings": 1,
+                    "placeholder": "Ej: introduction",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_landing_nav_items"
+                }
+            ]
+        },
+        {
+            "key": "field_landing_nav_cta",
+            "label": "Botón CTA",
+            "name": "landing_nav_cta",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Enlace del botón de contacto a la derecha del nav.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-landing.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Campos del header de progreso para las páginas con el template Landing.",
+    "show_in_rest": 0,
+    "modified": 1748217600
+}
