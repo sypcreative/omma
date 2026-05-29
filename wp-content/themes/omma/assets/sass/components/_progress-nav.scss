@@ -1,99 +1,120 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables-theme" as *;
+
+// ── Outer bar ─────────────────────────────────────────────────────────────────
+
 .progress-nav {
   width: 100%;
-  padding: 2em;
+  padding: 1.25em 2em;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 5;
+  color: $color-vanilla;
 }
 
 .progress-nav__inner {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  display: flex;
   position: relative;
 }
 
+// ── Logo ──────────────────────────────────────────────────────────────────────
+
 .progress-nav__logo {
-  color: inherit;
+  color: $color-vanilla;
   text-decoration: none;
 }
 
-.progress-nav__logo-svg {
+.progress-nav__logo-svg,
+.progress-nav__logo-img {
   width: 8em;
+  height: auto;
 }
+
+// ── Nav wrapper ───────────────────────────────────────────────────────────────
 
 .progress-nav__wrapper {
-  background-color: #c9cce0;
-  border-radius: 50em;
-  padding: 0.5em;
+  background-color: rgba($color-blue-800, 0.25);
+  border: 1px solid rgba($color-blue-800, 0.6);
+  border-radius: 10px;
+  padding: 0.3em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
+
+// ── Nav list ──────────────────────────────────────────────────────────────────
 
 .progress-nav__list {
-  border-radius: 50em;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
-  display: flex;
   position: relative;
   overflow: hidden;
+  border-radius: 7px;
 }
 
+// ── Sliding indicator ─────────────────────────────────────────────────────────
+
 .progress-nav__indicator {
-  z-index: 2;
-  background-color: #fff;
-  border-radius: 50em;
-  width: 2.5em;
-  height: 2.5em;
   position: absolute;
   left: -2.5em;
+  z-index: 2;
+  width: 2.5em;
+  height: 2.5em;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
   transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+// ── Nav buttons ───────────────────────────────────────────────────────────────
+
 .progress-nav__btn {
+  position: relative;
   z-index: 3;
-  cursor: pointer;
-  color: inherit;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 2.5em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+  color: $color-vanilla;
   text-decoration: none;
-  display: flex;
-  position: relative;
+  cursor: pointer;
   overflow: hidden;
 }
 
 .progress-nav__btn.is--before {
+  position: absolute;
+  right: 100%;
   z-index: 1;
   width: 2.5em;
   height: 2.5em;
   padding-left: 0;
   padding-right: 0;
-  position: absolute;
-  right: 100%;
 }
 
 .progress-nav__btn.is--after {
+  position: absolute;
+  left: 100%;
   z-index: 1;
   width: 2.5em;
   height: 2.5em;
   padding-left: 0;
   padding-right: 0;
-  position: absolute;
-  left: 100%;
 }
 
 .progress-nav__btn-text {
-  white-space: nowrap;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-size: 1.125em;
-  font-weight: 500;
-  display: flex;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.9375em;
+  font-weight: 400;
+  white-space: nowrap;
   transform: translateY(0%) rotate(0.001deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .progress-nav__btn-text.is--duplicate {
@@ -106,32 +127,19 @@
   transform: translateY(-100%) rotate(0.001deg);
 }
 
+// ── CTA button ────────────────────────────────────────────────────────────────
+
 .progress-nav__contact-btn {
-  color: #fff;
-  background-color: #2d336b;
-  border-radius: 50em;
-  height: 3.5em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: 2.5em;
   padding-left: 1.5em;
   padding-right: 1.5em;
+  color: $color-vanilla;
+  background-color: $color-blue-800;
+  border: 1px solid rgba($color-blue-800, 0.6);
+  border-radius: 8px;
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.section-resource {
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  display: flex;
-}
-
-.section-resource.is--flipped {
-  color: #fff;
-  background-color: #7886c7;
-}
-
-.section-resource__h2 {
-  font-size: 5em;
-  font-weight: 500;
-  line-height: 1;
 }

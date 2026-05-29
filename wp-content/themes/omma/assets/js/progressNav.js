@@ -1,16 +1,29 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { getLenis } from "./initLenis.js";
 
-// Register GSAP Plugins
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function initProgressNavigation() {
-  // Cache the parent container
   let navProgress = document.querySelector('[data-progress-nav-list]');
   if (!navProgress) return;
 
-  // Smooth scroll for anchor clicks (Lenis is disabled on landing)
-  document.documentElement.style.scrollBehavior = 'smooth';
+  // Intercept anchor clicks — use GSAP (aware of pin spacers) instead of
+  // native browser scroll, which conflicts with ScrollTrigger snap
+  document.querySelectorAll('[data-progress-nav-target][href]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(target, { duration: 1.2 });
+      } else {
+        gsap.to(window, { scrollTo: { y: target }, duration: 1, ease: 'power2.inOut' });
+      }
+    });
+  });
 
   // Create or select the moving indicator
   let indicator = navProgress.querySelector('.progress-nav__indicator');
@@ -20,36 +33,21 @@ function initProgressNavigation() {
     navProgress.appendChild(indicator);
   }
 
-  // Function to update the indicator based on the active nav link
   function updateIndicator(activeLink) {
-    let parentWidth = navProgress.offsetWidth;
+    let parentWidth  = navProgress.offsetWidth;
     let parentHeight = navProgress.offsetHeight;
-
-    // Get the active link's position relative to the parent
-    let parentRect = navProgress.getBoundingClientRect();
-    let linkRect = activeLink.getBoundingClientRect();
+    let parentRect   = navProgress.getBoundingClientRect();
+    let linkRect     = activeLink.getBoundingClientRect();
     let linkPos = {
       left: linkRect.left - parentRect.left,
-      top: linkRect.top - parentRect.top
+      top:  linkRect.top  - parentRect.top,
     };
-
-    let linkWidth = activeLink.offsetWidth;
-    let linkHeight = activeLink.offsetHeight;
-
-    // Calculate percentage values relative to parent dimensions
-    let leftPercent = (linkPos.left / parentWidth) * 100;
-    let topPercent = (linkPos.top / parentHeight) * 100;
-    let widthPercent = (linkWidth / parentWidth) * 100;
-    let heightPercent = (linkHeight / parentHeight) * 100;
-
-    // Update the indicator with a smooth CSS transition (set in your CSS)
-    indicator.style.left = leftPercent + '%';
-    indicator.style.top = topPercent + '%';
-    indicator.style.width = widthPercent + '%';
-    indicator.style.height = heightPercent + '%';
+    indicator.style.left   = (linkPos.left          / parentWidth)  * 100 + '%';
+    indicator.style.top    = (linkPos.top           / parentHeight) * 100 + '%';
+    indicator.style.width  = (activeLink.offsetWidth  / parentWidth)  * 100 + '%';
+    indicator.style.height = (activeLink.offsetHeight / parentHeight) * 100 + '%';
   }
 
-  // Get all anchor sections
   let progressAnchors = gsap.utils.toArray('[data-progress-nav-anchor]');
 
   progressAnchors.forEach((progressAnchor) => {
@@ -63,12 +61,8 @@ function initProgressNavigation() {
         let activeLink = navProgress.querySelector('[data-progress-nav-target="#' + anchorID + '"]');
         if (!activeLink) return;
         activeLink.classList.add('is--active');
-        // Remove 'is--active' class from sibling links
-        let siblings = navProgress.querySelectorAll('[data-progress-nav-target]');
-        siblings.forEach((sib) => {
-          if (sib !== activeLink) {
-            sib.classList.remove('is--active');
-          }
+        navProgress.querySelectorAll('[data-progress-nav-target]').forEach(sib => {
+          if (sib !== activeLink) sib.classList.remove('is--active');
         });
         updateIndicator(activeLink);
       },
@@ -76,20 +70,15 @@ function initProgressNavigation() {
         let activeLink = navProgress.querySelector('[data-progress-nav-target="#' + anchorID + '"]');
         if (!activeLink) return;
         activeLink.classList.add('is--active');
-        // Remove 'is--active' class from sibling links
-        let siblings = navProgress.querySelectorAll('[data-progress-nav-target]');
-        siblings.forEach((sib) => {
-          if (sib !== activeLink) {
-            sib.classList.remove('is--active');
-          }
+        navProgress.querySelectorAll('[data-progress-nav-target]').forEach(sib => {
+          if (sib !== activeLink) sib.classList.remove('is--active');
         });
         updateIndicator(activeLink);
-      }
+      },
     });
   });
 }
 
-// Initialize One Page Progress Navigation
 document.addEventListener('DOMContentLoaded', () => {
   initProgressNavigation();
 });

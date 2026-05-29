@@ -35,7 +35,7 @@ $buttons = get_field('hero_landing_buttons');
 
 	<div class="container position-relative z-1 pb-5">
 		<div class="row">
-			<div class="col-12 col-lg-10">
+			<div class="col-12 col-lg-10 mb-5 pb-5">
 
 				<?php if ($title) : ?>
 					<h1 class="hero-landing__title text-blue-800 mb-4 r-0"

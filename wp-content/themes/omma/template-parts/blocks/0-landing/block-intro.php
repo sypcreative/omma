@@ -12,7 +12,7 @@ if (! $text) {
 }
 ?>
 
-<section class="block-intro" id="intro" data-progress-nav-anchor="">
+<section class="block-intro py-5 mt-5" id="intro" data-progress-nav-anchor="">
 	<div class=" container">
 		<div class="row">
 			<div class="col-12 col-lg-10 col-xl-8"

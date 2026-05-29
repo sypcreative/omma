@@ -118,6 +118,60 @@ function omma_blocks(): void
 		);
 
 		/**
+		 * Block What Is
+		 */
+		acf_register_block(
+			array(
+				'name'            => 'block-what-is',
+				'title'           => __('Block What Is', 'OMMA'),
+				'post_types'      => ['page'],
+				'description'     => __('Bloque con título, texto, diagrama de nodos y tarjetas apiladas.', 'OMMA'),
+				'render_template' => 'template-parts/blocks/0-landing/block-what-is.php',
+				'category'        => 'OM-MA-landing',
+				'mode'            => 'edit',
+				'icon'            => 'networking',
+				'keywords'        => array('what is', 'diagram', 'types', 'OM-MA'),
+				'render_callback' => 'render_preview',
+			)
+		);
+
+		/**
+		 * Block About
+		 */
+		acf_register_block(
+			array(
+				'name'            => 'block-about',
+				'title'           => __('Block About', 'OMMA'),
+				'post_types'      => ['page'],
+				'description'     => __('Imagen fija + bloques de texto apilados.', 'OMMA'),
+				'render_template' => 'template-parts/blocks/0-landing/block-about.php',
+				'category'        => 'OM-MA-landing',
+				'mode'            => 'edit',
+				'icon'            => 'admin-users',
+				'keywords'        => array('about', 'imagen', 'texto', 'OM-MA'),
+				'render_callback' => 'render_preview',
+			)
+		);
+
+		/**
+		 * Block Graph
+		 */
+		acf_register_block(
+			array(
+				'name'            => 'block-graph',
+				'title'           => __('Block Graph', 'OMMA'),
+				'post_types'      => ['page'],
+				'description'     => __('Diagrama de nodos conectados con flechas animadas.', 'OMMA'),
+				'render_template' => 'template-parts/blocks/0-landing/block-graph.php',
+				'category'        => 'OM-MA-landing',
+				'mode'            => 'edit',
+				'icon'            => 'networking',
+				'keywords'        => array('graph', 'diagram', 'nodes', 'OM-MA'),
+				'render_callback' => 'render_preview',
+			)
+		);
+
+		/**
 		 * Block Intro
 		 */
 		acf_register_block(

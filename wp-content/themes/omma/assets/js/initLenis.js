@@ -8,14 +8,12 @@ let _lenis;
 let _tickerCallback;
 let _refreshListener;
 
+export function getLenis() {
+  return _lenis;
+}
+
 export function initLenis(options = {}) {
   if (_lenis) return _lenis;
-
-  // No inicializar Lenis en la landing — el progress nav usa scroll nativo
-  if (document.querySelector("[data-progress-nav-list]")) {
-    ScrollTrigger.refresh();
-    return null;
-  }
 
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 

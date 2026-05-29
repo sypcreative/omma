@@ -35,7 +35,7 @@ function scrollTrigger(el, start) {
 function maskLines(lines) {
   lines.forEach(line => {
     const mask = document.createElement("span");
-    mask.style.cssText = "display:block; overflow:hidden; padding-bottom:0.1em;";
+    mask.style.cssText = "display:block; overflow:hidden; padding-top:0.2em; margin-top:-0.2em; padding-bottom:0.1em;";
     line.parentNode.insertBefore(mask, line);
     mask.appendChild(line);
   });

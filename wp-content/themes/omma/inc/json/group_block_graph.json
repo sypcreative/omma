@@ -1,0 +1,122 @@
+{
+    "key": "group_block_graph",
+    "title": "Block Graph",
+    "fields": [
+        {
+            "key": "field_bg_nodes",
+            "label": "Nodes",
+            "name": "block_graph_nodes",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Each item is a node in the diagram. Arrows between nodes are generated automatically.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "table",
+            "pagination": 0,
+            "min": 2,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Añadir nodo",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_bg_node_icon",
+                    "label": "Icon",
+                    "name": "block_graph_node_icon",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "SVG or PNG icon for this node.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "25", "class": "", "id": "" },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "svg, png, jpg",
+                    "allow_in_bindings": 0,
+                    "preview_size": "thumbnail",
+                    "parent_repeater": "field_bg_nodes"
+                },
+                {
+                    "key": "field_bg_node_label",
+                    "label": "Label",
+                    "name": "block_graph_node_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "35", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bg_nodes"
+                },
+                {
+                    "key": "field_bg_node_fwd_text",
+                    "label": "Arrow → label",
+                    "name": "block_graph_node_fwd_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Text above the forward arrow going to the next node. Leave empty on the last node.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "20", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bg_nodes"
+                },
+                {
+                    "key": "field_bg_node_bwd_text",
+                    "label": "Arrow ← label",
+                    "name": "block_graph_node_bwd_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Text below the backward arrow returning from the next node. Leave empty on the last node.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "20", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bg_nodes"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-graph"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1748520000
+}

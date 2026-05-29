@@ -5,37 +5,37 @@
  * @package omma
  */
 
-$has_acf = function_exists( 'get_field' );
-$logo    = $has_acf ? get_field( 'site_logo',    'option' ) : null;
-$icon    = $has_acf ? get_field( 'site_icon',    'option' ) : null;
-$offices = $has_acf ? get_field( 'site_offices', 'option' ) : [];
+$has_acf = function_exists('get_field');
+$logo    = $has_acf ? get_field('site_logo',    'option') : null;
+$icon    = $has_acf ? get_field('site_icon',    'option') : null;
+$offices = $has_acf ? get_field('site_offices', 'option') : [];
 ?>
 
 </main>
 
-<footer id="site-footer" class="site-footer bg-charcoal position-relative overflow-hidden">
+<footer id="site-footer" class="site-footer position-relative overflow-hidden" style="background: #001019">
 	<div class="container position-relative z-1">
 
 		<!-- ── Logo ──────────────────────────────────────────────────────────── -->
 		<div class="site-footer__logo py-5">
-			<?php if ( $logo ) : ?>
+			<?php if ($logo) : ?>
 				<img
-					src="<?php echo esc_url( $logo['url'] ); ?>"
-					alt="<?php echo esc_attr( $logo['alt'] ?: get_bloginfo( 'name' ) ); ?>"
+					src="<?php echo esc_url($logo['url']); ?>"
+					alt="<?php echo esc_attr($logo['alt'] ?: get_bloginfo('name')); ?>"
 					class="site-footer__logo-img"
 					loading="lazy"
 					decoding="async"
 					width="<?php echo (int) $logo['width']; ?>"
 					height="<?php echo (int) $logo['height']; ?>">
 			<?php else : ?>
-				<span class="h-4 text-vanilla"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></span>
+				<span class="h-4 text-vanilla"><?php echo esc_html(get_bloginfo('name')); ?></span>
 			<?php endif; ?>
 		</div>
 
 		<!-- ── Oficinas ──────────────────────────────────────────────────────── -->
-		<?php if ( $offices ) : ?>
+		<?php if ($offices) : ?>
 			<div class="row g-4 g-xl-5 site-footer__offices pb-5">
-				<?php foreach ( $offices as $office ) :
+				<?php foreach ($offices as $office) :
 					$name    = $office['site_office_name']    ?? '';
 					$address = $office['site_office_address'] ?? '';
 					$text    = $office['site_office_text']    ?? '';
@@ -43,21 +43,21 @@ $offices = $has_acf ? get_field( 'site_offices', 'option' ) : [];
 					<div class="col-12 col-md-6 col-lg-4">
 						<div class="site-footer__office">
 
-							<?php if ( $name ) : ?>
+							<?php if ($name) : ?>
 								<p class="site-footer__office-name h-6 text-vanilla mb-2">
-									<?php echo esc_html( $name ); ?>
+									<?php echo esc_html($name); ?>
 								</p>
 							<?php endif; ?>
 
-							<?php if ( $address ) : ?>
+							<?php if ($address) : ?>
 								<p class="site-footer__office-address fs-small text-vanilla mb-1">
-									<?php echo esc_html( $address ); ?>
+									<?php echo esc_html($address); ?>
 								</p>
 							<?php endif; ?>
 
-							<?php if ( $text ) : ?>
+							<?php if ($text) : ?>
 								<p class="site-footer__office-text fs-small text-vanilla mb-0">
-									<?php echo esc_html( $text ); ?>
+									<?php echo esc_html($text); ?>
 								</p>
 							<?php endif; ?>
 
@@ -70,7 +70,7 @@ $offices = $has_acf ? get_field( 'site_offices', 'option' ) : [];
 		<!-- ── Barra copyright ───────────────────────────────────────────────── -->
 		<div class="site-footer__bar d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 py-4 border-top border-white border-opacity-10">
 			<p class="fs-small text-vanilla mb-0">
-				Copyright &copy; <?php echo esc_html( date( 'Y' ) ); ?> OM-MA &mdash; Todos los derechos reservados.
+				Copyright &copy; <?php echo esc_html(date('Y')); ?> OM-MA &mdash; Todos los derechos reservados.
 			</p>
 			<p class="fs-small text-vanilla mb-0">
 				Parte del Grupo Ontier
@@ -83,10 +83,10 @@ $offices = $has_acf ? get_field( 'site_offices', 'option' ) : [];
 	</div>
 
 	<!-- ── Icono decorativo fondo (aria-hidden, no semántico) ────────────────── -->
-	<?php if ( $icon ) : ?>
+	<?php if ($icon) : ?>
 		<div class="site-footer__deco position-absolute top-0 end-0 h-100 d-none d-lg-block" aria-hidden="true">
 			<img
-				src="<?php echo esc_url( $icon['url'] ); ?>"
+				src="<?php echo esc_url($icon['url']); ?>"
 				alt=""
 				class="site-footer__deco-img h-100 w-auto"
 				loading="lazy"
@@ -99,4 +99,5 @@ $offices = $has_acf ? get_field( 'site_offices', 'option' ) : [];
 <?php wp_footer(); ?>
 
 </body>
+
 </html>

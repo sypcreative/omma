@@ -7,6 +7,8 @@ import "./directionalHover.js";
 import "./textAnimations.js";
 import "./parallax.js";
 import "./stackingCards.js";
+import "./blockGraph.js";
+import "./blockAbout.js";
 
 initLenis();
 // initPageTransitions();

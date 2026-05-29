@@ -38,10 +38,7 @@ function initBlockSectors() {
     list.addEventListener('mousemove', (e) => {
       const listRect = list.getBoundingClientRect();
       const relY = e.clientY - listRect.top;
-      const halfH = wrap.offsetHeight / 2;
-      const maxY = listRect.height - wrap.offsetHeight;
-      const targetY = Math.max(0, Math.min(relY - halfH, maxY));
-      moveTo(targetY);
+      moveTo(relY - wrap.offsetHeight / 2);
     });
   }
 

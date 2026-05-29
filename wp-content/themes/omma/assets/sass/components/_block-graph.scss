@@ -1,0 +1,147 @@
+@use '../abstracts/mixins' as *;
+
+// ── Section ────────────────────────────────────────────────────────────────────
+
+.block-graph {
+  padding: 5rem 0;
+
+  @include bp-up(lg) {
+    padding: 8rem 0;
+  }
+}
+
+// ── Track ──────────────────────────────────────────────────────────────────────
+
+.block-graph__track {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  justify-content: center;
+  padding: 0.5rem 2rem 1rem;
+  gap: 0;
+
+  @include bp-up(lg) {
+    overflow-x: visible;
+    padding: 0 4rem;
+  }
+}
+
+// ── Node ───────────────────────────────────────────────────────────────────────
+
+.block-graph__node {
+  flex-shrink: 0;
+  padding: 1.25rem 1.5rem;
+  min-width: 170px;
+  gap: 1rem !important;
+  background: rgba($color-vanilla, 0.05);
+  border: 1px solid rgba($color-vanilla, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  @include bp-up(lg) {
+    padding: 1.5rem 2rem;
+    min-width: 210px;
+    gap: 1.25rem !important;
+  }
+
+  &--center {
+    background: rgba($color-vanilla, 0.08);
+    border-color: rgba($color-vanilla, 0.2);
+    box-shadow: 0 0 32px rgba($color-vanilla, 0.05), inset 0 1px 0 rgba($color-vanilla, 0.1);
+  }
+}
+
+.block-graph__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+
+  @include bp-up(lg) {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+.block-graph__icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.block-graph__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+
+  @include bp-up(lg) {
+    font-size: 0.82rem;
+  }
+}
+
+// ── Connector ─────────────────────────────────────────────────────────────────
+
+.block-graph__connector {
+  flex: 1;
+  min-width: 60px;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 8px;
+}
+
+.block-graph__conn-label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: rgba($color-vanilla, 0.45);
+  text-align: center;
+  line-height: 1.35;
+
+  &--fwd { margin-bottom: 4px; }
+  &--bwd { margin-top: 4px; }
+}
+
+.block-graph__arrow {
+  height: 14px;
+  gap: 0;
+}
+
+.block-graph__shaft {
+  display: block;
+  flex: 1;
+  height: 1.5px;
+  background-color: rgba($color-vanilla, 0.4);
+  will-change: transform;
+}
+
+.block-graph__arrow--fwd .block-graph__shaft {
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.block-graph__arrow--bwd .block-graph__shaft {
+  transform-origin: right center;
+  transform: scaleX(0);
+}
+
+.block-graph__tip {
+  display: block;
+  flex-shrink: 0;
+  width: 0;
+  height: 0;
+}
+
+.block-graph__tip--fwd {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 9px solid rgba($color-vanilla, 0.4);
+}
+
+.block-graph__tip--bwd {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 9px solid rgba($color-vanilla, 0.4);
+}

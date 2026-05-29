@@ -2,10 +2,19 @@
 
 // ── Image strip ───────────────────────────────────────────────────────────────
 
+.block-sectors__image-col {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(4 / 12 * 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .block-sectors__image-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   opacity: 0;
 }
@@ -34,6 +43,11 @@
 .block-sectors__name {
   position: relative;
   z-index: 1;
+}
+
+.block-sectors__num {
+  width: 4rem;
+  flex-shrink: 0;
 }
 
 .block-sectors__hover-tile {

@@ -1,12 +1,58 @@
 @use "../abstracts/mixins" as *;
 
+.block-types {
+  min-height: 100vh;
+  background-color: var(--color-vanilla);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 @include bp-up(lg) {
-  .block-types {
+
+  .block-types__item {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  // Both label and content are always out of flow — card height comes only from JS
+  .block-types__label {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
 
-    .container {
-      width: 100%;
-    }
+  .block-types__label-text {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .block-types__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-width: 0;
+    will-change: transform, opacity;
+  }
+
+}
+
+.block-types__label {
+  display: none;
+}
+
+@include bp-up(lg) {
+  .block-types__label {
+    display: flex;
   }
 }

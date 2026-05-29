@@ -1,4 +1,4 @@
-@use '../abstracts/mixins' as *;
+@use "../abstracts/mixins" as *;
 
 html,
 body {
@@ -33,4 +33,10 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@include bp-up(lg) {
+  .gap-lg-14 {
+    gap: 14.5rem;
+  }
 }

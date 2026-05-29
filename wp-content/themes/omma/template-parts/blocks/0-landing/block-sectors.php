@@ -22,20 +22,20 @@ foreach ($items as $i => $item) {
 }
 ?>
 
-<section class="block-sectors bg-charcoal py-5" id="who" data-progress-nav-anchor="">
+<section class="block-sectors pb-5" id="who" data-progress-nav-anchor="">
 	<div class=" container">
 
 		<?php if ($title) : ?>
-			<p class="block-sectors__label h-6 text-vanilla text-uppercase mb-4 mb-lg-5"
+			<p class="block-sectors__label h-4 text-vanilla text-uppercase mb-4 mb-lg-5"
 				data-anim="fade-up">
 				<?php echo esc_html($title); ?>
 			</p>
 		<?php endif; ?>
 
-		<div class="row align-items-start g-0">
+		<div class="row align-items-start g-0 position-relative">
 
 			<!-- ── Lista de sectores ──────────────────────────────── -->
-			<div class="col-12 col-lg-8">
+			<div class="col-12">
 				<ul class="block-sectors__list list-unstyled m-0"
 					data-directional-hover=""
 					data-type="y">
@@ -44,7 +44,7 @@ foreach ($items as $i => $item) {
 						$num  = str_pad($i + 1, 2, '0', STR_PAD_LEFT);
 						$name = $item['block_sectors_sector_name'];
 					?>
-						<li class="block-sectors__item d-flex align-items-center gap-3 gap-lg-4 border-bottom border-white border-opacity-10 py-2 py-lg-3"
+						<li class="block-sectors__item d-flex align-items-center gap-lg-14 border-bottom border-white border-opacity-10 py-2 py-lg-3"
 							data-sector-index="<?php echo $i; ?>"
 							data-directional-hover-item=""
 							data-anim="fade-up"
@@ -52,7 +52,7 @@ foreach ($items as $i => $item) {
 
 							<div data-directional-hover-tile="" class="block-sectors__hover-tile"></div>
 
-							<span class="block-sectors__num h-1 text-vanilla lh-1 flex-shrink-0">
+							<span class="block-sectors__num r-2 text-vanilla lh-1 flex-shrink-0">
 								<?php echo esc_html($num); ?>
 							</span>
 
@@ -68,7 +68,7 @@ foreach ($items as $i => $item) {
 
 			<!-- ── Imagen (desktop) ──────────────────────────────── -->
 			<?php if ($first_slide_i !== null) : ?>
-				<div class="col-lg-4 d-none d-lg-block ps-4">
+				<div class="block-sectors__image-col d-none d-lg-block">
 					<div class="block-sectors__image-wrap" data-sectors-image
 						data-parallax="trigger"
 						data-parallax-start="-10"

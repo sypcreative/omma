@@ -64,6 +64,9 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 		'acf/block-sectors',
 		'acf/block-intro',
 		'acf/block-types',
+		'acf/block-what-is',
+		'acf/block-graph',
+		'acf/block-about',
 	];
 
 	return array_merge($core, $omma);
