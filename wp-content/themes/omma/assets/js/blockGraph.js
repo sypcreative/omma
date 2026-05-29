@@ -18,8 +18,9 @@ function initBlockGraph() {
   mm.add("(max-width: 991px)", () => {
     gsap.set(nodes, { autoAlpha: 0, y: 20 });
     connectors.forEach(c => {
-      gsap.set(c.querySelectorAll(".block-graph__shaft"), { scaleY: 0 });
-      gsap.set(c.querySelectorAll(".block-graph__tip"),   { autoAlpha: 0 });
+      gsap.set(c.querySelectorAll(".block-graph__shaft"),      { scaleY: 0 });
+      gsap.set(c.querySelectorAll(".block-graph__tip"),        { autoAlpha: 0 });
+      gsap.set(c.querySelectorAll("[data-graph-label]"),       { autoAlpha: 0 });
     });
 
     const tl = gsap.timeline({
@@ -33,13 +34,17 @@ function initBlockGraph() {
       const fwdTip   = connector.querySelector(".block-graph__arrow--fwd .block-graph__tip");
       const bwdShaft = connector.querySelector(".block-graph__arrow--bwd .block-graph__shaft");
       const bwdTip   = connector.querySelector(".block-graph__arrow--bwd .block-graph__tip");
+      const fwdLabel = connector.querySelector(".block-graph__conn-label--fwd");
+      const bwdLabel = connector.querySelector(".block-graph__conn-label--bwd");
       const start    = i === 0 ? ">-=0.2" : "<+=0.08";
 
       tl
         .to(fwdShaft, { scaleY: 1, duration: 0.35, ease: "power2.inOut" }, start)
         .to(fwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
+        .to(fwdLabel, { autoAlpha: 1, duration: 0.25, ease: "power2.out" }, "<")
         .to(bwdShaft, { scaleY: 1, duration: 0.35, ease: "power2.inOut" }, "<-=0.05")
-        .to(bwdTip,   { autoAlpha: 1, duration: 0.15 }, ">");
+        .to(bwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
+        .to(bwdLabel, { autoAlpha: 1, duration: 0.25, ease: "power2.out" }, "<");
     });
   });
 

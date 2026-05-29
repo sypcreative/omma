@@ -10,7 +10,7 @@ $title   = get_field('hero_landing_title');
 $buttons = get_field('hero_landing_buttons');
 ?>
 
-<section class="hero-landing position-relative overflow-hidden w-100 min-vh-100 d-flex align-items-end">
+<section class="hero-landing position-relative overflow-hidden w-100 min-vh-100 d-flex align-items-center align-items-lg-end">
 
 	<?php if ($image) : ?>
 		<div class="hero-landing__bg position-absolute top-0 start-0 w-100"
@@ -35,12 +35,12 @@ $buttons = get_field('hero_landing_buttons');
 		</div>
 	<?php endif; ?>
 
-	<div class="container position-relative z-1 pb-5">
-		<div class="row">
-			<div class="col-12 col-lg-10 mb-5 pb-5">
+	<div class="container position-relative z-1 py-5">
+		<div class="row justify-content-center justify-content-lg-start">
+			<div class="col-12 col-lg-10 text-center text-lg-start mb-0 mb-lg-5 pb-0 pb-lg-5">
 
 				<?php if ($title) : ?>
-					<h1 class="hero-landing__title text-blue-800 mb-4 h-4 h-md-2 r-lg-0"
+					<h1 class="hero-landing__title text-blue-800 mb-5 mb-lg-4 h-3 h-md-1 r-lg-0"
 						data-anim="lines"
 						data-anim-start="top bottom">
 						<?php echo esc_html($title); ?>
@@ -48,7 +48,7 @@ $buttons = get_field('hero_landing_buttons');
 				<?php endif; ?>
 
 				<?php if ($buttons) : ?>
-					<div class="hero-landing__buttons d-flex flex-wrap gap-3"
+					<div class="hero-landing__buttons d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3 align-items-center align-items-lg-start justify-content-center justify-content-lg-start"
 						data-anim="fade-up"
 						data-anim-delay="0.5"
 						data-anim-start="top bottom">
@@ -60,7 +60,7 @@ $buttons = get_field('hero_landing_buttons');
 							<a
 								href="<?php echo esc_url($btn['url']); ?>"
 								target="<?php echo esc_attr($btn['target'] ?: '_self'); ?>"
-								class="btn-omma">
+								class="btn-omma-blue">
 								<span class="button-020__inner">
 									<span class="button-020__default">
 										<span class="button-020__default-bg"></span>

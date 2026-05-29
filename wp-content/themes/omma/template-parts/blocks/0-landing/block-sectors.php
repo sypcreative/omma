@@ -22,7 +22,7 @@ foreach ($items as $i => $item) {
 }
 ?>
 
-<section class="block-sectors py-5 pt-md-0" id="who" data-progress-nav-anchor="">
+<section class="block-sectors pb-5" id="who" data-progress-nav-anchor="">
 	<div class="container">
 
 		<?php if ($title) : ?>

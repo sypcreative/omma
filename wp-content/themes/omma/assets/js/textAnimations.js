@@ -4,6 +4,10 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// Prevent the mobile browser UI bar hiding/showing from triggering a refresh
+// mid-animation, which causes jumps and re-triggers on iOS/Android.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 // ── Defaults ──────────────────────────────────────────────────────────────────
 
 const DEFAULTS = {

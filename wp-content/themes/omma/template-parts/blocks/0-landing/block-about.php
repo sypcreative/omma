@@ -58,7 +58,6 @@ $total = count($items);
 						<span class="block-about__index" aria-hidden="true"><?php echo $num; ?></span>
 
 						<div class="block-about__panel-content" data-about-panel-content="">
-							<div class="block-about__panel-line" aria-hidden="true"></div>
 
 							<?php if ($label) : ?>
 								<p class="block-about__panel-label h-6 text-vanilla text-uppercase mb-4">

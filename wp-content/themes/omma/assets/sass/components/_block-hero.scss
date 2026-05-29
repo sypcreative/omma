@@ -3,9 +3,23 @@
 // ── Section ────────────────────────────────────────────────────────────────────
 
 .hero-landing {
-  // 100svh respects the mobile browser UI bar; fallback to 100vh for older browsers
   min-height: 100vh;
   min-height: 100svh;
+
+  // Overlay so text reads cleanly over the image
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 10, 25, 0.35);
+    pointer-events: none;
+    z-index: 0;
+
+    @include bp-up(lg) {
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 10, 25, 0.75) 100%);
+      inset: 40% 0 0 0;
+    }
+  }
 }
 
 // ── Background ─────────────────────────────────────────────────────────────────
@@ -19,11 +33,17 @@
   }
 }
 
-// ── Content spacing ────────────────────────────────────────────────────────────
+// ── Buttons — equal width on mobile ───────────────────────────────────────────
 
-.hero-landing__title {
-  // Fluid bottom margin — tighter on mobile
-  @include bp-down(md) {
-    margin-bottom: 1.25rem !important;
+@include bp-down(sm) {
+  .hero-landing__buttons .btn-omma,
+  .hero-landing__buttons .btn-omma-blue,
+  .hero-landing__buttons .btn-omma-dark,
+  .hero-landing__buttons .btn-omma-primary {
+    width: 100%;
+
+    .button-020__inner {
+      width: 100%;
+    }
   }
 }
