@@ -12,8 +12,8 @@ if (! $text) {
 }
 ?>
 
-<section class="block-intro py-5 mt-5" id="intro" data-progress-nav-anchor="">
-	<div class=" container">
+<section class="block-intro py-5 my-5" id="intro" data-progress-nav-anchor="">
+	<div class=" container py-5 mb-5">
 		<div class="row">
 			<div class="col-12 col-lg-10 col-xl-8"
 				data-parallax="trigger"

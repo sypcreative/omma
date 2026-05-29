@@ -6,6 +6,48 @@
  * @package omma
  */
 
+// ── AJAX contact form (block-contact) ─────────────────────────────────────────
+
+add_action('wp_ajax_nopriv_omma_contact_submit', 'omma_ajax_contact_submit');
+add_action('wp_ajax_omma_contact_submit',        'omma_ajax_contact_submit');
+
+function omma_ajax_contact_submit(): void
+{
+	check_ajax_referer('omma_contact_submit', '_wpnonce');
+
+	$fname   = isset($_POST['fname'])   ? sanitize_text_field($_POST['fname'])        : '';
+	$lname   = isset($_POST['lname'])   ? sanitize_text_field($_POST['lname'])        : '';
+	$email   = isset($_POST['email'])   ? sanitize_email($_POST['email'])             : '';
+	$message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message'])  : '';
+
+	if (empty($fname) || empty($email) || !is_email($email)) {
+		wp_send_json_error(['message' => 'Please fill in all required fields.']);
+	}
+
+	$to      = get_option('admin_email');
+	$subject = sprintf('[%s] New contact from %s %s', get_bloginfo('name'), $fname, $lname);
+	$body    = implode("\n", [
+		"Name: {$fname} {$lname}",
+		"Email: {$email}",
+		'',
+		"Message:\n{$message}",
+	]);
+	$headers = [
+		'Content-Type: text/plain; charset=UTF-8',
+		"Reply-To: {$fname} {$lname} <{$email}>",
+	];
+
+	$sent = wp_mail($to, $subject, $body, $headers);
+
+	if ($sent) {
+		wp_send_json_success(['message' => "Message sent! We'll be in touch soon."]);
+	} else {
+		wp_send_json_error(['message' => 'Failed to send. Please try again.']);
+	}
+}
+
+// ── Legacy admin-post handler ──────────────────────────────────────────────────
+
 add_action('admin_post_nopriv_block_contact_submit', 'omma_handle_contact_submit');
 add_action('admin_post_block_contact_submit', 'omma_handle_contact_submit');
 

@@ -53,6 +53,11 @@ function omma_enqueue_assets()
 		filemtime( $theme_path . $js_bundle ),
 		true // carga en footer
 	);
+
+	wp_localize_script( 'omma-js', 'ommaAjax', [
+		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'nonce'   => wp_create_nonce( 'omma_contact_submit' ),
+	] );
 }
 add_action( 'wp_enqueue_scripts', 'omma_enqueue_assets', 20 );
 

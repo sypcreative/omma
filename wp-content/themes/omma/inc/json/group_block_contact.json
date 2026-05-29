@@ -1,0 +1,81 @@
+{
+    "key": "group_block_contact",
+    "title": "Block Contact",
+    "fields": [
+        {
+            "key": "field_bc_title",
+            "label": "Title",
+            "name": "block_contact_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Main heading. Defaults to “Contact Us” if empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Contact Us",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "Contact Us",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_bc_subtitle",
+            "label": "Subtitle",
+            "name": "block_contact_subtitle",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Short line below the heading.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Start your project with confidence — request a free consultation today.",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_bc_image",
+            "label": "Decorative image",
+            "name": "block_contact_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Fills the right half of the section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-contact"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1748476800
+}

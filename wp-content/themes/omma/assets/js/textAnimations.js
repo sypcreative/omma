@@ -135,5 +135,10 @@ function initTextAnimations() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initTextAnimations);
+document.addEventListener("DOMContentLoaded", () => {
+  document.fonts.ready.then(() => {
+    initTextAnimations();
+    ScrollTrigger.refresh();
+  });
+});
 export { initTextAnimations };

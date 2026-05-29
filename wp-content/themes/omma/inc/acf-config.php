@@ -172,6 +172,24 @@ function omma_blocks(): void
 		);
 
 		/**
+		 * Block Contact
+		 */
+		acf_register_block(
+			array(
+				'name'            => 'block-contact',
+				'title'           => __('Block Contact', 'OMMA'),
+				'post_types'      => ['page'],
+				'description'     => __('Formulario de contacto con imagen decorativa.', 'OMMA'),
+				'render_template' => 'template-parts/blocks/0-landing/block-contact.php',
+				'category'        => 'OM-MA-contact',
+				'mode'            => 'edit',
+				'icon'            => 'email',
+				'keywords'        => array('contact', 'form', 'email', 'OM-MA'),
+				'render_callback' => 'render_preview',
+			)
+		);
+
+		/**
 		 * Block Intro
 		 */
 		acf_register_block(

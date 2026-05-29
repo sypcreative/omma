@@ -173,6 +173,16 @@ $-ease:    cubic-bezier(0.32, 0.72, 0, 1);
   --_btn-focus-color: #{$color-vanilla};
 }
 
+// ─── .btn-omma-blue — azul → azul oscuro ─────────────────────────────────────
+.btn-omma-blue {
+  @extend %_btn-omma;
+  --_btn-color:       #{$color-vanilla};
+  --_btn-bg:          #{$color-blue};
+  --_btn-hover-color: #{$color-vanilla};
+  --_btn-hover-bg:    #{$color-blue-1000};
+  --_btn-focus-color: #{$color-blue};
+}
+
 // ─── .btn-omma-outline — borde charcoal → fill charcoal ──────────────────────
 .btn-omma-outline {
   @extend %_btn-omma;

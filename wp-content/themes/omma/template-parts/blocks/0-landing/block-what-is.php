@@ -35,7 +35,7 @@ if (! $items) {
 		<?php if ($text_left || $text_right) : ?>
 			<div class="row mb-5">
 				<?php if ($text_left) : ?>
-					<div class="col-12 col-lg-6 pb-5 mb-5">
+					<div class="col-12 col-lg-6">
 						<p class="block-what-is__text fs-5 mb-0"
 							data-anim="fade-up"
 							data-anim-delay="0.1">
@@ -44,7 +44,7 @@ if (! $items) {
 					</div>
 				<?php endif; ?>
 				<?php if ($text_right) : ?>
-					<div class="col-12 offset-lg-6 col-lg-6 mt-4 mt-lg-0 pt-5 mt-5">
+					<div class="col-12 col-lg-6">
 						<p class="block-what-is__text fs-5 mb-0"
 							data-anim="fade-up"
 							data-anim-delay="0.2">

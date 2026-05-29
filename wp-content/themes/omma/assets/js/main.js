@@ -9,6 +9,7 @@ import "./parallax.js";
 import "./stackingCards.js";
 import "./blockGraph.js";
 import "./blockAbout.js";
+import "./blockContact.js";
 
 initLenis();
 // initPageTransitions();

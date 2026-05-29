@@ -1,15 +1,25 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+function maskLines(lines) {
+  lines.forEach(line => {
+    const mask = document.createElement("span");
+    mask.style.cssText = "display:block; overflow:hidden; padding-top:0.2em; margin-top:-0.2em; padding-bottom:0.1em;";
+    line.parentNode.insertBefore(mask, line);
+    mask.appendChild(line);
+  });
+}
 
 function initBlockAbout() {
   const section = document.querySelector("[data-about-section]");
   if (!section) return;
 
-  const track      = section.querySelector("[data-about-track]");
-  const panels     = gsap.utils.toArray("[data-about-panel]", section);
-  const counter    = section.querySelector("[data-about-progress-current]");
+  const track   = section.querySelector("[data-about-track]");
+  const panels  = gsap.utils.toArray("[data-about-panel]", section);
+  const counter = section.querySelector("[data-about-progress-current]");
 
   if (!track || panels.length < 2) return;
 
@@ -19,10 +29,9 @@ function initBlockAbout() {
     const containerW = track.parentElement.offsetWidth;
     const totalMove  = containerW * (panels.length - 1);
 
-    // Set explicit widths so each panel = full container width
     track.style.width = `${containerW * panels.length}px`;
     panels.forEach(p => {
-      p.style.width     = `${containerW}px`;
+      p.style.width      = `${containerW}px`;
       p.style.flexShrink = "0";
     });
 
@@ -52,34 +61,20 @@ function initBlockAbout() {
       },
     });
 
-    // ── Content reveal per panel ──────────────────────────────────────────────
+    // ── Text reveal per panel ─────────────────────────────────────────────────
     panels.forEach((panel, i) => {
-      const content = panel.querySelector("[data-about-panel-content]");
-      const line    = panel.querySelector(".block-about__panel-line");
-      if (!content) return;
+      const label = panel.querySelector(".block-about__panel-label");
+      const text  = panel.querySelector(".block-about__panel-text");
+      const line  = panel.querySelector(".block-about__panel-line");
 
-      // First panel starts visible
+      // First panel: already visible, just split and set in place — no ScrollTrigger
       if (i === 0) {
-        gsap.set(content, { autoAlpha: 1, x: 0 });
+        if (label) { const s = new SplitText(label, { type: "lines", linesClass: "split-line" }); maskLines(s.lines); }
+        if (text)  { const s = new SplitText(text,  { type: "lines", linesClass: "split-line" }); maskLines(s.lines); }
         return;
       }
 
-      gsap.set(content, { autoAlpha: 0, x: 50 });
-
-      gsap.to(content, {
-        autoAlpha: 1,
-        x: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: panel,
-          containerAnimation: mainST,
-          start: "left 75%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // Line draws in slightly after
+      // Panels 1+: reveal via containerAnimation
       if (line) {
         gsap.from(line, {
           scaleX: 0,
@@ -94,6 +89,41 @@ function initBlockAbout() {
           },
         });
       }
+
+      const labelSplit = label ? new SplitText(label, { type: "lines", linesClass: "split-line" }) : null;
+      if (labelSplit) maskLines(labelSplit.lines);
+
+      const textSplit = text ? new SplitText(text, { type: "lines", linesClass: "split-line" }) : null;
+      if (textSplit) maskLines(textSplit.lines);
+
+      if (!labelSplit && !textSplit) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: panel,
+          containerAnimation: mainST,
+          start: "left 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      if (labelSplit) {
+        tl.from(labelSplit.lines, {
+          yPercent: 110,
+          duration: 0.55,
+          stagger: 0.05,
+          ease: "power3.out",
+        });
+      }
+
+      if (textSplit) {
+        tl.from(textSplit.lines, {
+          yPercent: 110,
+          duration: 0.65,
+          stagger: 0.04,
+          ease: "power3.out",
+        }, labelSplit ? "<0.15" : ">");
+      }
     });
 
     return () => {
@@ -107,5 +137,10 @@ function initBlockAbout() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initBlockAbout);
+document.addEventListener("DOMContentLoaded", () => {
+  document.fonts.ready.then(() => {
+    initBlockAbout();
+    ScrollTrigger.refresh();
+  });
+});
 export { initBlockAbout };
