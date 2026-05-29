@@ -13,7 +13,7 @@ function initStackingCards() {
 
   const mm = gsap.matchMedia();
 
-  mm.add("(min-width: 992px)", () => {
+  mm.add("(min-width: 0px)", () => {
     const ctx = gsap.context(() => {
       const maxH = Math.max(...cards.map((c) => c.offsetHeight));
 

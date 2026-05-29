@@ -1,4 +1,29 @@
+@use '../abstracts/mixins' as *;
+
+// ── Section ────────────────────────────────────────────────────────────────────
+
+.hero-landing {
+  // 100svh respects the mobile browser UI bar; fallback to 100vh for older browsers
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+// ── Background ─────────────────────────────────────────────────────────────────
+
 .hero-landing__bg {
-  height: 120%;
-  will-change: transform;
+  height: 100%; // mobile: no parallax, fill the section exactly
+
+  @include bp-up(lg) {
+    height: 120%; // desktop: extra height for parallax movement
+    will-change: transform;
+  }
+}
+
+// ── Content spacing ────────────────────────────────────────────────────────────
+
+.hero-landing__title {
+  // Fluid bottom margin — tighter on mobile
+  @include bp-down(md) {
+    margin-bottom: 1.25rem !important;
+  }
 }

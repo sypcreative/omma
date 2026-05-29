@@ -17,7 +17,8 @@ $buttons = get_field('hero_landing_buttons');
 			data-parallax="trigger"
 			data-parallax-start="0"
 			data-parallax-end="40"
-			data-parallax-scroll-start="top top">
+			data-parallax-scroll-start="top top"
+			data-parallax-disable="tablet">
 			<?php echo wp_get_attachment_image(
 				$image['ID'],
 				'full',
@@ -28,6 +29,7 @@ $buttons = get_field('hero_landing_buttons');
 					'fetchpriority' => 'high',
 					'decoding'      => 'async',
 					'sizes'         => '100vw',
+					'alt'           => esc_attr(get_post_meta($image['ID'], '_wp_attachment_image_alt', true) ?: ($title ?: get_bloginfo('name'))),
 				]
 			); ?>
 		</div>
@@ -38,7 +40,7 @@ $buttons = get_field('hero_landing_buttons');
 			<div class="col-12 col-lg-10 mb-5 pb-5">
 
 				<?php if ($title) : ?>
-					<h1 class="hero-landing__title text-blue-800 mb-4 r-0"
+					<h1 class="hero-landing__title text-blue-800 mb-4 h-4 h-md-2 r-lg-0"
 						data-anim="lines"
 						data-anim-start="top bottom">
 						<?php echo esc_html($title); ?>

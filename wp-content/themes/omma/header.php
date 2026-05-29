@@ -28,11 +28,6 @@ $menu_principal = [
 	<meta name="format-detection" content="telephone=no">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.png" sizes="150x50">
-	<meta property="og:title" content="Check Creative Content – Creative Front-End Development">
-	<meta property="og:description" content="Creative front-end development with a strong focus on UX, performance and motion.">
-	<meta property="og:image" content="https://OM-MAcontent.com/og-image.jpg">
-	<meta property="og:url" content="https://OM-MAcontent.com/">
-	<meta property="og:type" content="website">
 	<?php wp_head(); ?>
 </head>
 

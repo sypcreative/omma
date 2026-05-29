@@ -96,6 +96,45 @@ $offices = $has_acf ? get_field('site_offices', 'option') : [];
 
 </footer>
 
+<?php
+// ── JSON-LD: Organization + office locations ───────────────────────────────
+$schema = [
+	'@context' => 'https://schema.org',
+	'@type'    => 'Organization',
+	'name'     => get_bloginfo('name'),
+	'url'      => home_url('/'),
+];
+
+if ($logo && !empty($logo['url'])) {
+	$schema['logo'] = esc_url($logo['url']);
+}
+
+if ($offices) {
+	$locations = [];
+	foreach ($offices as $office) {
+		$name    = $office['site_office_name']    ?? '';
+		$address = $office['site_office_address'] ?? '';
+		$text    = $office['site_office_text']    ?? '';
+		if (!$name) continue;
+		$locations[] = [
+			'@type'   => 'Place',
+			'name'    => $name,
+			'address' => array_filter([
+				'@type'         => 'PostalAddress',
+				'streetAddress' => $address,
+				'description'   => $text,
+			]),
+		];
+	}
+	if ($locations) {
+		$schema['location'] = count($locations) === 1 ? $locations[0] : $locations;
+	}
+}
+?>
+<script type="application/ld+json">
+<?php echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+</script>
+
 <?php wp_footer(); ?>
 
 </body>

@@ -11,7 +11,7 @@ $image    = get_field('block_contact_image');
 
 ?>
 
-<section class="block-contact" id="contact" data-progress-nav-anchor="">
+<section class="block-contact align-items-center" id="contact" data-progress-nav-anchor="">
 
 	<!-- ── Form side ──────────────────────────────────────────────────────────── -->
 	<div class="block-contact__form-side">
@@ -87,7 +87,7 @@ $image    = get_field('block_contact_image');
 
 	<!-- ── Image side ─────────────────────────────────────────────────────────── -->
 	<?php if ($image) : ?>
-		<div class="block-contact__image-side">
+		<div class="block-contact__image-side d-none d-md-block">
 			<?php echo wp_get_attachment_image(
 				$image['ID'],
 				'large',

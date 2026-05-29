@@ -1,14 +1,17 @@
-@use "../abstracts/mixins" as *;
+@use '../abstracts/mixins' as *;
 
 .block-types {
-  min-height: 100vh;
   background-color: var(--color-vanilla);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 @include bp-up(lg) {
+
+  .block-types {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .block-types__item {
     position: relative;
@@ -49,10 +52,19 @@
 
 .block-types__label {
   display: none;
-}
 
-@include bp-up(lg) {
-  .block-types__label {
+  @include bp-up(lg) {
     display: flex;
   }
+}
+
+// ── Bullet ────────────────────────────────────────────────────────────────────
+
+.block-types__bullet {
+  display: inline-block;
+  width:  6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
 }

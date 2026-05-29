@@ -45,6 +45,13 @@
   z-index: 1;
 }
 
+// gap-lg-14 doesn't exist in Bootstrap's spacer map — define it here
+@include bp-up(lg) {
+  .block-sectors__item {
+    gap: 3.5rem !important;
+  }
+}
+
 .block-sectors__num {
   width: 4rem;
   flex-shrink: 0;

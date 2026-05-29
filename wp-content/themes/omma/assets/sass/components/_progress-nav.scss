@@ -5,12 +5,16 @@
 
 .progress-nav {
   width: 100%;
-  padding: 1.25em 2em;
+  padding: 1em 1.25rem;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 5;
   color: $color-vanilla;
+
+  @include bp-up(lg) {
+    padding: 1.25em 2em;
+  }
 }
 
 .progress-nav__inner {
@@ -29,13 +33,23 @@
 
 .progress-nav__logo-svg,
 .progress-nav__logo-img {
-  width: 8em;
+  width: 6em;
   height: auto;
+
+  @include bp-up(lg) {
+    width: 8em;
+  }
 }
 
 // ── Nav wrapper ───────────────────────────────────────────────────────────────
 
 .progress-nav__wrapper {
+  display: none;
+
+  @include bp-up(lg) {
+    display: block;
+  }
+
   background-color: rgba($color-blue-800, 0.25);
   border: 1px solid rgba($color-blue-800, 0.6);
   border-radius: 10px;

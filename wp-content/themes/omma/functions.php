@@ -73,6 +73,7 @@ omma_require('/inc/navs/custom-nav-menu.php');
 
 omma_require('/inc/gtm-functions.php');          // DataLayer GTM
 
+omma_require('/inc/seo.php');                    // Dynamic meta tags, OG, Twitter Cards
 omma_require('/inc/ajax/ajax-forms.php');        // Handler formulario de contacto
 
 omma_require('/inc/admin/admin-columns.php');    // Columnas admin CPTs

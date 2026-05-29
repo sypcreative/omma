@@ -22,8 +22,8 @@ foreach ($items as $i => $item) {
 }
 ?>
 
-<section class="block-sectors pb-5" id="who" data-progress-nav-anchor="">
-	<div class=" container">
+<section class="block-sectors py-5 pt-md-0" id="who" data-progress-nav-anchor="">
+	<div class="container">
 
 		<?php if ($title) : ?>
 			<p class="block-sectors__label h-4 text-vanilla text-uppercase mb-4 mb-lg-5"
@@ -44,7 +44,7 @@ foreach ($items as $i => $item) {
 						$num  = str_pad($i + 1, 2, '0', STR_PAD_LEFT);
 						$name = $item['block_sectors_sector_name'];
 					?>
-						<li class="block-sectors__item d-flex align-items-center gap-lg-14 border-bottom border-white border-opacity-10 py-2 py-lg-3"
+						<li class="block-sectors__item d-flex align-items-center gap-3 gap-lg-14 border-bottom border-white border-opacity-10 py-2 py-lg-3"
 							data-sector-index="<?php echo $i; ?>"
 							data-directional-hover-item=""
 							data-anim="fade-up"
@@ -52,7 +52,7 @@ foreach ($items as $i => $item) {
 
 							<div data-directional-hover-tile="" class="block-sectors__hover-tile"></div>
 
-							<span class="block-sectors__num r-2 text-vanilla lh-1 flex-shrink-0">
+							<span class="block-sectors__num r-3 r-md-2 text-vanilla lh-1 flex-shrink-0">
 								<?php echo esc_html($num); ?>
 							</span>
 
@@ -90,6 +90,7 @@ foreach ($items as $i => $item) {
 										'loading'  => $i === $first_slide_i ? 'eager' : 'lazy',
 										'decoding' => 'async',
 										'sizes'    => '(min-width: 992px) 33vw, 0px',
+										'alt'      => esc_attr(get_post_meta($image['ID'], '_wp_attachment_image_alt', true) ?: ($item['block_sectors_sector_name'] ?? '')),
 									]
 								); ?>
 							</div>

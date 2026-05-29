@@ -39,27 +39,26 @@ function initBlockAbout() {
     const mainTween = gsap.to(track, {
       x: -totalMove,
       ease: "none",
-      paused: true,
-    });
-
-    const mainST = ScrollTrigger.create({
-      trigger: section,
-      pin: true,
-      scrub: 1.5,
-      start: "top top",
-      end: () => `+=${totalMove}`,
-      anticipatePin: 1,
-      refreshPriority: 1,
-      animation: mainTween,
-      onUpdate: self => {
-        if (!counter) return;
-        const idx = Math.min(
-          panels.length - 1,
-          Math.floor(self.progress * panels.length + 0.01)
-        );
-        counter.textContent = String(idx + 1).padStart(2, "0");
+      scrollTrigger: {
+        trigger: section,
+        pin: true,
+        scrub: 1.5,
+        start: "top top",
+        end: () => `+=${totalMove}`,
+        anticipatePin: 1,
+        refreshPriority: 1,
+        onUpdate: self => {
+          if (!counter) return;
+          const idx = Math.min(
+            panels.length - 1,
+            Math.floor(self.progress * panels.length + 0.01)
+          );
+          counter.textContent = String(idx + 1).padStart(2, "0");
+        },
       },
     });
+
+    const mainST = mainTween.scrollTrigger;
 
     // ── Text reveal per panel ─────────────────────────────────────────────────
     panels.forEach((panel, i) => {
@@ -127,7 +126,7 @@ function initBlockAbout() {
     });
 
     return () => {
-      mainST.kill();
+      mainTween.scrollTrigger?.kill();
       track.style.width = "";
       panels.forEach(p => {
         p.style.width      = "";

@@ -7,58 +7,74 @@ function initBlockGraph() {
   const section = document.querySelector("[data-graph-section]");
   if (!section) return;
 
-  const nodes      = gsap.utils.toArray("[data-graph-node]", section);
+  const nodes      = gsap.utils.toArray("[data-graph-node]",      section);
   const connectors = gsap.utils.toArray("[data-graph-connector]", section);
 
   if (!nodes.length) return;
 
-  // ── Initial states ────────────────────────────────────────────────────────────
-  gsap.set(nodes, { autoAlpha: 0, y: 28 });
+  const mm = gsap.matchMedia();
 
-  connectors.forEach(c => {
-    gsap.set(c.querySelectorAll(".block-graph__shaft"), { scaleX: 0 });
-    gsap.set(c.querySelectorAll(".block-graph__tip"),   { autoAlpha: 0 });
-    gsap.set(c.querySelectorAll("[data-graph-label]"),  { autoAlpha: 0, y: 6 });
+  // ── Mobile: vertical, scaleY shafts ──────────────────────────────────────────
+  mm.add("(max-width: 991px)", () => {
+    gsap.set(nodes, { autoAlpha: 0, y: 20 });
+    connectors.forEach(c => {
+      gsap.set(c.querySelectorAll(".block-graph__shaft"), { scaleY: 0 });
+      gsap.set(c.querySelectorAll(".block-graph__tip"),   { autoAlpha: 0 });
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: section, start: "top 75%", once: true },
+    });
+
+    tl.to(nodes, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" });
+
+    connectors.forEach((connector, i) => {
+      const fwdShaft = connector.querySelector(".block-graph__arrow--fwd .block-graph__shaft");
+      const fwdTip   = connector.querySelector(".block-graph__arrow--fwd .block-graph__tip");
+      const bwdShaft = connector.querySelector(".block-graph__arrow--bwd .block-graph__shaft");
+      const bwdTip   = connector.querySelector(".block-graph__arrow--bwd .block-graph__tip");
+      const start    = i === 0 ? ">-=0.2" : "<+=0.08";
+
+      tl
+        .to(fwdShaft, { scaleY: 1, duration: 0.35, ease: "power2.inOut" }, start)
+        .to(fwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
+        .to(bwdShaft, { scaleY: 1, duration: 0.35, ease: "power2.inOut" }, "<-=0.05")
+        .to(bwdTip,   { autoAlpha: 1, duration: 0.15 }, ">");
+    });
   });
 
-  // ── Scroll-triggered timeline ─────────────────────────────────────────────────
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start: "top 75%",
-      once: true,
-    },
-  });
+  // ── Desktop: horizontal, scaleX shafts ───────────────────────────────────────
+  mm.add("(min-width: 992px)", () => {
+    gsap.set(nodes, { autoAlpha: 0, y: 28 });
+    connectors.forEach(c => {
+      gsap.set(c.querySelectorAll(".block-graph__shaft"), { scaleX: 0 });
+      gsap.set(c.querySelectorAll(".block-graph__tip"),   { autoAlpha: 0 });
+      gsap.set(c.querySelectorAll("[data-graph-label]"),  { autoAlpha: 0, y: 6 });
+    });
 
-  // Nodes stagger in left → right
-  tl.to(nodes, {
-    autoAlpha: 1,
-    y: 0,
-    duration: 0.7,
-    stagger: 0.14,
-    ease: "power3.out",
-  });
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: section, start: "top 75%", once: true },
+    });
 
-  // Each connector: forward shaft draws, tip appears, then backward shaft + tip
-  connectors.forEach((connector, i) => {
-    const fwdShaft = connector.querySelector(".block-graph__arrow--fwd .block-graph__shaft");
-    const fwdTip   = connector.querySelector(".block-graph__arrow--fwd .block-graph__tip");
-    const bwdShaft = connector.querySelector(".block-graph__arrow--bwd .block-graph__shaft");
-    const bwdTip   = connector.querySelector(".block-graph__arrow--bwd .block-graph__tip");
+    tl.to(nodes, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.14, ease: "power3.out" });
 
-    // Overlap with the tail of the nodes animation on first connector
-    const startPos = i === 0 ? ">-=0.25" : "<+=0.08";
+    connectors.forEach((connector, i) => {
+      const fwdShaft = connector.querySelector(".block-graph__arrow--fwd .block-graph__shaft");
+      const fwdTip   = connector.querySelector(".block-graph__arrow--fwd .block-graph__tip");
+      const bwdShaft = connector.querySelector(".block-graph__arrow--bwd .block-graph__shaft");
+      const bwdTip   = connector.querySelector(".block-graph__arrow--bwd .block-graph__tip");
+      const fwdLabel = connector.querySelector(".block-graph__conn-label--fwd");
+      const bwdLabel = connector.querySelector(".block-graph__conn-label--bwd");
+      const start    = i === 0 ? ">-=0.25" : "<+=0.08";
 
-    const fwdLabel = connector.querySelector(".block-graph__conn-label--fwd");
-    const bwdLabel = connector.querySelector(".block-graph__conn-label--bwd");
-
-    tl
-      .to(fwdShaft, { scaleX: 1, duration: 0.4, ease: "power2.inOut" }, startPos)
-      .to(fwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
-      .to(fwdLabel, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<")
-      .to(bwdShaft, { scaleX: 1, duration: 0.4, ease: "power2.inOut" }, "<-=0.05")
-      .to(bwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
-      .to(bwdLabel, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<");
+      tl
+        .to(fwdShaft, { scaleX: 1, duration: 0.4,  ease: "power2.inOut" }, start)
+        .to(fwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
+        .to(fwdLabel, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<")
+        .to(bwdShaft, { scaleX: 1, duration: 0.4,  ease: "power2.inOut" }, "<-=0.05")
+        .to(bwdTip,   { autoAlpha: 1, duration: 0.15 }, ">")
+        .to(bwdLabel, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, "<");
+    });
   });
 }
 

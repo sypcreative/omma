@@ -67,7 +67,7 @@ $total = count($items);
 							<?php endif; ?>
 
 							<?php if ($text) : ?>
-								<p class="block-about__panel-text fs-5 text-vanilla mb-0">
+								<p class="block-about__panel-text fs-6 fs-md-5 text-vanilla mb-0">
 									<?php echo nl2br(esc_html($text)); ?>
 								</p>
 							<?php endif; ?>

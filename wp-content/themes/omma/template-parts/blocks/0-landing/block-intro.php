@@ -12,15 +12,15 @@ if (! $text) {
 }
 ?>
 
-<section class="block-intro py-5 my-5" id="intro" data-progress-nav-anchor="">
-	<div class=" container py-5 mb-5">
+<section class="block-intro py-4 py-lg-5 my-3 my-lg-5" id="intro" data-progress-nav-anchor="">
+	<div class="container py-3 py-lg-5 mb-3 mb-lg-5">
 		<div class="row">
 			<div class="col-12 col-lg-10 col-xl-8"
 				data-parallax="trigger"
 				data-parallax-start="6"
 				data-parallax-end="-6"
 				data-parallax-disable="mobile">
-				<div class="block-intro__text text-white fs-3"
+				<div class="block-intro__text text-white fs-4 fs-md-3"
 					data-anim="lines"
 					data-anim-stagger="0.1">
 					<?php echo wp_kses_post($text); ?>
