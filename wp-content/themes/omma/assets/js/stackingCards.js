@@ -15,7 +15,6 @@ function initStackingCards() {
 
   mm.add("(min-width: 992px)", () => {
     const ctx = gsap.context(() => {
-
       const maxH = Math.max(...cards.map((c) => c.offsetHeight));
 
       gsap.set(wrap, { position: "relative", height: maxH });
@@ -25,16 +24,43 @@ function initStackingCards() {
 
       gsap.set(cards.slice(1), { yPercent: 110 });
 
-      const scrollPerCard = window.innerHeight * 0.9;
+      const contents = cards.map((c) => c.querySelector(".block-what-is__content"));
+      gsap.set(contents, { autoAlpha: 0, y: 20 });
+      const animated = new Array(cards.length).fill(false);
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top top",
-          end: `+=${(cards.length - 1) * scrollPerCard}`,
+          start: () => {
+            const offset =
+              wrap.getBoundingClientRect().top -
+              section.getBoundingClientRect().top;
+            return `top+=${offset} 40%`;
+          },
+          end: () => `+=${maxH + 80}`,
           pin: true,
           scrub: 1,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
+          //  markers: true,
+          onUpdate: (self) => {
+            cards.forEach((_, i) => {
+              const threshold =
+                i === 0 ? 0 : (i - 1 + 0.7) / (cards.length - 1);
+              if (self.progress >= threshold && !animated[i]) {
+                animated[i] = true;
+                gsap.fromTo(
+                  contents[i],
+                  { autoAlpha: 0, y: 20 },
+                  { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }
+                );
+              }
+              if (self.progress < threshold && animated[i]) {
+                animated[i] = false;
+                gsap.set(contents[i], { autoAlpha: 0, y: 20 });
+              }
+            });
+          },
         },
       });
 
@@ -47,7 +73,7 @@ function initStackingCards() {
           card,
           { yPercent: 110 },
           { yPercent: 0, duration: 1, ease: "power2.inOut" },
-          pos
+          pos,
         );
 
         for (let j = 0; j < i; j++) {
@@ -65,11 +91,10 @@ function initStackingCards() {
               duration: 1,
               ease: "power2.inOut",
             },
-            pos
+            pos,
           );
         }
       });
-
     }, section);
 
     return () => ctx.revert();
