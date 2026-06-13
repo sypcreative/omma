@@ -6,6 +6,16 @@
  * @package omma
  */
 
+// ── Nonce endpoint (REST, never cached) ───────────────────────────────────────
+
+add_action('rest_api_init', function () {
+	register_rest_route('omma/v1', '/contact-nonce', [
+		'methods'             => 'GET',
+		'callback'            => fn() => ['nonce' => wp_create_nonce('omma_contact_submit')],
+		'permission_callback' => '__return_true',
+	]);
+});
+
 // ── AJAX contact form (block-contact) ─────────────────────────────────────────
 
 add_action('wp_ajax_nopriv_omma_contact_submit', 'omma_ajax_contact_submit');
@@ -15,16 +25,22 @@ function omma_ajax_contact_submit(): void
 {
 	check_ajax_referer('omma_contact_submit', '_wpnonce');
 
-	$fname   = isset($_POST['fname'])   ? sanitize_text_field($_POST['fname'])        : '';
-	$lname   = isset($_POST['lname'])   ? sanitize_text_field($_POST['lname'])        : '';
-	$email   = isset($_POST['email'])   ? sanitize_email($_POST['email'])             : '';
-	$message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message'])  : '';
+	// Strip newlines to prevent email header injection
+	$fname   = isset($_POST['fname'])   ? preg_replace('/[\r\n]/', '', sanitize_text_field($_POST['fname']))   : '';
+	$lname   = isset($_POST['lname'])   ? preg_replace('/[\r\n]/', '', sanitize_text_field($_POST['lname']))   : '';
+	$email   = isset($_POST['email'])   ? sanitize_email($_POST['email'])                                      : '';
+	$message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message'])                           : '';
 
 	if (empty($fname) || empty($email) || !is_email($email)) {
 		wp_send_json_error(['message' => 'Please fill in all required fields.']);
 	}
 
-	$to      = get_option('admin_email');
+	$to = get_option('admin_email');
+
+	if (empty($to) || !is_email($to)) {
+		wp_send_json_error(['message' => 'Could not send message. Please try again later.']);
+	}
+
 	$subject = sprintf('[%s] New contact from %s %s', get_bloginfo('name'), $fname, $lname);
 	$body    = implode("\n", [
 		"Name: {$fname} {$lname}",
@@ -42,6 +58,7 @@ function omma_ajax_contact_submit(): void
 	if ($sent) {
 		wp_send_json_success(['message' => "Message sent! We'll be in touch soon."]);
 	} else {
+		error_log('omma_contact_submit: wp_mail() failed for ' . $email);
 		wp_send_json_error(['message' => 'Failed to send. Please try again.']);
 	}
 }

@@ -16,6 +16,8 @@
  * @package omma
  */
 
+define('OMMA_DEFAULT_DESCRIPTION', 'OM-MA IDi estructura soluciones Tax Lease que convierten incentivos fiscales de I+D+i en financiación para empresas innovadoras y oportunidades de eficiencia fiscal para inversores.');
+
 function omma_seo_description(): string
 {
 	if (is_singular()) {
@@ -25,12 +27,23 @@ function omma_seo_description(): string
 				return wp_strip_all_tags($post->post_excerpt);
 			}
 			if ($post->post_content) {
-				return wp_trim_words(wp_strip_all_tags($post->post_content), 25, '…');
+				$text = wp_trim_words(wp_strip_all_tags($post->post_content), 25, '…');
+				if ($text) {
+					return $text;
+				}
 			}
 		}
 	}
-	return get_bloginfo('description');
+	$tagline = get_bloginfo('description');
+	return $tagline ?: OMMA_DEFAULT_DESCRIPTION;
 }
+
+add_filter('pre_get_document_title', function (string $title): string {
+	if (is_front_page()) {
+		return 'OM-MA IDi | Tax Lease I+D+i — Financiación Inteligente para Innovación';
+	}
+	return $title;
+});
 
 function omma_seo_og_image(): string
 {

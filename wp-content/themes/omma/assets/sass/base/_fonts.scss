@@ -42,3 +42,33 @@ $font-path: "../fonts" !default;
     url("#{$font-path}/RelieoRegular.woff") format("woff");
   font-display: swap;
 }
+
+@font-face {
+  font-family: "MiguerSans";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url("#{$font-path}/MiguerSans-Bold.woff2") format("woff2"),
+    url("#{$font-path}/MiguerSans-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MiguerSans";
+  font-style: normal;
+  font-weight: 800;
+  src:
+    url("#{$font-path}/MiguerSans-ExtraBold.woff2") format("woff2"),
+    url("#{$font-path}/MiguerSans-ExtraBold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MiguerSans";
+  font-style: normal;
+  font-weight: 900;
+  src:
+    url("#{$font-path}/MiguerSans-Black.woff2") format("woff2"),
+    url("#{$font-path}/MiguerSans-Black.woff") format("woff");
+  font-display: swap;
+}

@@ -17,8 +17,8 @@ get_header();
 		<div class="container-fluid ">
 			<div class="row h-80-view justify-content-center align-content-center">
 				<div class="col-11 col-md-8 md-5 text-center">
-					<h1 class="page-title"><?= __('Página no encontrada', 'OM-MA'); ?></h1>
-					<a href="<?= get_home_url() ?>" class="btn btn-primary"><?= __('Volver a la página principal', 'OM-MA') ?></a>
+					<h1 class="page-title"><?= __('Página no encontrada', 'omma'); ?></h1>
+					<a href="<?= get_home_url() ?>" class="btn btn-primary"><?= __('Volver a la página principal', 'omma') ?></a>
 				</div>
 			</div>
 		</div>

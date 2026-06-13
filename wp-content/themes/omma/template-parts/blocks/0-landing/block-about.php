@@ -15,7 +15,7 @@ if (! $items) {
 $total = count($items);
 ?>
 
-<section class="block-about" data-about-section="" data-progress-nav-anchor="">
+<section class="block-about" id="us" data-about-section="" data-progress-nav-anchor="">
 
 	<!-- ── Image (left, fixed while panels scroll) ─────────────────────────── -->
 	<?php if ($image) : ?>
@@ -48,6 +48,7 @@ $total = count($items);
 		<div class="block-about__track" data-about-track="">
 
 			<?php foreach ($items as $i => $item) :
+				$logo  = $item['block_about_item_logo']  ?? null;
 				$label = $item['block_about_item_label'] ?? '';
 				$text  = $item['block_about_item_text']  ?? '';
 				$num   = str_pad($i + 1, 2, '0', STR_PAD_LEFT);
@@ -58,6 +59,21 @@ $total = count($items);
 						<span class="block-about__index" aria-hidden="true"><?php echo $num; ?></span>
 
 						<div class="block-about__panel-content" data-about-panel-content="">
+
+							<?php if ($logo) : ?>
+								<div class="block-about__panel-logo mb-4">
+									<?php echo wp_get_attachment_image(
+										$logo['ID'],
+										'full',
+										false,
+										[
+											'class'   => 'block-about__logo-img',
+											'loading' => 'lazy',
+											'style'   => 'max-height: 36px; width: auto;',
+										]
+									); ?>
+								</div>
+							<?php endif; ?>
 
 							<?php if ($label) : ?>
 								<p class="block-about__panel-label h-6 text-vanilla text-uppercase mb-4">

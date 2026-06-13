@@ -96,6 +96,18 @@ $relieo-scale: (
   '6':       ($font-h6,      $lh-h6),
 );
 
+// MiguerSans: display sans-serif, disponible de display hasta h6.
+$miguer-scale: (
+  'display': ($font-display, $lh-display),
+  '0':       ($font-h0,      $lh-h0),
+  '1':       ($font-h1,      $lh-h1),
+  '2':       ($font-h2,      $lh-h2),
+  '3':       ($font-h3,      $lh-h3),
+  '4':       ($font-h4,      $lh-h4),
+  '5':       ($font-h5,      $lh-h5),
+  '6':       ($font-h6,      $lh-h6),
+);
+
 // Breakpoints responsive (xs = base sin sufijo, xxl queda fuera del sistema de clases)
 $_type-bps: ('sm', 'md', 'lg', 'xl');
 
@@ -126,6 +138,14 @@ $_type-bps: ('sm', 'md', 'lg', 'xl');
   .r-#{$key} { @include _type($size, $lh, $font-family-relieo, $font-weight-relieo); }
 }
 
+// ─── Clases base: MiguerSans ──────────────────────────────────────────────────
+@each $key, $values in $miguer-scale {
+  $size: list.nth($values, 1);
+  $lh:   list.nth($values, 2);
+
+  .m-#{$key} { @include _type($size, $lh, $font-family-miguer, $font-weight-miguer); }
+}
+
 // ─── Clases responsive: PlusJakarta ──────────────────────────────────────────
 @each $bp in $_type-bps {
   @include bp-up($bp) {
@@ -147,6 +167,18 @@ $_type-bps: ('sm', 'md', 'lg', 'xl');
       $lh:   list.nth($values, 2);
 
       .r-#{$bp}-#{$key} { @include _type($size, $lh, $font-family-relieo, $font-weight-relieo); }
+    }
+  }
+}
+
+// ─── Clases responsive: MiguerSans ───────────────────────────────────────────
+@each $bp in $_type-bps {
+  @include bp-up($bp) {
+    @each $key, $values in $miguer-scale {
+      $size: list.nth($values, 1);
+      $lh:   list.nth($values, 2);
+
+      .m-#{$bp}-#{$key} { @include _type($size, $lh, $font-family-miguer, $font-weight-miguer); }
     }
   }
 }

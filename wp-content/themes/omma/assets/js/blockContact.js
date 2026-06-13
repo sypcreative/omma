@@ -15,9 +15,24 @@ function initBlockContact() {
 
     submit.disabled = true;
 
+    let nonce = '';
+    try {
+      const nonceRes  = await fetch((window.ommaAjax?.resturl ?? '/wp-json') + '/omma/v1/contact-nonce');
+      const nonceData = await nonceRes.json();
+      nonce = nonceData.nonce ?? '';
+    } catch {
+      nonce = window.ommaAjax?.nonce ?? '';
+    }
+
+    if (!nonce) {
+      showFeedback(feedback, 'Error de seguridad. Por favor recarga la página.', 'error');
+      submit.disabled = false;
+      return;
+    }
+
     const body = new URLSearchParams({
       action:   'omma_contact_submit',
-      _wpnonce: window.ommaAjax?.nonce ?? '',
+      _wpnonce: nonce,
       fname:    form.elements.fname.value.trim(),
       lname:    form.elements.lname.value.trim(),
       email:    form.elements.email.value.trim(),

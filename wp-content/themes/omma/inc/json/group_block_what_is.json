@@ -90,14 +90,14 @@
                 {
                     "key": "field_bwi_graph_icon",
                     "label": "Icon",
-                    "name": "block_what_is_graph_icon",
+                    "name": "block_graph_node_icon",
                     "aria-label": "",
                     "type": "image",
                     "instructions": "SVG or PNG icon for this node.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "30",
+                        "width": "25",
                         "class": "",
                         "id": ""
                     },
@@ -117,14 +117,58 @@
                 {
                     "key": "field_bwi_graph_label",
                     "label": "Label",
-                    "name": "block_what_is_graph_label",
+                    "name": "block_graph_node_label",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "70",
+                        "width": "35",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bwi_graph"
+                },
+                {
+                    "key": "field_bwi_graph_fwd_text",
+                    "label": "Arrow → label",
+                    "name": "block_graph_node_fwd_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Text above the forward arrow going to the next node. Leave empty on the last node.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bwi_graph"
+                },
+                {
+                    "key": "field_bwi_graph_bwd_text",
+                    "label": "Arrow ← label",
+                    "name": "block_graph_node_bwd_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Text below the backward arrow returning from the next node. Leave empty on the last node.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
                         "class": "",
                         "id": ""
                     },

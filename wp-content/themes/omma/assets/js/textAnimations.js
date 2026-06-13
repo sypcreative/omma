@@ -31,6 +31,7 @@ function opts(el) {
 }
 
 function scrollTrigger(el, start) {
+  if (start === "entry") return undefined;
   return { trigger: el, start, once: true };
 }
 

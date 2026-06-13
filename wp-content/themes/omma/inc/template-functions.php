@@ -63,33 +63,6 @@ function omma_pingback_header()
 add_action('wp_head', 'omma_pingback_header');
 
 /**
- * Añadimos thumnail por defecto en empleos
- *
- * @param $value
- * @param $post_id
- * @param $meta_key
- * @param $single
- *
- * @return mixed
- */
-function custom_default_thumbnail($value, $post_id, $meta_key, $single)
-{
-	// Verifica si la meta solicitada es la imagen destacada y si no tiene valor
-	if ($meta_key === '_thumbnail_id' && empty($value)) {
-		// Verifica si el post es del tipo de publicación personalizada deseado
-		$post_type = get_post_type($post_id);
-		if ($post_type === 'empleos') {
-			// Retorna el ID de la imagen por defecto.
-			return 5165; //Nombre: empleos_single
-		}
-	}
-
-	return $value;
-}
-
-add_filter('get_post_metadata', 'custom_default_thumbnail', 10, 4);
-
-/**
  * Añadimos que aquellos enlaces del editor de menus que tengan "Nueva ventana"
  * sigan dicho proceso
  *
@@ -139,25 +112,6 @@ function set_featured_image_from_acf_field($post_id, $post, $update)
 add_action('save_post', 'set_featured_image_from_acf_field', 10, 3);
 
 
-// Method 1: Filter.
-function my_acf_google_map_api($api)
-{
-	$api['key'] = 'AIzaSyBVFp7rOsdigQAvYQTmaINR74hW06j3C0g';
-
-	return $api;
-}
-
-add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
-
-// Method 2: Setting.
-function my_acf_init()
-{
-	acf_update_setting('google_api_key', 'AIzaSyBVFp7rOsdigQAvYQTmaINR74hW06j3C0g');
-}
-
-add_action('acf/init', 'my_acf_init');
-
-
 function tiene_hijos_cpt($post_type)
 {
 	global $post;
@@ -200,22 +154,4 @@ function remove_special_characters($string)
 	$string = preg_replace('/[^\p{L}\p{N}\s]+/u', '', $string);
 
 	return $string;
-}
-
-
-//WOOCOMMERCE
-add_filter('woocommerce_add_to_cart_fragments', 'omma_mini_cart_subtotal_fragment');
-
-function omma_mini_cart_subtotal_fragment($fragments)
-{
-
-	ob_start();
-?>
-	<strong class="mc-subtotal-amount">
-		<?php echo WC()->cart->get_cart_subtotal(); ?>
-	</strong>
-<?php
-	$fragments['strong.mc-subtotal-amount'] = ob_get_clean(); // selector ➜ HTML
-
-	return $fragments;
 }

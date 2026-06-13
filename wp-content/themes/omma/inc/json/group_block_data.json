@@ -1,0 +1,98 @@
+{
+    "key": "group_block_data",
+    "title": "Block Data",
+    "fields": [
+        {
+            "key": "field_bda_subtitle",
+            "label": "Subtítulo",
+            "name": "block_data_subtitle",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Texto descriptivo bajo los datos (ej: Trusted by global studios...).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "Trusted by global studios, Producers and Brand partners",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_bda_items",
+            "label": "Datos",
+            "name": "block_data_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Añadir dato",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_bda_item_text_1",
+                    "label": "Texto 1",
+                    "name": "block_data_item_text_1",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Valor principal (ej: €100M+, 300+).",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "€100M+",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bda_items"
+                },
+                {
+                    "key": "field_bda_item_text_2",
+                    "label": "Texto 2",
+                    "name": "block_data_item_text_2",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Etiqueta del dato (ej: Structured, Projects).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "Structured",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_bda_items"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-data"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1749859200
+}

@@ -1,0 +1,65 @@
+@use '../abstracts/variables-theme' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// Block Logos — Cards de clientes con ciclo animado de logos
+// =============================================================================
+
+.block-logos {
+
+  // ── Card contenedora ─────────────────────────────────────────────────────────
+  &__card {
+    background:    rgba(255, 255, 255, 0.055);
+    border:        1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    height:        160px;
+    position:      relative;
+    overflow:      hidden; // el blur del logo no desborda la card
+
+    @include bp-up(lg) {
+      height: 210px;
+    }
+  }
+
+  // ── Slot de logo (posición absoluta, centrado) ────────────────────────────────
+  &__logo {
+    position: absolute;
+    inset:    0;
+    display:  flex;
+    align-items:     center;
+    justify-content: center;
+    padding:  1.5rem 2.5rem;
+    opacity:  0; // JS controla visibilidad vía GSAP autoAlpha
+
+    img {
+      display:    block;
+      max-width:  60%;
+      max-height: 52px;
+      width:      auto;
+      height:     auto;
+      object-fit: contain;
+
+      @include bp-up(lg) {
+        max-height: 64px;
+      }
+    }
+  }
+
+  // ── CTA ──────────────────────────────────────────────────────────────────────
+  &__cta {
+    color:            $color-charcoal;
+    background-color: $color-vanilla;
+    border:           1px solid $color-vanilla;
+    border-radius:    100px;
+    font-size:        0.875rem;
+    font-weight:      500;
+    letter-spacing:   0.01em;
+    white-space:      nowrap;
+    transition:       background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: transparent;
+      color:            $color-vanilla;
+    }
+  }
+}

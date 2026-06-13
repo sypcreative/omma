@@ -25,7 +25,7 @@ $image    = get_field('block_contact_image');
 				<?php echo wp_kses_post($subtitle); ?>
 			</p>
 
-			<form class="block-contact__form" data-contact-form="" novalidate>
+			<form class="block-contact__form" method="post" data-contact-form="" novalidate>
 
 				<div class="block-contact__row">
 					<div class="block-contact__field">
@@ -68,13 +68,13 @@ $image    = get_field('block_contact_image');
 							<span class="button-020__default">
 								<span class="button-020__default-bg"></span>
 								<span class="button-020__default-text">
-									<?php esc_html_e('Send message', 'omma'); ?>
+									<?php esc_html_e('Enviar mensaje', 'omma'); ?>
 								</span>
 							</span>
 							<span aria-hidden="true" class="button-020__hover">
 								<span class="button-020__hover-bg"></span>
 								<span class="button-020__hover-text">
-									<?php esc_html_e('Send message', 'omma'); ?>
+									<?php esc_html_e('Enviar mensaje', 'omma'); ?>
 								</span>
 							</span>
 						</span>

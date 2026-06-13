@@ -56,6 +56,7 @@ function omma_enqueue_assets()
 
 	wp_localize_script( 'omma-js', 'ommaAjax', [
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'resturl' => rest_url(),
 		'nonce'   => wp_create_nonce( 'omma_contact_submit' ),
 	] );
 }

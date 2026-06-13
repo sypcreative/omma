@@ -1,0 +1,89 @@
+@use '../abstracts/variables-theme' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// Block Capabilities — Título sticky + wipe reveal en scroll
+// =============================================================================
+
+.block-capabilities {
+
+  // ── Título ────────────────────────────────────────────────────────────────
+
+  &__title-wrap {
+    @include bp-up(lg) {
+      position: sticky;
+      top:      3rem;
+    }
+  }
+
+  &__title {
+    font-size:      clamp(2.5rem, 5vw, 4.5rem);
+    font-weight:    700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height:    1.05;
+    color:          $color-vanilla;
+  }
+
+  // ── Lista ─────────────────────────────────────────────────────────────────
+
+  &__list {
+    padding-top: 0.25rem;
+  }
+
+  // ── Item ──────────────────────────────────────────────────────────────────
+
+  &__item {
+    padding-bottom: 2.5rem;
+
+    @include bp-up(lg) {
+      padding-bottom: 3rem;
+    }
+  }
+
+  // ── Línea separadora ──────────────────────────────────────────────────────
+
+  &__item-line {
+    height:           1px;
+    background-color: rgba(255, 255, 255, 0.22);
+    margin-bottom:    2rem;
+    transform-origin: left center;
+
+    @include bp-up(lg) {
+      margin-bottom: 2.5rem;
+    }
+
+    &--last {
+      margin-bottom: 0;
+    }
+  }
+
+  // ── Cuerpo del item (el wipe actúa sobre este elemento) ───────────────────
+
+  &__item-body {
+    // clip-path se aplica vía JS para el wipe reveal
+    will-change: clip-path;
+  }
+
+  &__item-title {
+    font-size:   1.125rem;
+    font-weight: 700;
+    color:       $color-vanilla;
+    margin-bottom: 0.625rem;
+
+    @include bp-up(lg) {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__item-desc {
+    font-size:   0.9375rem;
+    line-height: 1.65;
+    color:       rgba(255, 255, 255, 0.5);
+    margin-bottom: 0;
+
+    @include bp-up(lg) {
+      font-size: 1rem;
+    }
+  }
+}

@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * Block: Hero Home
+ * Fields: block_hero_home_image, block_hero_home_title,
+ *         block_hero_home_subtitle, block_hero_home_buttons
+ */
+
+$image    = get_field('block_hero_home_image');
+$title    = get_field('block_hero_home_title');
+$subtitle = get_field('block_hero_home_subtitle');
+$buttons  = get_field('block_hero_home_buttons');
+
+?>
+
+<section class="block-hero-home position-relative overflow-hidden vh-100 d-flex flex-column">
+
+	<!-- Imagen de fondo -->
+	<?php if ($image) : ?>
+		<div class="position-absolute top-0 start-0 bottom-0 end-0">
+			<?php echo wp_get_attachment_image(
+				$image['ID'],
+				'full',
+				false,
+				[
+					'class'         => 'w-100 h-100 object-fit-cover',
+					'loading'       => 'eager',
+					'decoding'      => 'async',
+					'fetchpriority' => 'high',
+					'sizes'         => '100vw',
+				]
+			); ?>
+		</div>
+	<?php endif; ?>
+
+	<!-- Overlay -->
+	<div class="position-absolute top-0 start-0 bottom-0 end-0" aria-hidden="true"></div>
+
+	<!-- Contenido — flex-column ocupa toda la altura, mt-auto empuja al fondo -->
+	<div class="container position-relative z-1 py-5 d-flex flex-column flex-grow-1">
+
+		<!-- Título: top-left -->
+		<?php if ($title) : ?>
+			<div class="row">
+				<div class="col-12 col-lg-11">
+					<h1 class="h-4 h-md-1 text-vanilla mb-0" data-anim="lines" data-anim-start="entry" data-anim-delay="0.1">
+						<?php echo esc_html($title); ?>
+					</h1>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<!-- Subtítulo + botones: bottom-right -->
+		<?php if ($subtitle || $buttons) : ?>
+			<div class="mt-auto">
+				<div class="row justify-content-end">
+					<div class="col-12 col-lg-6">
+
+						<?php if ($subtitle) : ?>
+							<p class="fs-6 fs-md-5 text-vanilla mb-4" data-anim="fade-up" data-anim-start="entry" data-anim-delay="0.4">
+								<?php echo esc_html($subtitle); ?>
+							</p>
+						<?php endif; ?>
+
+						<?php if ($buttons) : ?>
+							<div class="d-flex flex-wrap gap-3" data-anim="fade-up" data-anim-start="entry" data-anim-delay="0.6">
+								<?php foreach ($buttons as $btn) :
+									$text = $btn['block_hero_home_btn_text'] ?? '';
+									$url  = $btn['block_hero_home_btn_url']  ?? '';
+									if (! $text || ! $url) continue;
+								?>
+									<a href="<?php echo esc_url($url); ?>" class="btn-omma">
+										<span class="button-020__inner">
+											<span class="button-020__default">
+												<span class="button-020__default-bg"></span>
+												<span class="button-020__default-text">
+													<?php echo esc_html($text); ?> ↗
+												</span>
+											</span>
+											<span aria-hidden="true" class="button-020__hover">
+												<span class="button-020__hover-bg"></span>
+												<span class="button-020__hover-text">
+													<?php echo esc_html($text); ?> ↗
+												</span>
+											</span>
+										</span>
+									</a>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
+
+	</div>
+
+</section>

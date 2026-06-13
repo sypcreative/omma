@@ -16,7 +16,7 @@ if (! $items) {
 }
 ?>
 
-<section class="block-what-is py-4 py-lg-5" id="about" data-progress-nav-anchor="" data-stack-section="">
+<section class="block-what-is py-5" id="about" data-progress-nav-anchor="" data-stack-section="">
 	<div class="container">
 
 		<!-- Title -->
@@ -55,44 +55,9 @@ if (! $items) {
 			</div>
 		<?php endif; ?>
 
+
 		<!-- Graph -->
-		<!-- <?php if ($graph) : ?>
-			<div class="block-what-is__graph mb-5"
-				data-anim="fade-up"
-				data-anim-delay="0.3">
-				<?php foreach ($graph as $gi => $node) :
-						$icon  = $node['block_what_is_graph_icon']  ?? null;
-						$label = $node['block_what_is_graph_label'] ?? '';
-				?>
-
-					<?php if ($gi > 0) : ?>
-						<div class="block-what-is__graph-arrow" aria-hidden="true">
-							<span class="block-what-is__graph-arrow-fwd"></span>
-							<span class="block-what-is__graph-arrow-bwd"></span>
-						</div>
-					<?php endif; ?>
-
-					<div class="block-what-is__graph-node">
-						<?php if ($icon) : ?>
-							<div class="block-what-is__graph-icon-wrap">
-								<?php echo wp_get_attachment_image(
-									$icon['ID'],
-									[64, 64],
-									false,
-									['class' => 'block-what-is__graph-icon']
-								); ?>
-							</div>
-						<?php endif; ?>
-						<?php if ($label) : ?>
-							<span class="block-what-is__graph-label">
-								<?php echo esc_html($label); ?>
-							</span>
-						<?php endif; ?>
-					</div>
-
-				<?php endforeach; ?>
-			</div>
-		<?php endif; ?> -->
+		<?php get_template_part('template-parts/blocks/0-landing/block-graph', null, ['nodes' => $graph]); ?>
 
 		<!-- Stacking cards -->
 		<div class="block-what-is__cards-section pt-3 pt-lg-5">

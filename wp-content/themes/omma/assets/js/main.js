@@ -10,6 +10,10 @@ import "./stackingCards.js";
 import "./blockGraph.js";
 import "./blockAbout.js";
 import "./blockContact.js";
+import "./blockMap.js";
+import "./blockLogos.js";
+import "./blockEcosystem.js";
+import "./blockCapabilities.js";
 
 initLenis();
 // initPageTransitions();

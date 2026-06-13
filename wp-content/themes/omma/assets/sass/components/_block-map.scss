@@ -1,0 +1,47 @@
+@use '../abstracts/variables-theme' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// Block Map — globo 3D interactivo (Three.js)
+// =============================================================================
+
+.block-map {
+  overflow: hidden;
+
+  // ── Wrapper del canvas — clipa el globo por la mitad inferior ───────────────
+  &__globe-wrap {
+    width: min(100vw, 1000px);
+    // mostrar solo el ~58% superior del globo cuadrado
+    height: min(58vw, 580px);
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+
+    @include bp-up(lg) {
+      width: min(90vw, 1100px);
+      height: min(52.2vw, 638px);
+    }
+
+    // Fade inferior hacia el fondo de la sección
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 55%;
+      background: linear-gradient(to bottom, transparent, #{$color-charcoal});
+      pointer-events: none;
+      z-index: 2;
+    }
+  }
+
+  // ── Canvas Three.js — Three.js controla el height via inline style ──────────
+  &__globe {
+    display: block;
+    width: 100% !important;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}

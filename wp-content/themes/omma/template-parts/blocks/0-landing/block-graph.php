@@ -5,7 +5,7 @@
  * Template: template-parts/blocks/0-landing/block-graph.php
  */
 
-$nodes = get_field('block_graph_nodes');
+$nodes = $args['nodes'] ?? get_field('block_graph_nodes');
 
 if (! $nodes || count($nodes) < 2) {
 	return;
@@ -71,6 +71,7 @@ $center_i = (int) floor($last_i / 2);
 							[
 								'class'   => 'block-graph__icon',
 								'loading' => 'lazy',
+								'alt'     => esc_attr($label),
 							]
 						); ?>
 					</div>

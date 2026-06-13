@@ -74,8 +74,8 @@ $offices = $has_acf ? get_field('site_offices', 'option') : [];
 			</p>
 			<p class="fs-small text-vanilla mb-0">
 				Parte del Grupo Ontier
-				<a href="https://www.ontier.net" target="_blank" rel="noopener noreferrer" class="text-vanilla">
-					www.ontier.net
+				<a href="https://www.ontier.law" target="_blank" rel="noopener noreferrer" class="text-vanilla">
+					www.ontier.law
 				</a>
 			</p>
 		</div>
@@ -90,7 +90,9 @@ $offices = $has_acf ? get_field('site_offices', 'option') : [];
 				alt=""
 				class="site-footer__deco-img h-100 w-auto"
 				loading="lazy"
-				decoding="async">
+				decoding="async"
+				width="<?php echo (int) $icon['width']; ?>"
+				height="<?php echo (int) $icon['height']; ?>">
 		</div>
 	<?php endif; ?>
 
@@ -132,7 +134,7 @@ if ($offices) {
 }
 ?>
 <script type="application/ld+json">
-<?php echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+	<?php echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
 </script>
 
 <?php wp_footer(); ?>

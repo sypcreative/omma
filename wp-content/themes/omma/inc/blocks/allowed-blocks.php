@@ -38,35 +38,22 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 	// Bloques registrados en inc/acf-config.php.
 	// El slug de ACF es acf/{name} donde {name} es el 'name' del array de acf_register_block.
 	$omma = [
+		// Home
+		'acf/block-hero-home',
+		'acf/block-data',
+		'acf/block-map',
+		'acf/block-logos',
+		'acf/block-ecosystem',
+		'acf/block-capabilities',
+		// Landing
 		'acf/hero-landing',
-		'acf/block-hero-landing',
-		'acf/block-clients',
-		'acf/block-best-projects',
-		'acf/block-services-home',
-		'acf/block-testimonies',
-		'acf/block-hero-about',
-		'acf/block-title-history',
-		'acf/block-image',
-		'acf/block-images',
-		'acf/block-team',
-		'acf/block-videos',
-		'acf/block-paragraphs',
-		'acf/block-mission',
-		'acf/block-hero-services',
-		'acf/block-timeline-services',
-		'acf/block-works',
-		'acf/block-description-single',
-		'acf/block-objective-single',
-		'acf/block-gallery-single',
-		'acf/block-related-projects',
-		'acf/block-contact',
-		'acf/block-gallery',
 		'acf/block-sectors',
-		'acf/block-intro',
 		'acf/block-types',
 		'acf/block-what-is',
-		'acf/block-graph',
 		'acf/block-about',
+		'acf/block-graph',
+		'acf/block-contact',
+		'acf/block-intro',
 	];
 
 	return array_merge($core, $omma);
