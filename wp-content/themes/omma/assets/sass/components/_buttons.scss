@@ -193,3 +193,14 @@ $-ease:    cubic-bezier(0.32, 0.72, 0, 1);
   --_btn-focus-color:  #{$color-charcoal};
   --_btn-outer-border: 1px solid #{$color-charcoal};
 }
+
+// ─── .btn-omma-outline-dark — borde vanilla → fill vanilla (para fondos oscuros)
+.btn-omma-outline-dark {
+  @extend %_btn-omma;
+  --_btn-color:        #{$color-vanilla};
+  --_btn-bg:           transparent;
+  --_btn-hover-color:  #{$color-charcoal};
+  --_btn-hover-bg:     #{$color-vanilla};
+  --_btn-focus-color:  #{$color-vanilla};
+  --_btn-outer-border: 1px solid #{$color-vanilla};
+}

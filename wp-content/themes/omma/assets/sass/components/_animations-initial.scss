@@ -1,0 +1,85 @@
+// =============================================================================
+// _animations-initial.scss — Estados iniciales de todas las animaciones GSAP
+//
+// Los elementos empiezan ocultos por CSS desde el primer render,
+// sin depender de cuándo cargue el JS. GSAP anima al estado final con .to().
+//
+// SplitText: visibility:hidden (preserva espacio en layout).
+//   → el JS revela el contenedor tras split + posicionar las palabras.
+// Resto: opacity:0 (suficiente para evitar el flash visual).
+// =============================================================================
+
+// ── Contenedores SplitText ────────────────────────────────────────────────────
+
+.block-hero-home__title,
+.block-data__subtitle,
+.block-ecosystem__title,
+.block-capabilities__title,
+.block-about-intro h2,
+.block-about-ceo h2,
+.block-about-team h2,
+.block-cs-header h1,
+.block-cs-details h2,
+.block-cs-extra-info h2,
+.block-services-intro__title,
+.block-services-list__item h2,
+.block-cs-page-header h1,
+.block-news-page-header h1 {
+  visibility: hidden;
+}
+
+// ── Resto de elementos animados ───────────────────────────────────────────────
+
+.block-hero-home__subtitle,
+.block-hero-home__actions > *,
+
+.block-data__label,
+
+.block-ecosystem__subtitle,
+.block-ecosystem__card,
+.block-ecosystem__cta,
+
+[data-logos-slot],
+.block-logos__cta,
+
+.block-map__globe-wrap,
+
+.block-about-intro__eyebrow,
+.block-about-intro__logo-card,
+.block-about-intro__body p,
+
+.block-about-ceo__eyebrow,
+.block-about-ceo__figure,
+.block-about-ceo__body p,
+
+.block-about-team__card,
+
+.block-cs-header__excerpt,
+.block-cs-header__sector,
+.block-cs-header__services,
+
+.block-cs-details__item,
+
+.block-cs-extra-info__desc,
+
+.block-cs-data__titulo,
+.block-cs-data__numero,
+.block-cs-data__texto,
+
+.block-cs-images__item,
+
+.block-cs-more-projects__section-label,
+.block-cs-more-projects__item,
+
+.block-services-intro__desc,
+.block-services-list__desc,
+.block-services-list__icon,
+.block-services-list__buttons,
+
+.block-cs-page-header__desc,
+.block-cs-grid__card,
+
+.block-news-page-header__desc,
+.block-news-grid__card {
+  opacity: 0;
+}

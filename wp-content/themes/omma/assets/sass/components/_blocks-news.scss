@@ -1,0 +1,49 @@
+@use '../abstracts/variables-theme' as *;
+
+// ── News Page Header ──────────────────────────────────────────────────────────
+
+.block-news-page-header {
+  &__desc {
+    color: rgba($color-vanilla, 0.65);
+  }
+}
+
+// ── News Grid ─────────────────────────────────────────────────────────────────
+
+.block-news-grid {
+  &__card {
+    display: block;
+    text-decoration: none;
+  }
+
+  &__thumb {
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 4 / 3;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+  }
+
+  &__card:hover &__thumb img {
+    transform: scale(1.04);
+  }
+
+  &__date {
+    color: rgba($color-vanilla, 0.55);
+    margin-bottom: 0;
+  }
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+  &__excerpt {
+    color: rgba($color-vanilla, 0.65);
+  }
+}

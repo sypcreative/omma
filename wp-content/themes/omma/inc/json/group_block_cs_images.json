@@ -1,0 +1,68 @@
+{
+    "key": "group_block_cs_images",
+    "title": "Block CS Images",
+    "fields": [
+        {
+            "key": "field_cs_img_items",
+            "label": "Images",
+            "name": "block_cs_img_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "pagination": 0,
+            "min": "",
+            "max": "",
+            "collapsed": "",
+            "button_label": "Add Image",
+            "allow_in_bindings": 0,
+            "sub_fields": [
+                {
+                    "key": "field_cs_img_image",
+                    "label": "Image",
+                    "name": "block_cs_img_image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "return_format": "array",
+                    "library": "all",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "parent_repeater": "field_cs_img_items"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-cs-images"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1749960001
+}

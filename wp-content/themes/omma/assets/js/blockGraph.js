@@ -25,10 +25,10 @@ function initBlockGraph() {
       });
 
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: section, start: "top 75%", once: true },
+        scrollTrigger: { trigger: section, start: "top 82%", once: true },
       });
 
-      tl.to(nodes, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" });
+      tl.to(nodes, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "expo.out" });
 
       connectors.forEach((connector, i) => {
         const fwdShaft = connector.querySelector(".block-graph__arrow--fwd .block-graph__shaft");
@@ -59,10 +59,10 @@ function initBlockGraph() {
       });
 
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: section, start: "top 75%", once: true },
+        scrollTrigger: { trigger: section, start: "top 82%", once: true },
       });
 
-      tl.to(nodes, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.14, ease: "power3.out" });
+      tl.to(nodes, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.14, ease: "expo.out" });
 
       connectors.forEach((connector, i) => {
         const fwdShaft = connector.querySelector(".block-graph__arrow--fwd .block-graph__shaft");

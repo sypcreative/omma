@@ -42,22 +42,3 @@ function add_menu_link_class($atts, $item, $args)
 
 add_filter('nav_menu_link_attributes', 'add_menu_link_class', 1, 3);
 
-// ── MENÚ MOBILE ──────────────────────────────────────────────────────────────
-
-function omma_mobile_menu_li_class(array $classes, $item, $args): array
-{
-	if (isset($args->theme_location) && $args->theme_location === 'menu-mobile') {
-		$classes[] = 'bold-nav-full__li';
-	}
-	return $classes;
-}
-add_filter('nav_menu_css_class', 'omma_mobile_menu_li_class', 10, 3);
-
-function omma_mobile_menu_link_class(array $atts, $item, $args): array
-{
-	if (isset($args->theme_location) && $args->theme_location === 'menu-mobile') {
-		$atts['class'] = 'bold-nav-full__link';
-	}
-	return $atts;
-}
-add_filter('nav_menu_link_attributes', 'omma_mobile_menu_link_class', 10, 3);

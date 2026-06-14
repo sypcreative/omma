@@ -5,9 +5,7 @@ if (is_singular()) {
 	$post_type_obj = get_post_type_object($post_type);
 
 
-	if ($post_type === 'proyectos') {
-		$breadcrumbs .= ' <span class="text-white"> / </span> <a href=" https://pre.OM-MA.com/proyectos/ " class="text-white text-decoration-none">' . $post_type_obj->labels->name . '</a>';
-	} elseif ($post_type === 'productos') {
+	if ($post_type === 'productos') {
 		$breadcrumbs .= ' <span class="text-white"> / </span><span class="text-white">' . $post_type_obj->labels->name . '</span>';
 	}
 

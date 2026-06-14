@@ -14,7 +14,7 @@
 $has_acf   = function_exists('get_field');
 $nav_items = $has_acf ? (get_field('landing_nav_items') ?: []) : [];
 $cta_link  = $has_acf ? get_field('landing_nav_cta') : null;
-$site_logo = $has_acf ? get_field('site_logo', 'option') : null;
+$site_logo = $has_acf ? get_field('site_logo_landing', 'option') : null;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>

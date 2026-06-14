@@ -284,8 +284,14 @@ export function initBlockMap() {
 
   // ── Scroll reveal ─────────────────────────────────────────────────────────
   const section = canvas.closest(".block-map");
-  gsap.from(wrap, {
-    autoAlpha: 0, scale: 0.92, duration: 1.6, ease: "power3.out",
+  gsap.set(wrap, { autoAlpha: 0, scale: 0.85, filter: "blur(20px)" });
+  gsap.to(wrap, {
+    autoAlpha:     1,
+    scale:         1,
+    filter:        "blur(0px)",
+    duration:      2.0,
+    ease:          "expo.out",
+    clearProps:    "filter",
     scrollTrigger: { trigger: section, start: "top 85%", once: true },
   });
 

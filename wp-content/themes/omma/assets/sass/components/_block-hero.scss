@@ -1,6 +1,6 @@
 @use '../abstracts/mixins' as *;
 
-// ── Section ────────────────────────────────────────────────────────────────────
+// ── Landing hero (untouched) ───────────────────────────────────────────────────
 
 .hero-landing {
   min-height: 100vh;
@@ -22,18 +22,14 @@
   }
 }
 
-// ── Background ─────────────────────────────────────────────────────────────────
-
 .hero-landing__bg {
-  height: 100%; // mobile: no parallax, fill the section exactly
+  height: 100%;
 
   @include bp-up(lg) {
-    height: 120%; // desktop: extra height for parallax movement
+    height: 120%;
     will-change: transform;
   }
 }
-
-// ── Buttons — equal width on mobile ───────────────────────────────────────────
 
 @include bp-down(sm) {
   .hero-landing__buttons .btn-omma,
@@ -46,4 +42,31 @@
       width: 100%;
     }
   }
+}
+
+// ── Home hero — sticky scroll-over ────────────────────────────────────────────
+
+.block-hero-home {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+
+  .container {
+    padding-top: 10rem;
+
+    @media (min-width: 992px) {
+      padding-top: 14rem;
+    }
+  }
+}
+
+.block-hero-home__bg {
+  will-change: transform;
+  transform-origin: center center;
+}
+
+// Sections that follow scroll on top of the pinned hero
+.site-main > * + * {
+  position: relative;
+  z-index: 1;
 }

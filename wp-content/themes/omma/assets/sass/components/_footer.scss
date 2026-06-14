@@ -1,5 +1,7 @@
 @use '../abstracts/mixins' as *;
 
+.site-footer--landing { background: #001019; }
+
 .site-footer__logo-img {
   width: auto;
   height: 50px;

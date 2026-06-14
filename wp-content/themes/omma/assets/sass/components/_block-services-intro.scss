@@ -1,0 +1,9 @@
+@use '../abstracts/variables-theme' as *;
+
+.block-services-intro {
+  &__desc {
+    color: rgba($color-vanilla, 0.7);
+
+    p { margin-bottom: 0; }
+  }
+}

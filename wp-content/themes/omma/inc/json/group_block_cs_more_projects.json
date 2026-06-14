@@ -1,0 +1,61 @@
+{
+    "key": "group_block_cs_more_projects",
+    "title": "Block CS More Projects",
+    "fields": [
+        {
+            "key": "field_cs_mpr_titulo",
+            "label": "Titulo",
+            "name": "block_cs_mpr_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "See More Projects",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "e.g. See More Projects",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_cs_mpr_posts",
+            "label": "Related Projects",
+            "name": "block_cs_mpr_posts",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "post_type": [ "case-studies" ],
+            "taxonomy": [],
+            "filters": [ "search", "taxonomy" ],
+            "return_format": "object",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "elements": [ "featured_image" ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-cs-more-projects"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1749965100
+}

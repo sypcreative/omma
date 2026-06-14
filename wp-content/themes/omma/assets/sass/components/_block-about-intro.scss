@@ -1,0 +1,30 @@
+@use '../abstracts/variables-theme' as *;
+
+.block-about-intro {
+
+  &__eyebrow {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &__logo-card {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    background:      $color-vanilla;
+    border-radius:   8px;
+    padding:         1.25rem 1.75rem;
+
+    img {
+      width:      auto;
+      height:     auto;
+      max-width:  160px;
+      max-height: 72px;
+      object-fit: contain;
+    }
+  }
+
+  &__body {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+}

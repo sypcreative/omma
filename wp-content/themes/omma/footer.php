@@ -13,7 +13,7 @@ $offices = $has_acf ? get_field('site_offices', 'option') : [];
 
 </main>
 
-<footer id="site-footer" class="site-footer position-relative overflow-hidden" style="background: #001019">
+<footer id="site-footer" class="site-footer position-relative overflow-hidden <?php echo is_page_template('template-landing.php') ? 'site-footer--landing' : 'bg-charcoal'; ?>">
 	<div class="container position-relative z-1">
 
 		<!-- ── Logo ──────────────────────────────────────────────────────────── -->
@@ -136,6 +136,10 @@ if ($offices) {
 <script type="application/ld+json">
 	<?php echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
 </script>
+
+<div data-transition-wrap class="transition" aria-hidden="true">
+	<div data-transition-dark class="transition__dark"></div>
+</div>
 
 <?php wp_footer(); ?>
 

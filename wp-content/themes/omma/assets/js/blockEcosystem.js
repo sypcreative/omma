@@ -1,9 +1,8 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// ── Reveal del bloque completo ────────────────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 function revealSection(section) {
   const title    = section.querySelector(".block-ecosystem__title");
@@ -11,59 +10,68 @@ function revealSection(section) {
   const cards    = section.querySelectorAll(".block-ecosystem__card");
   const cta      = section.querySelector(".block-ecosystem__cta");
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start:   "top 78%",
-      once:    true,
-    },
-  });
+  if (subtitle)     gsap.set(subtitle, { autoAlpha: 0, y: 18, filter: "blur(6px)" });
+  if (cards.length) gsap.set(cards,    { scale: 0.88, autoAlpha: 0 });
+  if (cta)          gsap.set(cta,      { x: 28, autoAlpha: 0 });
 
+  // Título: SplitText con su propio trigger
   if (title) {
-    tl.from(title, {
-      y:         36,
-      autoAlpha: 0,
-      duration:  0.8,
-      ease:      "expo.out",
+    const split = new SplitText(title, { type: "lines,words", linesClass: "split-line-mask" });
+    gsap.set(split.lines, {
+      overflow:      "hidden",
+      paddingTop:    "0.1em",  marginTop:    "-0.1em",
+      paddingBottom: "0.25em", marginBottom: "-0.25em",
+    });
+    gsap.set(split.words, { yPercent: 130 });
+    gsap.set(title, { visibility: "visible" });
+    gsap.to(split.words, {
+      yPercent: 0,
+      duration: 1.1,
+      stagger:  { each: 0.04, from: "start" },
+      ease:     "expo.out",
+      scrollTrigger: { trigger: title, start: "top 85%", once: true },
     });
   }
 
+  // Subtítulo: su propio trigger
   if (subtitle) {
-    tl.from(subtitle, {
-      y:         20,
-      autoAlpha: 0,
-      duration:  0.7,
-      ease:      "expo.out",
-    }, "-=0.55");
+    gsap.to(subtitle, {
+      autoAlpha:  1,
+      y:          0,
+      filter:     "blur(0px)",
+      duration:   0.9,
+      ease:       "expo.out",
+      clearProps: "filter",
+      scrollTrigger: { trigger: subtitle, start: "top 85%", once: true },
+    });
   }
 
-  if (cards.length) {
-    tl.from(cards, {
-      y:         44,
-      autoAlpha: 0,
-      scale:     0.97,
-      duration:  0.75,
-      stagger:   { each: 0.09, ease: "power2.out" },
+  // Cards: trigger individual por card
+  cards.forEach(card => {
+    gsap.to(card, {
+      scale:     1,
+      autoAlpha: 1,
+      duration:  0.9,
       ease:      "expo.out",
-    }, "-=0.4");
-  }
+      scrollTrigger: { trigger: card, start: "top 85%", once: true },
+    });
+  });
 
+  // CTA: su propio trigger
   if (cta) {
-    tl.from(cta, {
-      y:         16,
-      autoAlpha: 0,
-      duration:  0.55,
+    gsap.to(cta, {
+      x:         0,
+      autoAlpha: 1,
+      duration:  0.8,
       ease:      "expo.out",
-    }, "-=0.25");
+      scrollTrigger: { trigger: cta, start: "top 88%", once: true },
+    });
   }
 }
-
-// ── Init ──────────────────────────────────────────────────────────────────────
 
 export function initBlockEcosystem() {
   const section = document.querySelector(".block-ecosystem");
   if (!section) return;
-
   revealSection(section);
 }
 

@@ -31,7 +31,7 @@ function initBlockAbout() {
       const label = panel.querySelector(".block-about__panel-label");
       const text  = panel.querySelector(".block-about__panel-text");
       const line  = panel.querySelector(".block-about__panel-line");
-      const st    = { trigger: panel, start: "top 80%", once: true };
+      const st    = { trigger: panel, start: "top 82%", once: true };
 
       if (line) {
         gsap.from(line, { scaleX: 0, transformOrigin: "left center", duration: 0.5, ease: "power2.inOut", scrollTrigger: st });
@@ -42,13 +42,13 @@ function initBlockAbout() {
       if (label) {
         const s = new SplitText(label, { type: "lines", linesClass: "split-line" });
         maskLines(s.lines);
-        tl.from(s.lines, { yPercent: 110, duration: 0.55, stagger: 0.05, ease: "power3.out" });
+        tl.from(s.lines, { yPercent: 110, duration: 0.55, stagger: 0.05, ease: "expo.out" });
       }
 
       if (text) {
         const s = new SplitText(text, { type: "lines", linesClass: "split-line" });
         maskLines(s.lines);
-        tl.from(s.lines, { yPercent: 110, duration: 0.65, stagger: 0.04, ease: "power3.out" }, "<0.15");
+        tl.from(s.lines, { yPercent: 110, duration: 0.65, stagger: 0.04, ease: "expo.out" }, "<0.15");
       }
     });
   });
@@ -98,10 +98,10 @@ function initBlockAbout() {
 
       if (i === 0) {
         // Panel 0: animate in when the section enters the viewport
-        const st0 = { trigger: section, start: "top 70%", once: true };
+        const st0 = { trigger: section, start: "top 82%", once: true };
 
         if (index) {
-          gsap.from(index, { autoAlpha: 0, y: 30, duration: 0.8, ease: "power3.out", scrollTrigger: st0 });
+          gsap.from(index, { autoAlpha: 0, y: 30, duration: 0.8, ease: "expo.out", scrollTrigger: st0 });
         }
 
         if (line) {
@@ -120,13 +120,13 @@ function initBlockAbout() {
         if (label) {
           const s = new SplitText(label, { type: "lines", linesClass: "split-line" });
           maskLines(s.lines);
-          tl0.from(s.lines, { yPercent: 110, duration: 0.55, stagger: 0.05, ease: "power3.out" });
+          tl0.from(s.lines, { yPercent: 110, duration: 0.55, stagger: 0.05, ease: "expo.out" });
         }
 
         if (text) {
           const s = new SplitText(text, { type: "lines", linesClass: "split-line" });
           maskLines(s.lines);
-          tl0.from(s.lines, { yPercent: 110, duration: 0.65, stagger: 0.04, ease: "power3.out" }, "<0.15");
+          tl0.from(s.lines, { yPercent: 110, duration: 0.65, stagger: 0.04, ease: "expo.out" }, "<0.15");
         }
 
         return;
@@ -141,7 +141,7 @@ function initBlockAbout() {
           autoAlpha: 0,
           y: 40,
           duration: 0.9,
-          ease: "power3.out",
+          ease: "expo.out",
           scrollTrigger: stLine,
         });
       }
@@ -167,7 +167,7 @@ function initBlockAbout() {
       const tl = gsap.timeline({ scrollTrigger: stText });
 
       if (labelSplit) {
-        tl.from(labelSplit.lines, { yPercent: 110, duration: 0.55, stagger: 0.05, ease: "power3.out" });
+        tl.from(labelSplit.lines, { yPercent: 110, duration: 0.55, stagger: 0.05, ease: "expo.out" });
       }
 
       if (textSplit) {
@@ -175,7 +175,7 @@ function initBlockAbout() {
           yPercent: 110,
           duration: 0.65,
           stagger: 0.04,
-          ease: "power3.out",
+          ease: "expo.out",
         }, labelSplit ? "<0.15" : ">");
       }
     });

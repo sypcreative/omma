@@ -1,3 +1,50 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Entrance animation ────────────────────────────────────────────────────────
+
+function initContactReveal() {
+  const section = document.querySelector(".block-contact");
+  if (!section) return;
+
+  const form    = section.querySelector("[data-contact-form]");
+  const imgSide = section.querySelector(".block-contact__image-side");
+
+  // Row, fields and footer (direct children of the form, not the named inputs)
+  const formItems = form
+    ? Array.from(form.children).filter(el =>
+        el.matches(".block-contact__row, .block-contact__field, .block-contact__footer")
+      )
+    : [];
+
+  if (formItems.length) {
+    gsap.from(formItems, {
+      y:         28,
+      autoAlpha: 0,
+      duration:  0.75,
+      stagger:   0.1,
+      ease:      "expo.out",
+      delay:     0.35,
+      scrollTrigger: { trigger: section, start: "top 82%", once: true },
+    });
+  }
+
+  if (imgSide) {
+    gsap.from(imgSide, {
+      autoAlpha: 0,
+      scale:     1.04,
+      duration:  1.1,
+      ease:      "expo.out",
+      delay:     0.1,
+      scrollTrigger: { trigger: section, start: "top 82%", once: true },
+    });
+  }
+}
+
+// ── Form submission ───────────────────────────────────────────────────────────
+
 function initBlockContact() {
   const form = document.querySelector('[data-contact-form]');
   if (!form) return;
@@ -69,5 +116,8 @@ function showFeedback(el, message, type) {
   el.hidden      = false;
 }
 
-document.addEventListener('DOMContentLoaded', initBlockContact);
-export { initBlockContact };
+document.addEventListener('DOMContentLoaded', () => {
+  initBlockContact();
+  initContactReveal();
+});
+export { initBlockContact, initContactReveal };

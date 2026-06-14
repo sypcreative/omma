@@ -19,6 +19,7 @@
 @use 'base/general' as *;
 
 // ── Componentes ───────────────────────────────────────────────────────────────
+@use 'components/site-nav' as *;
 @use 'components/buttons' as *;
 @use 'components/progress-nav' as *;
 @use 'components/block-sectors' as *;
@@ -33,6 +34,15 @@
 @use 'components/block-logos' as *;
 @use 'components/block-ecosystem' as *;
 @use 'components/block-capabilities' as *;
+@use 'components/block-about-intro' as *;
+@use 'components/block-about-ceo' as *;
+@use 'components/block-about-team' as *;
+@use 'components/blocks-case-studies' as *;
+@use 'components/blocks-news' as *;
+@use 'components/block-services-intro' as *;
+@use 'components/block-services-list' as *;
+@use 'components/scroll-progress' as *;
+@use 'components/page-transition' as *;
 
-// ── Animaciones (añadir cuando se creen en animations/) ───────────────────────
-// @use 'animations/...' as *;
+// ── Estados iniciales para animaciones GSAP ───────────────────────────────────
+@use 'components/animations-initial' as *;

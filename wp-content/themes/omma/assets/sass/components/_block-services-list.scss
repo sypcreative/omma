@@ -1,0 +1,72 @@
+@use '../abstracts/variables-theme' as *;
+
+.block-services-list {
+  &__line {
+    height: 1px;
+    background: rgba($color-vanilla, 0.15);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  &__desc {
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+    }
+  }
+
+  // ── Botones ──────────────────────────────────────────────────────────────────
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    // Botones a ancho completo en mobile
+    .btn-omma,
+    .btn-omma-outline-dark {
+      width: 100%;
+
+      .button-020__inner { width: 100%; }
+    }
+
+    @media (min-width: 992px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .btn-omma,
+      .btn-omma-outline-dark {
+        width: auto;
+
+        .button-020__inner { width: auto; }
+      }
+    }
+  }
+
+  // ── Body (acordeón) ─────────────────────────────────────────────────────────
+
+  &__body {
+    overflow: hidden;
+    height: 0;
+  }
+
+  // ── Features ────────────────────────────────────────────────────────────────
+
+  &__feature {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: rgba($color-vanilla, 0.06);
+    height: 100%;
+  }
+
+  &__feature-desc {
+    color: rgba($color-vanilla, 0.6);
+    margin-bottom: 0;
+  }
+}

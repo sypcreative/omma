@@ -1,0 +1,31 @@
+@use '../abstracts/variables-theme' as *;
+
+.block-about-team {
+
+  &__card {
+    border-radius: 8px;
+    overflow:      hidden;
+  }
+
+  &__photo-wrap {
+    display:      block;
+    aspect-ratio: 1 / 1;
+    overflow:     hidden;
+  }
+
+  &__photo {
+    width:           100%;
+    height:          100%;
+    object-fit:      cover;
+    object-position: center top;
+  }
+
+  &__info {
+    padding: 1rem 1.25rem;
+  }
+
+  &__role {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+}

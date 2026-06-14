@@ -1,0 +1,28 @@
+@use '../abstracts/variables-theme' as *;
+@use '../abstracts/mixins' as *;
+
+.block-about-ceo {
+
+  &__eyebrow {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &__body {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  &__figure {
+    display: block;
+    overflow: hidden;
+
+    @include bp-up(lg) {
+      height: 100%;
+
+      img {
+        height: 100%;
+        object-position: center top;
+      }
+    }
+  }
+
+}

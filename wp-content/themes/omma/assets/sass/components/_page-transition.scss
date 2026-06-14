@@ -1,0 +1,17 @@
+.transition {
+  z-index: 100;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: clip;
+}
+
+.transition__dark {
+  opacity: 0;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

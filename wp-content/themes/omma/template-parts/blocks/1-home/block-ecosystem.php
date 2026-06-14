@@ -131,8 +131,17 @@ $bot_cards = array_slice($cards ?: [], 3);
 		<!-- CTA centrado -->
 		<?php if ($btn_text && $btn_url) : ?>
 			<div class="d-flex justify-content-center mt-5">
-				<a href="<?php echo esc_url($btn_url); ?>" class="block-ecosystem__cta px-4 py-2">
-					<?php echo esc_html($btn_text); ?> ↗
+				<a href="<?php echo esc_url($btn_url); ?>" class="block-ecosystem__cta btn-omma">
+					<span class="button-020__inner">
+						<span class="button-020__default">
+							<span class="button-020__default-bg"></span>
+							<span class="button-020__default-text"><?php echo esc_html($btn_text); ?> ↗</span>
+						</span>
+						<span aria-hidden="true" class="button-020__hover">
+							<span class="button-020__hover-bg"></span>
+							<span class="button-020__hover-text"><?php echo esc_html($btn_text); ?> ↗</span>
+						</span>
+					</span>
 				</a>
 			</div>
 		<?php endif; ?>

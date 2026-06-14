@@ -13,8 +13,8 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 const DEFAULTS = {
   duration: 0.9,
   stagger:  0.06,
-  ease:     "power3.out",
-  start:    "top 88%",
+  ease:     "expo.out",
+  start:    "top 82%",
   delay:    0,
 };
 

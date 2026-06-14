@@ -52,7 +52,7 @@ function initStackingCards() {
                 gsap.fromTo(
                   contents[i],
                   { autoAlpha: 0, y: 20 },
-                  { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }
+                  { autoAlpha: 1, y: 0, duration: 0.7, ease: "expo.out" }
                 );
               }
               if (self.progress < threshold && animated[i]) {

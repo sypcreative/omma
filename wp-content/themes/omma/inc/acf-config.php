@@ -16,6 +16,7 @@ function omma_blocks_category( array $categories ): array
 		[ 'slug' => 'OM-MA-about',        'title' => __( 'OM-MA | About',            'omma' ) ],
 		[ 'slug' => 'OM-MA-services',     'title' => __( 'OM-MA | Services',         'omma' ) ],
 		[ 'slug' => 'OM-MA-works',        'title' => __( 'OM-MA | Works',            'omma' ) ],
+		[ 'slug' => 'OM-MA-news',         'title' => __( 'OM-MA | News',             'omma' ) ],
 		[ 'slug' => 'OM-MA-contact',      'title' => __( 'OM-MA | Contact',          'omma' ) ],
 		[ 'slug' => 'OM-MA-single-works', 'title' => __( 'OM-MA | Single Productos', 'omma' ) ],
 	];
@@ -138,6 +139,226 @@ function omma_blocks(): void
 		'category'        => 'OM-MA-home',
 		'icon'            => 'chart-bar',
 		'keywords'        => [ 'data', 'stats', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	// ── About ────────────────────────────────────────────────────────────────
+
+	acf_register_block_type( [
+		'name'            => 'block-about-intro',
+		'title'           => __( 'Block About Intro', 'omma' ),
+		'description'     => __( 'Introducción de la página About: título, subtítulo, imagen y texto.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/2-about/block-about-intro.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-about',
+		'icon'            => 'editor-paragraph',
+		'keywords'        => [ 'about', 'intro', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-about-ceo',
+		'title'           => __( 'Block About CEO', 'omma' ),
+		'description'     => __( 'Bloque del CEO con título, subtítulo, descripción e imagen.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/2-about/block-about-ceo.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-about',
+		'icon'            => 'admin-users',
+		'keywords'        => [ 'ceo', 'about', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-about-team',
+		'title'           => __( 'Block About Team', 'omma' ),
+		'description'     => __( 'Grid del equipo con foto, nombre y puesto.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/2-about/block-about-team.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-about',
+		'icon'            => 'groups',
+		'keywords'        => [ 'team', 'equipo', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	// ── Case Studies ─────────────────────────────────────────────────────────
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-header',
+		'title'           => __( 'CS Header', 'omma' ),
+		'description'     => __( 'Cabecera del case study: título, excerpt, sector y servicios del post.', 'omma' ),
+		'post_types'      => [ 'case-studies' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-header.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'cover-image',
+		'keywords'        => [ 'header', 'hero', 'case study', 'omma' ],
+		'mode'            => 'preview',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-details',
+		'title'           => __( 'CS Details', 'omma' ),
+		'description'     => __( 'Título y listado de detalles con descripción.', 'omma' ),
+		'post_types'      => [ 'case-studies' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-details.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'list-view',
+		'keywords'        => [ 'details', 'case study', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-images',
+		'title'           => __( 'CS Images', 'omma' ),
+		'description'     => __( 'Galería de imágenes del case study.', 'omma' ),
+		'post_types'      => [ 'case-studies' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-images.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'format-gallery',
+		'keywords'        => [ 'images', 'gallery', 'case study', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-extra-info',
+		'title'           => __( 'CS Extra Info', 'omma' ),
+		'description'     => __( 'Bloque de información adicional con título y descripción.', 'omma' ),
+		'post_types'      => [ 'case-studies' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-extra-info.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'editor-paragraph',
+		'keywords'        => [ 'extra', 'info', 'case study', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-data',
+		'title'           => __( 'CS Data', 'omma' ),
+		'description'     => __( 'Banda de datos numéricos del case study.', 'omma' ),
+		'post_types'      => [ 'case-studies' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-data.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'chart-bar',
+		'keywords'        => [ 'data', 'stats', 'case study', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-more-projects',
+		'title'           => __( 'CS More Projects', 'omma' ),
+		'description'     => __( 'Selección de otros case studies relacionados.', 'omma' ),
+		'post_types'      => [ 'case-studies' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-more-projects.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'portfolio',
+		'keywords'        => [ 'more', 'projects', 'related', 'case study', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	// ── Case Studies — página listado ────────────────────────────────────────
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-page-header',
+		'title'           => __( 'CS Page Header', 'omma' ),
+		'description'     => __( 'Cabecera de la página de listado de case studies: título y descripción.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-page-header.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'cover-image',
+		'keywords'        => [ 'case studies', 'header', 'intro', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-cs-grid',
+		'title'           => __( 'CS Grid', 'omma' ),
+		'description'     => __( 'Grid automático con todos los case studies publicados.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/4-case-studies/block-cs-grid.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-works',
+		'icon'            => 'grid-view',
+		'keywords'        => [ 'case studies', 'grid', 'portfolio', 'omma' ],
+		'mode'            => 'preview',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	// ── News — página listado ────────────────────────────────────────────────
+
+	acf_register_block_type( [
+		'name'            => 'block-news-page-header',
+		'title'           => __( 'News Page Header', 'omma' ),
+		'description'     => __( 'Cabecera de la página de listado de news: título y descripción.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/5-news/block-news-page-header.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-news',
+		'icon'            => 'megaphone',
+		'keywords'        => [ 'news', 'header', 'intro', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-news-grid',
+		'title'           => __( 'News Grid', 'omma' ),
+		'description'     => __( 'Grid automático con todas las news publicadas.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/5-news/block-news-grid.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-news',
+		'icon'            => 'grid-view',
+		'keywords'        => [ 'news', 'grid', 'omma' ],
+		'mode'            => 'preview',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	// ── Services ─────────────────────────────────────────────────────────────
+
+	acf_register_block_type( [
+		'name'            => 'block-services-intro',
+		'title'           => __( 'Block Services Intro', 'omma' ),
+		'description'     => __( 'Introducción de la página de servicios: título y descripción.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/3-services/block-services-intro.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-services',
+		'icon'            => 'editor-paragraph',
+		'keywords'        => [ 'services', 'intro', 'omma' ],
+		'mode'            => 'edit',
+		'supports'        => [ 'align' => false, 'mode' => false ],
+	] );
+
+	acf_register_block_type( [
+		'name'            => 'block-services-list',
+		'title'           => __( 'Block Services List', 'omma' ),
+		'description'     => __( 'Listado de servicios con icono, título, descripción, botones y características.', 'omma' ),
+		'post_types'      => [ 'page' ],
+		'render_template' => 'template-parts/blocks/3-services/block-services-list.php',
+		'render_callback' => 'omma_render_preview',
+		'category'        => 'OM-MA-services',
+		'icon'            => 'list-view',
+		'keywords'        => [ 'services', 'list', 'omma' ],
 		'mode'            => 'edit',
 		'supports'        => [ 'align' => false, 'mode' => false ],
 	] );

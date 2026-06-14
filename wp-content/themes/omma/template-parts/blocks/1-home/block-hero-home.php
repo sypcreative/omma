@@ -13,11 +13,11 @@ $buttons  = get_field('block_hero_home_buttons');
 
 ?>
 
-<section class="block-hero-home position-relative overflow-hidden vh-100 d-flex flex-column">
+<section class="block-hero-home overflow-hidden vh-100 d-flex flex-column">
 
 	<!-- Imagen de fondo -->
 	<?php if ($image) : ?>
-		<div class="position-absolute top-0 start-0 bottom-0 end-0">
+		<div class="block-hero-home__bg position-absolute top-0 start-0 w-100 h-100">
 			<?php echo wp_get_attachment_image(
 				$image['ID'],
 				'full',
@@ -37,13 +37,13 @@ $buttons  = get_field('block_hero_home_buttons');
 	<div class="position-absolute top-0 start-0 bottom-0 end-0" aria-hidden="true"></div>
 
 	<!-- Contenido — flex-column ocupa toda la altura, mt-auto empuja al fondo -->
-	<div class="container position-relative z-1 py-5 d-flex flex-column flex-grow-1">
+	<div class="container position-relative z-1 pb-5 d-flex flex-column flex-grow-1">
 
 		<!-- Título: top-left -->
 		<?php if ($title) : ?>
 			<div class="row">
 				<div class="col-12 col-lg-11">
-					<h1 class="h-4 h-md-1 text-vanilla mb-0" data-anim="lines" data-anim-start="entry" data-anim-delay="0.1">
+					<h1 class="block-hero-home__title h-4 h-md-1 text-vanilla mb-0">
 						<?php echo esc_html($title); ?>
 					</h1>
 				</div>
@@ -57,13 +57,13 @@ $buttons  = get_field('block_hero_home_buttons');
 					<div class="col-12 col-lg-6">
 
 						<?php if ($subtitle) : ?>
-							<p class="fs-6 fs-md-5 text-vanilla mb-4" data-anim="fade-up" data-anim-start="entry" data-anim-delay="0.4">
+							<p class="block-hero-home__subtitle fs-6 fs-md-5 text-vanilla mb-4">
 								<?php echo esc_html($subtitle); ?>
 							</p>
 						<?php endif; ?>
 
 						<?php if ($buttons) : ?>
-							<div class="d-flex flex-wrap gap-3" data-anim="fade-up" data-anim-start="entry" data-anim-delay="0.6">
+							<div class="block-hero-home__actions d-flex flex-wrap gap-3">
 								<?php foreach ($buttons as $btn) :
 									$text = $btn['block_hero_home_btn_text'] ?? '';
 									$url  = $btn['block_hero_home_btn_url']  ?? '';

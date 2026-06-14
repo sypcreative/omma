@@ -143,7 +143,7 @@ $_type-bps: ('sm', 'md', 'lg', 'xl');
   $size: list.nth($values, 1);
   $lh:   list.nth($values, 2);
 
-  .m-#{$key} { @include _type($size, $lh, $font-family-miguer, $font-weight-miguer); }
+  .msans-#{$key} { @include _type($size, $lh, $font-family-miguer, $font-weight-miguer); }
 }
 
 // ─── Clases responsive: PlusJakarta ──────────────────────────────────────────
@@ -178,7 +178,7 @@ $_type-bps: ('sm', 'md', 'lg', 'xl');
       $size: list.nth($values, 1);
       $lh:   list.nth($values, 2);
 
-      .m-#{$bp}-#{$key} { @include _type($size, $lh, $font-family-miguer, $font-weight-miguer); }
+      .msans-#{$bp}-#{$key} { @include _type($size, $lh, $font-family-miguer, $font-weight-miguer); }
     }
   }
 }

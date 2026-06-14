@@ -32,10 +32,8 @@ function omma_setup(): void
 	add_theme_support('align-wide');
 
 	register_nav_menus([
-		'menu-izquierda' => esc_html__('Menú izquierdo', 'omma'),
-		'menu-derecha'   => esc_html__('Menú derecho', 'omma'),
-		'menu-footer'    => esc_html__('Menú footer', 'omma'),
-		'menu-mobile'    => esc_html__('Menú Mobile', 'omma'),
+		'menu-header' => esc_html__('Menú Header', 'omma'),
+		'menu-footer' => esc_html__('Menú Footer', 'omma'),
 	]);
 
 	add_image_size('description-block', 700, 875, true);

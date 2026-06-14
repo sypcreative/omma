@@ -1,0 +1,91 @@
+@use '../abstracts/mixins' as *;
+
+// ── Header z-index ────────────────────────────────────────────────────────────
+
+header.position-fixed {
+  z-index: 100;
+}
+
+// ── Page hero top clearance (compensa nav fixed) ──────────────────────────────
+
+.block-services-intro,
+.block-about-intro,
+.block-cs-header,
+.block-cs-page-header,
+.block-news-page-header {
+  padding-top: 8rem;
+
+  @media (min-width: 992px) {
+    padding-top: 11rem;
+  }
+}
+
+// ── Desktop navbar ─────────────────────────────────────────────────────────────
+
+.site-nav {
+  padding-top:     1.125rem;
+  padding-bottom:  1.125rem;
+  align-items:     center;
+  justify-content: space-between;
+
+  &__brand {
+    display:     flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    img {
+      height:     28px;
+      width:      auto;
+      object-fit: contain;
+    }
+  }
+
+  &__list {
+    list-style:  none;
+    display:     flex;
+    align-items: center;
+    gap:         2rem;
+    margin:      0;
+    padding:     0;
+  }
+
+  &__link {
+    display:         inline-flex;
+    align-items:     center;
+    color:           rgba($color-vanilla, 0.55);
+    font-family:     $font-family-light;
+    font-size:       $font-small;
+    text-decoration: none;
+    white-space:     nowrap;
+    transition:      color 0.25s ease;
+
+    &::before {
+      content:       '';
+      width:         5px;
+      height:        5px;
+      border-radius: 50%;
+      background:    currentColor;
+      margin-right:  7px;
+      opacity:       0;
+      flex-shrink:   0;
+      transition:    opacity 0.25s ease;
+    }
+
+    &:hover {
+      color: rgba($color-vanilla, 0.82);
+    }
+  }
+
+  &__item {
+    &.current-menu-item,
+    &.current-menu-ancestor {
+      .site-nav__link {
+        color: $color-vanilla;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

@@ -1,67 +1,74 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// ── Init ──────────────────────────────────────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export function initBlockCapabilities() {
   const section = document.querySelector(".block-capabilities");
   if (!section) return;
 
-  const titleWrap = section.querySelector(".block-capabilities__title-wrap");
-  const items     = section.querySelectorAll(".block-capabilities__item");
-  const lastLine  = section.querySelector(".block-capabilities__item-line--last");
+  const title    = section.querySelector(".block-capabilities__title");
+  const items    = section.querySelectorAll(".block-capabilities__item");
+  const lastLine = section.querySelector(".block-capabilities__item-line--last");
 
-  // Título: entra desde abajo
-  if (titleWrap) {
-    gsap.from(titleWrap, {
-      y:         48,
-      autoAlpha: 0,
-      duration:  1,
-      ease:      "expo.out",
-      scrollTrigger: { trigger: section, start: "top 78%", once: true },
+  // ── Título: word-by-word masked reveal ────────────────────────────────────
+  if (title) {
+    const split = new SplitText(title, { type: "lines,words", linesClass: "split-line-mask" });
+    gsap.set(split.lines, {
+      overflow:      "hidden",
+      paddingTop:    "0.1em",  marginTop:    "-0.1em",
+      paddingBottom: "0.25em", marginBottom: "-0.25em",
+    });
+    gsap.set(split.words, { yPercent: 130 });
+    gsap.set(title, { visibility: "visible" });
+    gsap.to(split.words, {
+      yPercent:      0,
+      duration:      1.1,
+      stagger:       { each: 0.05, from: "start" },
+      ease:          "expo.out",
+      scrollTrigger: { trigger: title, start: "top 85%", once: true },
     });
   }
 
-  // Cada item: línea se dibuja → cuerpo se revela con wipe de izquierda a derecha
+  // ── Cada item: línea dibujada → cuerpo wipe ───────────────────────────────
   items.forEach((item) => {
     const line = item.querySelector(".block-capabilities__item-line");
     const body = item.querySelector(".block-capabilities__item-body");
 
+    if (line) gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
+    if (body) gsap.set(body, { clipPath: "inset(0 100% 0 0)", y: 8 });
+
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: item, start: "top 86%", once: true },
+      scrollTrigger: { trigger: item, start: "top 85%", once: true },
     });
 
-    // 1. Línea se dibuja
     if (line) {
-      tl.from(line, {
-        scaleX:          0,
-        transformOrigin: "left center",
-        duration:        0.7,
-        ease:            "expo.out",
+      tl.to(line, {
+        scaleX:   1,
+        duration: 0.7,
+        ease:     "expo.out",
       });
     }
 
-    // 2. Texto entra con clip-path wipe (cortina de izq a der) + leve flotación
     if (body) {
-      tl.fromTo(
-        body,
-        { clipPath: "inset(0 100% 0 0)", y: 10 },
-        { clipPath: "inset(0 0% 0 0)",   y: 0, duration: 0.85, ease: "expo.out" },
-        "-=0.45",
-      );
+      tl.to(body, {
+        clipPath: "inset(0 0% 0 0)",
+        y:        0,
+        duration: 0.85,
+        ease:     "expo.out",
+      }, "-=0.45");
     }
   });
 
-  // Línea de cierre
+  // ── Línea de cierre ───────────────────────────────────────────────────────
   if (lastLine) {
-    gsap.from(lastLine, {
-      scaleX:          0,
-      transformOrigin: "left center",
-      duration:        0.7,
-      ease:            "expo.out",
-      scrollTrigger: { trigger: lastLine, start: "top 92%", once: true },
+    gsap.set(lastLine, { scaleX: 0, transformOrigin: "left center" });
+    gsap.to(lastLine, {
+      scaleX:        1,
+      duration:      0.7,
+      ease:          "expo.out",
+      scrollTrigger: { trigger: lastLine, start: "top 90%", once: true },
     });
   }
 }

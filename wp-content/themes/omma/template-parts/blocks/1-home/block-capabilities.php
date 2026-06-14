@@ -21,52 +21,58 @@ if (! $items) {
 
 <section class="block-capabilities bg-charcoal py-5 py-lg-6">
 	<div class="container-fluid px-4 px-lg-5">
-		<div class="row g-5 g-lg-6">
 
-			<!-- Título sticky -->
-			<div class="col-12 col-lg-5">
-				<div class="block-capabilities__title-wrap">
-					<?php if ($title) : ?>
-						<h2 class="block-capabilities__title">
-							<?php echo esc_html($title); ?>
-						</h2>
-					<?php endif; ?>
+		<!-- Título full width -->
+		<?php if ($title) : ?>
+			<div class="row mb-5 mb-lg-6">
+				<div class="col-12 col-lg-8">
+					<h2 class="block-capabilities__title">
+						<?php echo esc_html($title); ?>
+					</h2>
 				</div>
 			</div>
+		<?php endif; ?>
 
-			<!-- Lista de items -->
-			<div class="col-12 col-lg-7">
-				<div class="block-capabilities__list">
+		<!-- Lista de items con directional hover -->
+		<div class="block-capabilities__list" data-directional-hover data-type="y">
 
-					<?php foreach ($items as $item) :
-						$item_title = $item['block_capabilities_item_title']       ?? '';
-						$item_desc  = $item['block_capabilities_item_description'] ?? '';
-					?>
-						<div class="block-capabilities__item">
-							<div class="block-capabilities__item-line"></div>
-							<div class="block-capabilities__item-body">
+			<?php foreach ($items as $item) :
+				$item_title = $item['block_capabilities_item_title']       ?? '';
+				$item_desc  = $item['block_capabilities_item_description'] ?? '';
+			?>
+				<div class="block-capabilities__item" data-directional-hover-item>
 
-								<?php if ($item_title) : ?>
-									<p class="block-capabilities__item-title">
-										<?php echo esc_html($item_title); ?>
-									</p>
-								<?php endif; ?>
+					<!-- Tile para el efecto hover (JS lo mueve) -->
+					<div class="block-capabilities__item-tile" data-directional-hover-tile></div>
 
-								<?php if ($item_desc) : ?>
-									<p class="block-capabilities__item-desc">
-										<?php echo nl2br(esc_html($item_desc)); ?>
-									</p>
-								<?php endif; ?>
+					<!-- Línea separadora animada al scrollear -->
+					<div class="block-capabilities__item-line"></div>
 
-							</div>
+					<!-- Contenido: título izq + descripción der -->
+					<div class="block-capabilities__item-body row g-0 align-items-baseline">
+						<div class="col-12 col-lg-4">
+							<?php if ($item_title) : ?>
+								<p class="block-capabilities__item-title">
+									<?php echo esc_html($item_title); ?>
+								</p>
+							<?php endif; ?>
 						</div>
-					<?php endforeach; ?>
-
-					<div class="block-capabilities__item-line block-capabilities__item-line--last"></div>
+						<div class="col-12 col-lg-8">
+							<?php if ($item_desc) : ?>
+								<p class="block-capabilities__item-desc">
+									<?php echo nl2br(esc_html($item_desc)); ?>
+								</p>
+							<?php endif; ?>
+						</div>
+					</div>
 
 				</div>
-			</div>
+			<?php endforeach; ?>
+
+			<!-- Línea de cierre -->
+			<div class="block-capabilities__item-line block-capabilities__item-line--last"></div>
 
 		</div>
+
 	</div>
 </section>

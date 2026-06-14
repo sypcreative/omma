@@ -1,0 +1,98 @@
+{
+    "key": "group_block_cs_data",
+    "title": "Block CS Data",
+    "fields": [
+        {
+            "key": "field_cs_dat_titulo",
+            "label": "Titulo",
+            "name": "block_cs_dat_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "e.g. Some Numbers",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_cs_dat_items",
+            "label": "Data Items",
+            "name": "block_cs_dat_items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "table",
+            "pagination": 0,
+            "min": "",
+            "max": "",
+            "collapsed": "",
+            "button_label": "Add Item",
+            "allow_in_bindings": 0,
+            "sub_fields": [
+                {
+                    "key": "field_cs_dat_numero",
+                    "label": "Numero",
+                    "name": "block_cs_dat_numero",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "e.g. 50+",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_cs_dat_items"
+                },
+                {
+                    "key": "field_cs_dat_texto",
+                    "label": "Texto",
+                    "name": "block_cs_dat_texto",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_cs_dat_items"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-cs-data"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1749965000
+}

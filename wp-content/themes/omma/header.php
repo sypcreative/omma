@@ -40,37 +40,29 @@ $menu_principal = [
 		<!-- Nav Cabecera -->
 		<header class="position-fixed w-100 z-100">
 			<div class="px-5">
-				<nav class="mt-2 mt-md-4 d-none d-md-flex" id="menuCabecera">
-					<!-- Rail desktop -->
-					<ul class="nav-rail">
-						<?php
-						wp_nav_menu([
-							'theme_location' => 'menu-izquierda',
-							'container'      => false,
-							'items_wrap'     => '%3$s',
-							'depth'          => 1,
-							'fallback_cb'    => false,
-							'menu_class'     => '',
-							'link_class'     => 'ls-3 text-primary d-inline-block text-uppercase text-decoration-none',
-						]);
-						?>
-						<li class="nav-rail__brand">
-							<a href="<?= get_home_url(); ?>" class="nav-rail__brand-link">
-								<img src="<?= function_exists('get_field') ? esc_url(get_field('opciones_sitio_logo_principal', 'option')) : ''; ?>" alt="OM-MA" height="40">
-							</a>
-						</li>
-						<?php
-						wp_nav_menu([
-							'theme_location' => 'menu-derecha',
-							'container'      => false,
-							'items_wrap'     => '%3$s',
-							'depth'          => 1,
-							'fallback_cb'    => false,
-							'menu_class'     => '',
-							'link_class'     => 'ls-3 text-primary d-inline-block text-uppercase text-decoration-none',
-						]);
-						?>
-					</ul>
+				<nav class="site-nav d-none d-md-flex" id="menuCabecera">
+					<?php $logo = function_exists('get_field') ? get_field('site_logo', 'option') : null; ?>
+					<a href="<?= get_home_url(); ?>" class="site-nav__brand">
+						<?php if ($logo) : ?>
+							<img
+								src="<?= esc_url($logo['url']); ?>"
+								alt="<?= esc_attr($logo['alt'] ?: get_bloginfo('name')); ?>"
+								width="<?= (int) $logo['width']; ?>"
+								height="<?= (int) $logo['height']; ?>"
+								decoding="async">
+						<?php endif; ?>
+					</a>
+					<?php
+					wp_nav_menu([
+						'theme_location'  => 'menu-header',
+						'container'       => false,
+						'items_wrap'      => '<ul class="site-nav__list">%3$s</ul>',
+						'depth'           => 1,
+						'fallback_cb'     => false,
+						'list_item_class' => 'site-nav__item',
+						'link_class'      => 'site-nav__link',
+					]);
+					?>
 				</nav>
 				<!-- Menú fullscreen móvil -->
 				<nav data-navigation-status="not-active" class="bold-nav-full d-md-none d-flex" aria-label="Toggle navigation">
