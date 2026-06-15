@@ -62,7 +62,7 @@ $bot_cards = array_slice($cards ?: [], 3);
 						<div class="block-ecosystem__card" style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
 
 							<?php if ($card_title) : ?>
-								<p class="block-ecosystem__card-title"><?php echo esc_html($card_title); ?></p>
+								<p class="block-ecosystem__card-title h4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
 							<?php endif; ?>
 
 							<?php if ($card_icon) : ?>
@@ -73,13 +73,12 @@ $bot_cards = array_slice($cards ?: [], 3);
 										width="<?php echo (int) $card_icon['width']; ?>"
 										height="<?php echo (int) $card_icon['height']; ?>"
 										loading="lazy"
-										decoding="async"
-									>
+										decoding="async">
 								</div>
 							<?php endif; ?>
 
 							<?php if ($card_text) : ?>
-								<p class="block-ecosystem__card-text"><?php echo nl2br(esc_html($card_text)); ?></p>
+								<p class="block-ecosystem__card-text text-vanilla"><?php echo nl2br(esc_html($card_text)); ?></p>
 							<?php endif; ?>
 
 						</div>
@@ -102,7 +101,7 @@ $bot_cards = array_slice($cards ?: [], 3);
 						<div class="block-ecosystem__card" style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
 
 							<?php if ($card_title) : ?>
-								<p class="block-ecosystem__card-title"><?php echo esc_html($card_title); ?></p>
+								<p class="block-ecosystem__card-title h4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
 							<?php endif; ?>
 
 							<?php if ($card_icon) : ?>
@@ -113,13 +112,12 @@ $bot_cards = array_slice($cards ?: [], 3);
 										width="<?php echo (int) $card_icon['width']; ?>"
 										height="<?php echo (int) $card_icon['height']; ?>"
 										loading="lazy"
-										decoding="async"
-									>
+										decoding="async">
 								</div>
 							<?php endif; ?>
 
 							<?php if ($card_text) : ?>
-								<p class="block-ecosystem__card-text"><?php echo nl2br(esc_html($card_text)); ?></p>
+								<p class="block-ecosystem__card-text text-vanilla"><?php echo nl2br(esc_html($card_text)); ?></p>
 							<?php endif; ?>
 
 						</div>
@@ -131,15 +129,15 @@ $bot_cards = array_slice($cards ?: [], 3);
 		<!-- CTA centrado -->
 		<?php if ($btn_text && $btn_url) : ?>
 			<div class="d-flex justify-content-center mt-5">
-				<a href="<?php echo esc_url($btn_url); ?>" class="block-ecosystem__cta btn-omma">
+				<a href="<?php echo esc_url($btn_url); ?>" class="block-ecosystem__cta btn-omma-light">
 					<span class="button-020__inner">
 						<span class="button-020__default">
 							<span class="button-020__default-bg"></span>
-							<span class="button-020__default-text"><?php echo esc_html($btn_text); ?> ↗</span>
+							<span class="button-020__default-text"><?php echo esc_html($btn_text); ?> <?php echo omma_btn_arrow(); ?></span>
 						</span>
 						<span aria-hidden="true" class="button-020__hover">
 							<span class="button-020__hover-bg"></span>
-							<span class="button-020__hover-text"><?php echo esc_html($btn_text); ?> ↗</span>
+							<span class="button-020__hover-text"><?php echo esc_html($btn_text); ?> <?php echo omma_btn_arrow(); ?></span>
 						</span>
 					</span>
 				</a>

@@ -1,4 +1,4 @@
-@use '../abstracts/variables-theme' as *;
+@use "../abstracts/variables-theme" as *;
 
 .block-services-list {
   &__line {
@@ -32,7 +32,9 @@
     .btn-omma-outline-dark {
       width: 100%;
 
-      .button-020__inner { width: 100%; }
+      .button-020__inner {
+        width: 100%;
+      }
     }
 
     @media (min-width: 992px) {
@@ -44,7 +46,9 @@
       .btn-omma-outline-dark {
         width: auto;
 
-        .button-020__inner { width: auto; }
+        .button-020__inner {
+          width: auto;
+        }
       }
     }
   }
@@ -59,14 +63,12 @@
   // ── Features ────────────────────────────────────────────────────────────────
 
   &__feature {
-    padding: 1.5rem;
-    border-radius: 8px;
+    padding: 3.5rem 2.5rem;
     background-color: rgba($color-vanilla, 0.06);
     height: 100%;
   }
 
   &__feature-desc {
-    color: rgba($color-vanilla, 0.6);
     margin-bottom: 0;
   }
 }

@@ -1,0 +1,42 @@
+{
+    "key": "group_block_map",
+    "title": "Block Map",
+    "fields": [
+        {
+            "key": "field_block_map_mode",
+            "label": "Modo de visualización",
+            "name": "block_map_mode",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Activa para mostrar el mapa en 2D (puntos planos). Desactiva para el globo 3D interactivo.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "Mapa 2D",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "2D",
+            "ui_off_text": "3D"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-map"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1749945600
+}

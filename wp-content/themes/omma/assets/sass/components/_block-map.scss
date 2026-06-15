@@ -8,30 +8,86 @@
 .block-map {
   overflow: hidden;
 
+  // Glow azul solo en modo 3D
+  &:not(.block-map--2d) {
+    background-image: radial-gradient(
+      ellipse 80% 55% at 50% 88%,
+      rgba(0, 45, 130, 0.45) 0%,
+      transparent 65%
+    );
+  }
+
   // ── Wrapper del canvas — clipa el globo por la mitad inferior ───────────────
   &__globe-wrap {
-    width: min(100vw, 1000px);
-    // mostrar solo el ~58% superior del globo cuadrado
-    height: min(58vw, 580px);
+    width: 100%;
+    height: 54vw;
     overflow: hidden;
     position: relative;
-    margin: 0 auto;
 
     @include bp-up(lg) {
-      width: min(90vw, 1100px);
-      height: min(52.2vw, 638px);
+      height: 46vw;
     }
 
-    // Fade inferior hacia el fondo de la sección
+    // Fade superior (solo modo 3D)
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 35%;
+      background: linear-gradient(to bottom, #{$color-charcoal} 0%, #{$color-charcoal} 20%, transparent 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    // Fade inferior (solo modo 3D)
     &::after {
       content: '';
       position: absolute;
       inset: auto 0 0 0;
-      height: 55%;
+      height: 40%;
       background: linear-gradient(to bottom, transparent, #{$color-charcoal});
       pointer-events: none;
       z-index: 2;
     }
+  }
+
+  // ── Modo 2D: sin gradientes que tapen el mapa ────────────────────────────────
+  &--2d &__globe-wrap {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  // ── Tooltip de ciudad ────────────────────────────────────────────────────────
+  &__tooltip {
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, calc(-100% - 10px));
+    padding: 0.3rem 0.65rem;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+
+    &.is-visible { opacity: 1; }
+  }
+
+  // ── Canvas 2D ────────────────────────────────────────────────────────────────
+  &__map-2d {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   // ── Canvas Three.js — Three.js controla el height via inline style ──────────

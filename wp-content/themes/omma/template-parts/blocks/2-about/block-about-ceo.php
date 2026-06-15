@@ -18,14 +18,14 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 ?>
 
 <section class="block-about-ceo bg-charcoal pt-5 pt-lg-6 pb-5 pb-lg-0">
-	<div class="container-fluid px-4 px-lg-5">
-		<div class="row g-4 g-lg-5 align-items-end">
+	<div class="container-fluid px-4 px-lg-5 pt-0 py-md-5">
+		<div class="row g-4 g-lg-5">
 
 			<!-- Columna izquierda: nombre + cargo + descripción -->
-			<div class="col-12 col-lg-7 pb-lg-6">
+			<div class="col-12 col-lg-6 pb-lg-6 block-about-ceo__text-col">
 
 				<?php if ($title) : ?>
-					<h2 class="h-2 h-lg-1 text-vanilla mb-2">
+					<h2 class="h-2 h-lg-3 text-vanilla mb-2">
 						<?php echo esc_html($title); ?>
 					</h2>
 				<?php endif; ?>
@@ -37,7 +37,7 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 				<?php endif; ?>
 
 				<?php if ($description) : ?>
-					<div class="block-about-ceo__body fs-5">
+					<div class="block-about-ceo__body fs-6">
 						<?php echo wpautop(esc_html($description)); ?>
 					</div>
 				<?php endif; ?>
@@ -46,8 +46,8 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 
 			<!-- Columna derecha: retrato -->
 			<?php if ($image) : ?>
-				<div class="col-12 col-lg-5">
-					<figure class="block-about-ceo__figure m-0">
+				<div class="col-12 col-lg-5 offset-lg-1">
+					<figure class="block-about-ceo__figure m-0 rounded-2">
 						<img
 							src="<?php echo esc_url($image['url']); ?>"
 							alt="<?php echo esc_attr($image['alt']); ?>"

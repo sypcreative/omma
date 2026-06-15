@@ -13,7 +13,7 @@ if (! $items) return;
 	?>
 
 		<div class="block-services-list__item">
-			<?php if ( $i > 0 ) : ?>
+			<?php if ($i > 0) : ?>
 				<div class="block-services-list__line" aria-hidden="true"></div>
 			<?php endif; ?>
 
@@ -23,7 +23,7 @@ if (! $items) return;
 					<div class="row align-items-center py-5 py-lg-6">
 
 						<?php if ($icon) : ?>
-							<div class="col-12 col-lg-4 order-1 order-lg-2 d-flex justify-content-lg-end mb-4 mb-lg-0">
+							<div class="col-12 col-lg-4 offset-lg-2 order-1 order-lg-2 d-flex justify-content-lg-end mb-4 mb-lg-0">
 								<div class="block-services-list__icon">
 									<img src="<?php echo esc_url($icon['url']); ?>"
 										alt="<?php echo esc_attr($icon['alt']); ?>">
@@ -31,10 +31,10 @@ if (! $items) return;
 							</div>
 						<?php endif; ?>
 
-						<div class="col-12 <?php echo $icon ? 'col-lg-8 order-2 order-lg-1' : ''; ?>">
+						<div class="col-12 <?php echo $icon ? 'col-lg-6 order-2 order-lg-1' : ''; ?>">
 
 							<?php if ($title) : ?>
-								<h2 class="h-1 text-vanilla mb-3"><?php echo esc_html($title); ?></h2>
+								<h2 class="msans-3 text-vanilla mb-3"><?php echo esc_html($title); ?></h2>
 							<?php endif; ?>
 
 							<?php if ($desc) : ?>
@@ -51,15 +51,15 @@ if (! $items) return;
 										$url   = $btn['block_srv_list_btn_url']   ?? '';
 										if (! $label || ! $url) continue;
 									?>
-										<a href="<?php echo esc_url($url); ?>" class="btn-omma">
+										<a href="<?php echo esc_url($url); ?>" class="btn-omma-light">
 											<span class="button-020__inner">
 												<span class="button-020__default">
 													<span class="button-020__default-bg"></span>
-													<span class="button-020__default-text"><?php echo esc_html($label); ?> ↗</span>
+													<span class="button-020__default-text"><?php echo esc_html($label); ?> <?php echo omma_btn_arrow(); ?></span>
 												</span>
 												<span aria-hidden="true" class="button-020__hover">
 													<span class="button-020__hover-bg"></span>
-													<span class="button-020__hover-text"><?php echo esc_html($label); ?> ↗</span>
+													<span class="button-020__hover-text"><?php echo esc_html($label); ?> <?php echo omma_btn_arrow(); ?></span>
 												</span>
 											</span>
 										</a>
@@ -100,15 +100,15 @@ if (! $items) return;
 								$fbg    = $feat['block_srv_list_feat_bg']    ?? '';
 							?>
 								<div class="col-12 col-md-6">
-									<div class="block-services-list__feature"
+									<div class="block-services-list__feature rounded-3"
 										<?php if ($fbg) echo 'style="background-color:' . esc_attr($fbg) . '"'; ?>>
 										<?php if ($ftitle) : ?>
-											<p class="block-services-list__feature-title h-6 text-vanilla mb-2">
+											<p class="block-services-list__feature-title h-5 text-vanilla mb-2">
 												<?php echo esc_html($ftitle); ?>
 											</p>
 										<?php endif; ?>
 										<?php if ($fdesc) : ?>
-											<p class="block-services-list__feature-desc fs-small">
+											<p class="block-services-list__feature-desc text-vanilla fs-6">
 												<?php echo nl2br(esc_html($fdesc)); ?>
 											</p>
 										<?php endif; ?>

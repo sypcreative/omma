@@ -38,38 +38,34 @@ function geoTo3D([lng, lat], r = 1) {
 // ── Land mask desde topojson ──────────────────────────────────────────────────
 
 /**
- * Rasteriza las áreas de tierra del topojson sobre un canvas 1000×500
+ * Rasteriza las áreas de tierra del topojson sobre un canvas 2000×1000
  * en proyección equirectangular. Retorna ImageData.
+ *
+ * Usa países individuales (outer ring only) + fill nonzero para evitar
+ * agujeros causados por evenodd en polígonos simplificados que se solapan.
  */
 function buildLandMask() {
-  const W = 1000, H = 500;
+  const W = 2000, H = 1000;
   const c   = Object.assign(document.createElement("canvas"), { width: W, height: H });
   const ctx = c.getContext("2d");
 
-  const landGeo = feature(worldData, worldData.objects.land);
-  const polys   = landGeo.type === "Feature"
-    ? [landGeo.geometry]
-    : landGeo.features.map((f) => f.geometry);
-
+  const countriesGeo = feature(worldData, worldData.objects.countries);
   ctx.fillStyle = "white";
 
-  polys.forEach((geom) => {
-    const rings = geom.type === "Polygon"
-      ? [geom.coordinates]
-      : geom.coordinates; // MultiPolygon
-
-    rings.forEach((poly) => {
+  countriesGeo.features.forEach((f) => {
+    const geom = f.geometry;
+    if (!geom) return;
+    const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
+    polys.forEach((poly) => {
       ctx.beginPath();
-      poly.forEach((ring) => {
-        ring.forEach(([lng, lat], i) => {
-          const x = ((lng + 180) / 360) * W;
-          const y = ((90 - lat) / 180) * H;
-          if (i === 0) ctx.moveTo(x, y);
-          else         ctx.lineTo(x, y);
-        });
-        ctx.closePath();
+      poly[0].forEach(([lng, lat], i) => {
+        const x = ((lng + 180) / 360) * W;
+        const y = ((90 - lat) / 180) * H;
+        if (i === 0) ctx.moveTo(x, y);
+        else         ctx.lineTo(x, y);
       });
-      ctx.fill("evenodd");
+      ctx.closePath();
+      ctx.fill(); // nonzero — sin agujeros por solapamientos
     });
   });
 
@@ -121,13 +117,224 @@ function addLines(multiLine, r, mat, group) {
   });
 }
 
+// ── Mapa 2D ───────────────────────────────────────────────────────────────────
+
+function buildDots2D(mask, W, H, cols, rows) {
+  const dots = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const lng = ((c + 0.5) / cols) * 360 - 180;
+      const lat = 90 - ((r + 0.5) / rows) * 180;
+      if (!isLand(mask, lat, lng)) continue;
+      dots.push({
+        x: ((c + 0.5) / cols) * W,
+        y: ((r + 0.5) / rows) * H,
+      });
+    }
+  }
+  // Mezcla aleatoria para animación
+  for (let i = dots.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [dots[i], dots[j]] = [dots[j], dots[i]];
+  }
+  return dots;
+}
+
+export function initBlockMap2D() {
+  const canvas = document.querySelector('.block-map__map-2d');
+  if (!canvas) return;
+
+  const markers = JSON.parse(canvas.dataset.markers || '[]');
+  const wrap    = canvas.closest('.block-map__globe-wrap');
+  const section = canvas.closest('.block-map');
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  if (!W || !H) return;
+
+  const dpr = Math.min(devicePixelRatio, 2);
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Celdas cuadradas: ajusta ROWS al aspect ratio del canvas
+  const COLS   = 260;
+  const ROWS   = Math.round(COLS * H / W);
+  const cellW  = W / COLS;
+  const radius = cellW * 0.44;
+  const mask   = buildLandMask();
+  const dots   = buildDots2D(mask, W, H, COLS, ROWS);
+
+  // Ordena izquierda→derecha para el scan
+  const sorted = [...dots].sort((a, b) => a.x - b.x);
+
+  const markerDots = markers.map(({ location, name }) => {
+    const [lat, lng] = location;
+    return { x: (lng + 180) / 360 * W, y: (90 - lat) / 180 * H, name };
+  });
+
+  // Tooltip (igual que modo 3D)
+  const tip = document.createElement('div');
+  tip.className = 'block-map__tooltip';
+  wrap.appendChild(tip);
+
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let hit = null;
+    for (const m of markerDots) {
+      if (Math.hypot(mx - m.x, my - m.y) < 14) { hit = m; break; }
+    }
+    if (hit) {
+      tip.textContent = hit.name;
+      tip.style.left  = hit.x + 'px';
+      tip.style.top   = hit.y + 'px';
+      tip.classList.add('is-visible');
+    } else {
+      tip.classList.remove('is-visible');
+    }
+  });
+  canvas.addEventListener('mouseleave', () => tip.classList.remove('is-visible'));
+
+  // Render
+  let revealedIdx = 0;
+  let markerAlpha = 0;
+
+  function drawAll(xThreshold) {
+    while (revealedIdx < sorted.length && sorted[revealedIdx].x <= xThreshold) revealedIdx++;
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.globalAlpha = 0.6;
+    ctx.fillStyle = '#7e7e76';
+    ctx.beginPath();
+    for (let i = 0; i < revealedIdx; i++) {
+      const d = sorted[i];
+      ctx.moveTo(d.x + radius, d.y);
+      ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+    }
+    ctx.fill();
+
+    if (markerAlpha > 0) {
+      markerDots.forEach(m => {
+        ctx.globalAlpha = markerAlpha * 0.2;
+        ctx.fillStyle = '#e02157';
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, 11, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = markerAlpha;
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+  }
+
+  const SCAN_MS   = 2400;
+  const MARKER_MS = 700;
+  let t0 = null, scanDone = false, markerT0 = null;
+
+  function tick(now) {
+    if (!t0) t0 = now;
+
+    if (!scanDone) {
+      const t = Math.min(1, (now - t0) / SCAN_MS);
+      // ease in-out
+      const p = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      drawAll(p * W);
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        scanDone = true;
+        markerT0 = now;
+        requestAnimationFrame(tick);
+      }
+    } else {
+      markerAlpha = Math.min(1, (now - markerT0) / MARKER_MS);
+      drawAll(W);
+      if (markerAlpha < 1) requestAnimationFrame(tick);
+    }
+  }
+
+  gsap.set(wrap, { autoAlpha: 0, scale: 0.95 });
+  ScrollTrigger.create({
+    trigger: section,
+    start:   'top 85%',
+    once:    true,
+    onEnter() {
+      gsap.to(wrap, { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'expo.out' });
+      requestAnimationFrame(tick);
+    },
+  });
+}
+
+// ── Arcos animados entre oficinas ─────────────────────────────────────────────
+
+function makeArcPoints(v1, v2, segments = 80) {
+  const n1 = v1.clone().normalize();
+  const n2 = v2.clone().normalize();
+  const angle = n1.angleTo(n2);
+  if (angle < 0.01) return null; // puntos coincidentes
+
+  // Elevación proporcional a la distancia angular entre ciudades
+  const maxElev = 1.015 + angle * 0.04;
+
+  const points = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    // Slerp aproximado (nlerp normalizado) para la dirección
+    const dir = n1.clone().lerp(n2, t).normalize();
+    // Perfil senoidal: sin elevación en extremos, máximo en el centro
+    const r = 1.015 + (maxElev - 1.015) * Math.sin(t * Math.PI);
+    points.push(dir.multiplyScalar(r));
+  }
+  return points;
+}
+
+function initArcs(markers, globe, startDelay = 0) {
+  if (markers.length < 2) return;
+
+  const arcs = [];
+  for (let i = 0; i < markers.length; i++) {
+    for (let j = i + 1; j < markers.length; j++) {
+      const [lat1, lng1] = markers[i].location;
+      const [lat2, lng2] = markers[j].location;
+      const v1 = geoTo3D([lng1, lat1], 1.015);
+      const v2 = geoTo3D([lng2, lat2], 1.015);
+      const points = makeArcPoints(v1, v2, 80);
+      if (!points) continue;
+
+      const geo = new THREE.BufferGeometry().setFromPoints(points);
+      geo.setDrawRange(0, 0);
+      const mat = new THREE.LineBasicMaterial({
+        color: 0xe02157, transparent: true, opacity: 0.5,
+        depthWrite: false, blending: THREE.AdditiveBlending,
+      });
+      globe.add(new THREE.Line(geo, mat));
+      arcs.push({ geo, total: points.length });
+    }
+  }
+
+  arcs.forEach((arc, i) => {
+    gsap.to(arc.geo.drawRange, {
+      count: arc.total,
+      duration: 1.4,
+      delay: startDelay + i * 0.35,
+      ease: "power2.inOut",
+      onUpdate() { arc.geo.drawRange.count = Math.round(arc.geo.drawRange.count); },
+    });
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 export function initBlockMap() {
   const wrap = document.querySelector(".block-map__globe-wrap");
   if (!wrap) return;
 
-  const canvas  = wrap.querySelector(".block-map__globe");
+  const canvas = wrap.querySelector(".block-map__globe");
+  if (!canvas) return;
   const markers = JSON.parse(canvas.dataset.markers || "[]");
   const size    = wrap.offsetWidth || 700;
 
@@ -142,9 +349,11 @@ export function initBlockMap() {
   const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
   camera.position.z = 2.5;
 
+  const TARGET_ROT_Y = -Math.PI * 0.3;
+
   const globe = new THREE.Group();
-  globe.rotation.x = 0.08;
-  globe.rotation.y = Math.PI * 0.95;
+  globe.rotation.x = 0;
+  globe.rotation.y = TARGET_ROT_Y - Math.PI * 2;
   scene.add(globe);
 
   // ── Esfera base (océano oscuro) ───────────────────────────────────────────
@@ -198,26 +407,21 @@ export function initBlockMap() {
     globe,
   );
 
-  // ── Halo atmosférico ──────────────────────────────────────────────────────
-  globe.add(new THREE.Mesh(
-    new THREE.SphereGeometry(1.09, 64, 64),
-    new THREE.MeshBasicMaterial({
-      color: 0x2a2a26, transparent: true, opacity: 0.22, side: THREE.BackSide,
-    }),
-  ));
-
   // ── Marcadores — mismo estilo que los puntos del mapa, rosas y más grandes ─
+  let markerGeo    = null;
+  let markerPoints = null;
+
   if (markers.length > 0) {
     const markerPos = new Float32Array(markers.flatMap(({ location }) => {
       const [lat, lng] = location;
       const v = geoTo3D([lng, lat], 1.013);
       return [v.x, v.y, v.z];
     }));
-    const markerGeo = new THREE.BufferGeometry();
+    markerGeo = new THREE.BufferGeometry();
     markerGeo.setAttribute("position", new THREE.BufferAttribute(markerPos, 3));
 
     // Dot fijo — mismo sprite, color rosa, tamaño algo mayor que los del mapa
-    globe.add(new THREE.Points(markerGeo, new THREE.PointsMaterial({
+    markerPoints = new THREE.Points(markerGeo, new THREE.PointsMaterial({
       map:         sprite,
       color:       0xe02157,
       size:        0.028,
@@ -225,7 +429,8 @@ export function initBlockMap() {
       transparent: true,
       depthWrite:  false,
       blending:    THREE.AdditiveBlending,
-    })));
+    }));
+    globe.add(markerPoints);
 
     // Halo pulsante — capa más grande y tenue que respira
     const haloMat = new THREE.PointsMaterial({
@@ -247,26 +452,32 @@ export function initBlockMap() {
   }
 
   // ── Drag / Touch ──────────────────────────────────────────────────────────
-  let rotY = globe.rotation.y;
-  let isDragging = false, lastX = 0, velocity = 0;
+  const rotState = { y: TARGET_ROT_Y - Math.PI * 2, x: 0 };
+  const vel      = { x: 0, y: 0 };
+  let isDragging = false, lastX = 0, lastY = 0;
 
   canvas.addEventListener("mousedown", (e) => {
-    isDragging = true; lastX = e.clientX;
+    gsap.killTweensOf(rotState);
+    isDragging = true; lastX = e.clientX; lastY = e.clientY;
     canvas.style.cursor = "grabbing";
   });
   window.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
-    velocity = (e.clientX - lastX) * 0.005; lastX = e.clientX;
+    vel.y = (e.clientX - lastX) * 0.005; lastX = e.clientX;
+    vel.x = (e.clientY - lastY) * 0.003; lastY = e.clientY;
   });
   window.addEventListener("mouseup", () => {
     isDragging = false; canvas.style.cursor = "grab";
   });
   canvas.addEventListener("touchstart", (e) => {
-    isDragging = true; lastX = e.touches[0].clientX;
+    gsap.killTweensOf(rotState);
+    isDragging = true;
+    lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
   }, { passive: true });
   window.addEventListener("touchmove", (e) => {
     if (!isDragging) return;
-    velocity = (e.touches[0].clientX - lastX) * 0.005; lastX = e.touches[0].clientX;
+    vel.y = (e.touches[0].clientX - lastX) * 0.005; lastX = e.touches[0].clientX;
+    vel.x = (e.touches[0].clientY - lastY) * 0.003; lastY = e.touches[0].clientY;
   }, { passive: true });
   window.addEventListener("touchend", () => { isDragging = false; });
 
@@ -274,28 +485,68 @@ export function initBlockMap() {
   let rafId;
   function animate() {
     rafId = requestAnimationFrame(animate);
-    if (!isDragging) rotY += 0.0022;
-    rotY += velocity;
-    velocity *= 0.92;
-    globe.rotation.y = rotY;
+    rotState.y += vel.y;
+    rotState.x  = Math.max(-0.5, Math.min(0.5, rotState.x + vel.x));
+    vel.x *= 0.92;
+    vel.y *= 0.92;
+    globe.rotation.y = rotState.y;
+    globe.rotation.x = rotState.x;
     renderer.render(scene, camera);
   }
   animate();
 
-  // ── Scroll reveal ─────────────────────────────────────────────────────────
+  // ── Tooltip hover ─────────────────────────────────────────────────────────
+  const tooltip      = wrap.querySelector(".block-map__tooltip");
+  const raycaster    = new THREE.Raycaster();
+  raycaster.params.Points = { threshold: 0.045 };
+  const markerNames  = markers.map(m => m.name || '');
+
+  wrap.addEventListener("mousemove", (e) => {
+    if (!tooltip || !markerPoints) return;
+    const rect = wrap.getBoundingClientRect();
+    const mx   = ((e.clientX - rect.left) / rect.width)  *  2 - 1;
+    const my   = ((e.clientY - rect.top)  / rect.width)  * -2 + 1; // canvas cuadrado
+    raycaster.setFromCamera({ x: mx, y: my }, camera);
+    const hits = raycaster.intersectObject(markerPoints);
+    if (hits.length) {
+      const name = markerNames[hits[0].index];
+      if (name) {
+        const pos = new THREE.Vector3();
+        pos.fromBufferAttribute(markerGeo.attributes.position, hits[0].index);
+        pos.applyMatrix4(globe.matrixWorld);
+        pos.project(camera);
+        tooltip.textContent  = name;
+        tooltip.style.left   = ((pos.x *  0.5 + 0.5) * rect.width)  + 'px';
+        tooltip.style.top    = ((pos.y * -0.5 + 0.5) * rect.width)  + 'px';
+        tooltip.classList.add('is-visible');
+        return;
+      }
+    }
+    tooltip.classList.remove('is-visible');
+  });
+  wrap.addEventListener("mouseleave", () => tooltip?.classList.remove('is-visible'));
+
+  // ── Entrada + arcos (scroll trigger) ─────────────────────────────────────
   const section = canvas.closest(".block-map");
-  gsap.set(wrap, { autoAlpha: 0, scale: 0.85, filter: "blur(20px)" });
-  gsap.to(wrap, {
-    autoAlpha:     1,
-    scale:         1,
-    filter:        "blur(0px)",
-    duration:      2.0,
-    ease:          "expo.out",
-    clearProps:    "filter",
-    scrollTrigger: { trigger: section, start: "top 85%", once: true },
+  gsap.set(wrap, { autoAlpha: 0, scale: 0.9, filter: "blur(16px)" });
+
+  ScrollTrigger.create({
+    trigger: section,
+    start:   "top 85%",
+    once:    true,
+    onEnter() {
+      gsap.to(wrap, {
+        autoAlpha: 1, scale: 1, filter: "blur(0px)",
+        duration: 2.0, ease: "expo.out", clearProps: "filter",
+      });
+      gsap.to(rotState, {
+        y: TARGET_ROT_Y, duration: 3.2, ease: "power3.out",
+      });
+      initArcs(markers, globe, 2.4);
+    },
   });
 
   return () => { cancelAnimationFrame(rafId); renderer.dispose(); };
 }
 
-document.addEventListener("DOMContentLoaded", () => initBlockMap());
+document.addEventListener("DOMContentLoaded", () => { initBlockMap(); initBlockMap2D(); });

@@ -7,6 +7,13 @@
  */
 
 /**
+ * SVG de flecha para botones. fill="currentColor" hereda el color del texto.
+ */
+function omma_btn_arrow(): string {
+	return '<svg class="btn-arrow" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7.15178 7.36288C7.42758 7.35083 7.64154 7.11798 7.62963 6.84221L7.36309 0.744799C7.35177 0.485803 7.14423 0.278264 6.88524 0.266949L0.787824 0.000403651C0.512056 -0.0115064 0.27921 0.202459 0.267161 0.478253C0.255245 0.753992 0.468572 0.987503 0.74432 0.999606L2.26902 1.0659L3.7074 1.13978C4.46445 1.1786 4.81604 2.09755 4.27847 2.63203L4.27709 2.63341L0.145627 6.7773C-0.0491859 6.97288 -0.0485015 7.2895 0.147008 7.48441C0.34258 7.67922 0.659201 7.67854 0.854115 7.48303L4.98489 3.34121C5.53061 2.79911 6.45933 3.15971 6.49578 3.92816L6.56414 5.3624L6.63043 6.88572C6.64253 7.16146 6.87605 7.37479 7.15178 7.36288Z" fill="currentColor"/></svg>';
+}
+
+/**
  * Agrega clases personalizadas a la matriz de clases de cuerpo.
  *
  * @param array $classes Clases para el elemento del body.

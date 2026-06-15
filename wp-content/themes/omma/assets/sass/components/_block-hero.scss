@@ -65,6 +65,11 @@
   transform-origin: center center;
 }
 
+.block-hero-home__overlay {
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
 // Sections that follow scroll on top of the pinned hero
 .site-main > * + * {
   position: relative;

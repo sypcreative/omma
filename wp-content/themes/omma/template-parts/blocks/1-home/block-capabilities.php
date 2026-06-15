@@ -52,7 +52,7 @@ if (! $items) {
 					<div class="block-capabilities__item-body row g-0 align-items-baseline">
 						<div class="col-12 col-lg-4">
 							<?php if ($item_title) : ?>
-								<p class="block-capabilities__item-title">
+								<p class="block-capabilities__item-title h4 text-vanilla text-uppercase">
 									<?php echo esc_html($item_title); ?>
 								</p>
 							<?php endif; ?>

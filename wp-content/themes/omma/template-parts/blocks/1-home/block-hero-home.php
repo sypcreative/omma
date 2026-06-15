@@ -34,7 +34,7 @@ $buttons  = get_field('block_hero_home_buttons');
 	<?php endif; ?>
 
 	<!-- Overlay -->
-	<div class="position-absolute top-0 start-0 bottom-0 end-0" aria-hidden="true"></div>
+	<div class="block-hero-home__overlay position-absolute top-0 start-0 bottom-0 end-0" aria-hidden="true"></div>
 
 	<!-- Contenido — flex-column ocupa toda la altura, mt-auto empuja al fondo -->
 	<div class="container position-relative z-1 pb-5 d-flex flex-column flex-grow-1">
@@ -69,18 +69,18 @@ $buttons  = get_field('block_hero_home_buttons');
 									$url  = $btn['block_hero_home_btn_url']  ?? '';
 									if (! $text || ! $url) continue;
 								?>
-									<a href="<?php echo esc_url($url); ?>" class="btn-omma">
+									<a href="<?php echo esc_url($url); ?>" class="btn-omma-light">
 										<span class="button-020__inner">
 											<span class="button-020__default">
 												<span class="button-020__default-bg"></span>
 												<span class="button-020__default-text">
-													<?php echo esc_html($text); ?> ↗
+													<?php echo esc_html($text); ?> <?php echo omma_btn_arrow(); ?>
 												</span>
 											</span>
 											<span aria-hidden="true" class="button-020__hover">
 												<span class="button-020__hover-bg"></span>
 												<span class="button-020__hover-text">
-													<?php echo esc_html($text); ?> ↗
+													<?php echo esc_html($text); ?> <?php echo omma_btn_arrow(); ?>
 												</span>
 											</span>
 										</span>

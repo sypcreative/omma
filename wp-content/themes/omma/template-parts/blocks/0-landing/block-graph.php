@@ -31,7 +31,7 @@ $center_i = (int) floor($last_i / 2);
 				$bwd_text = $prev['block_graph_node_bwd_text'] ?? '';
 			?>
 				<!-- ── Connector ──────────────────────────────────────────── -->
-				<div class="block-graph__connector" data-graph-connector="" aria-hidden="true">
+				<div class="block-graph__connector" data-graph-connector="">
 
 					<?php if ($fwd_text) : ?>
 						<span class="block-graph__conn-label block-graph__conn-label--fwd" data-graph-label="">

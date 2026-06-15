@@ -16,7 +16,7 @@ if (! $items) {
 ?>
 
 <section class="block-data bg-charcoal py-5 py-lg-6">
-	<div class="container">
+	<div class="container pt-5">
 
 		<?php if ($subtitle) : ?>
 			<div class="row mb-4 mb-lg-5">

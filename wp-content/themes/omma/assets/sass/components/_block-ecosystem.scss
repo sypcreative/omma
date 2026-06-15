@@ -1,29 +1,28 @@
-@use '../abstracts/variables-theme' as *;
-@use '../abstracts/mixins' as *;
+@use "../abstracts/variables-theme" as *;
+@use "../abstracts/mixins" as *;
 
 // =============================================================================
 // Block Ecosystem — Bento grid de sectores con color personalizado por card
 // =============================================================================
 
 .block-ecosystem {
-
   // ── Cabecera ─────────────────────────────────────────────────────────────────
 
   &__title {
-    font-size:      clamp(2rem, 4.5vw, 3.75rem);
-    font-weight:    700;
+    font-size: clamp(2rem, 4.5vw, 3.75rem);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    line-height:    1.08;
-    color:          $color-vanilla;
+    line-height: 1.08;
+    color: $color-vanilla;
   }
 
   &__subtitle {
-    font-size:   1rem;
+    font-size: 1rem;
     line-height: 1.65;
-    color:       rgba(255, 255, 255, 0.55);
-    max-width:   54ch;
-    margin-left:  auto;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 54ch;
+    margin-left: auto;
     margin-right: auto;
 
     @include bp-up(lg) {
@@ -34,73 +33,70 @@
   // ── Card ─────────────────────────────────────────────────────────────────────
 
   &__card {
-    position:        relative;
-    border-radius:   18px;
-    border:          1px solid var(--card-border, rgba(255, 255, 255, 0.1));
-    padding:         1.75rem 1.5rem;
-    height:          500px;
-    display:         flex;
-    flex-direction:  column;
+    position: relative;
+    border-radius: 18px;
+    border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+    padding: 1.75rem 1.5rem;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    overflow:        hidden;
+    overflow: hidden;
 
     // Fondo con opacidad independiente del contenido
     &::before {
-      content:          '';
-      position:         absolute;
-      inset:            0;
+      content: "";
+      position: absolute;
+      inset: 0;
       background-color: var(--card-bg, #2e3a30);
-      opacity:          0.3;
-      border-radius:    inherit;
-      pointer-events:   none;
-      z-index:          0;
+      opacity: 0.3;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 0;
     }
 
     // Contenido por encima del pseudo-fondo
-    > * { position: relative; z-index: 1; }
+    > * {
+      position: relative;
+      z-index: 1;
+    }
 
     @include bp-up(lg) {
-      padding:       2.5rem 2rem;
+      padding: 3.5rem 2rem;
       border-radius: 20px;
     }
   }
 
   &__card-title {
-    font-size:      0.6875rem;
-    font-weight:    700;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color:          rgba(255, 255, 255, 0.55);
-    margin-bottom:  0;
+    margin-bottom: 0;
   }
 
   &__card-icon {
-    display:         flex;
-    align-items:     center;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex:            1;
-    padding:         1.5rem 0;
+    flex: 1;
+    padding: 1.5rem 0;
 
     img {
-      display:    block;
-      width:      auto;
+      display: block;
+      width: auto;
       max-height: 100px;
-      max-width:  100px;
+      max-width: 100px;
       object-fit: contain;
 
       @include bp-up(lg) {
         max-height: 124px;
-        max-width:  124px;
+        max-width: 124px;
       }
     }
   }
 
   &__card-text {
-    font-size:   0.875rem;
+    font-size: 1.125rem;
     line-height: 1.6;
-    color:       rgba(255, 255, 255, 0.55);
-    text-align:  center;
+    text-align: center;
     margin-bottom: 0;
   }
-
 }

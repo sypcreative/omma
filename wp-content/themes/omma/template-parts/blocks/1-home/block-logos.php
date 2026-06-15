@@ -64,15 +64,15 @@ foreach ($images as $i => $item) {
 		<!-- CTA -->
 		<?php if ($btn_text && $btn_url) : ?>
 			<div class="d-flex justify-content-end">
-				<a href="<?php echo esc_url($btn_url); ?>" class="block-logos__cta btn-omma">
+				<a href="<?php echo esc_url($btn_url); ?>" class="block-logos__cta btn-omma-light">
 					<span class="button-020__inner">
 						<span class="button-020__default">
 							<span class="button-020__default-bg"></span>
-							<span class="button-020__default-text"><?php echo esc_html($btn_text); ?> ↗</span>
+							<span class="button-020__default-text"><?php echo esc_html($btn_text); ?> <?php echo omma_btn_arrow(); ?></span>
 						</span>
 						<span aria-hidden="true" class="button-020__hover">
 							<span class="button-020__hover-bg"></span>
-							<span class="button-020__hover-text"><?php echo esc_html($btn_text); ?> ↗</span>
+							<span class="button-020__hover-text"><?php echo esc_html($btn_text); ?> <?php echo omma_btn_arrow(); ?></span>
 						</span>
 					</span>
 				</a>

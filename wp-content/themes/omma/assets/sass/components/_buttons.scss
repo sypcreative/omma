@@ -29,6 +29,14 @@
 $-bg-base: color.mix($color-charcoal, $color-vanilla, 8%);
 $-ease:    cubic-bezier(0.32, 0.72, 0, 1);
 
+.btn-arrow {
+  display:    inline-block;
+  flex-shrink: 0;
+  width:      0.6em;
+  height:     0.6em;
+  transition: transform 0.45s $-ease;
+}
+
 // ─── Estructura base compartida ───────────────────────────────────────────────
 %_btn-omma {
   user-select:                none;
@@ -87,11 +95,14 @@ $-ease:    cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .button-020__default-text {
-    width:      100%;
-    height:     100%;
-    padding:    0.75em 1.5em;
-    grid-area:  1 / 1;
-    transition: translate 0.45s $-ease, scale 0.45s $-ease;
+    width:       100%;
+    height:      100%;
+    padding:     0.75em 1.5em;
+    grid-area:   1 / 1;
+    transition:  translate 0.45s $-ease, scale 0.45s $-ease;
+    display:     flex;
+    align-items: center;
+    gap:         0.5em;
   }
 
   .button-020__hover {
@@ -112,16 +123,24 @@ $-ease:    cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .button-020__hover-text {
-    width:      100%;
-    height:     100%;
-    padding:    0.75em 1.5em;
-    grid-area:  1 / 1;
-    translate:  0 25% 0;
-    transition: translate 0.45s $-ease;
+    width:       100%;
+    height:      100%;
+    padding:     0.75em 1.5em;
+    grid-area:   1 / 1;
+    translate:   0 25% 0;
+    transition:  translate 0.45s $-ease;
+    display:     flex;
+    align-items: center;
+    gap:         0.5em;
   }
 
   // ── Hover / focus (solo dispositivos con puntero fino) ────────────────────
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    &:is(:hover, :focus-visible) .btn-arrow,
+    [data-hover]:is(:hover, :focus-visible) & .btn-arrow {
+      transform: rotate(45deg);
+    }
+
     &:is(:hover, :focus-visible) .button-020__default-text,
     [data-hover]:is(:hover, :focus-visible) & .button-020__default-text {
       translate:  0 -25% 0;
@@ -192,6 +211,16 @@ $-ease:    cubic-bezier(0.32, 0.72, 0, 1);
   --_btn-hover-bg:     #{$color-charcoal};
   --_btn-focus-color:  #{$color-charcoal};
   --_btn-outer-border: 1px solid #{$color-charcoal};
+}
+
+// ─── .btn-omma-light — vanilla estático, sin cambio de color en hover (para fondos oscuros)
+.btn-omma-light {
+  @extend %_btn-omma;
+  --_btn-color:       #{$color-charcoal};
+  --_btn-bg:          #{$color-vanilla};
+  --_btn-hover-color: #{$color-charcoal};
+  --_btn-hover-bg:    #{$color-vanilla};
+  --_btn-focus-color: #{$color-charcoal};
 }
 
 // ─── .btn-omma-outline-dark — borde vanilla → fill vanilla (para fondos oscuros)

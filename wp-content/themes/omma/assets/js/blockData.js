@@ -53,6 +53,8 @@ export function initBlockData() {
         start:   "top 85%",
         once:    true,
         onEnter() {
+          el.textContent = parsed.prefix + (isLarge ? '0' : '0.0') + parsed.suffix;
+          gsap.set(el, { autoAlpha: 1 });
           gsap.to(obj, {
             val:      parsed.value,
             duration: 2.2,

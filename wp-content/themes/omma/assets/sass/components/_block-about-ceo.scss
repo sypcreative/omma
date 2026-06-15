@@ -7,8 +7,19 @@
     color: rgba(255, 255, 255, 0.45);
   }
 
+  &__text-col {
+    @include bp-up(lg) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   &__body {
     color: rgba(255, 255, 255, 0.7);
+
+    @include bp-up(lg) {
+      margin-top: auto;
+    }
   }
 
   &__figure {

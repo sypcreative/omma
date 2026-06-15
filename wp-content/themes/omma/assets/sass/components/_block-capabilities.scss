@@ -1,21 +1,20 @@
-@use '../abstracts/variables-theme' as *;
-@use '../abstracts/mixins' as *;
+@use "../abstracts/variables-theme" as *;
+@use "../abstracts/mixins" as *;
 
 // =============================================================================
 // Block Capabilities — Full width con directional hover + wipe reveal
 // =============================================================================
 
 .block-capabilities {
-
   // ── Título ────────────────────────────────────────────────────────────────
 
   &__title {
-    font-size:      clamp(2.5rem, 5vw, 4.5rem);
-    font-weight:    700;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    line-height:    1.05;
-    color:          $color-vanilla;
+    line-height: 1.05;
+    color: $color-vanilla;
   }
 
   // ── Lista ─────────────────────────────────────────────────────────────────
@@ -29,29 +28,29 @@
   &__item {
     position: relative;
     overflow: hidden; // necesario para que el tile no desborde
-    cursor:   default;
+    cursor: default;
   }
 
   // ── Tile (efecto directional hover) ───────────────────────────────────────
 
   &__item-tile {
-    position:   absolute;
-    inset:      0;
+    position: absolute;
+    inset: 0;
     background: rgba(255, 255, 255, 0.06);
-    transform:  translateY(-100%); // estado inicial: fuera por arriba
+    transform: translateY(-100%); // estado inicial: fuera por arriba
     transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     pointer-events: none;
-    z-index:    0;
+    z-index: 0;
   }
 
   // ── Línea separadora ──────────────────────────────────────────────────────
 
   &__item-line {
-    height:           1px;
+    height: 1px;
     background-color: rgba(255, 255, 255, 0.22);
     transform-origin: left center;
-    position:         relative;
-    z-index:          2; // encima del tile
+    position: relative;
+    z-index: 2; // encima del tile
 
     &--last {
       // nada extra
@@ -61,9 +60,9 @@
   // ── Cuerpo del item ───────────────────────────────────────────────────────
 
   &__item-body {
-    position:   relative;
-    z-index:    1; // encima del tile
-    padding:    1.75rem 0;
+    position: relative;
+    z-index: 1; // encima del tile
+    padding: 1.75rem 0;
     will-change: clip-path;
 
     @include bp-up(lg) {
@@ -72,21 +71,18 @@
   }
 
   &__item-title {
-    font-size:   1rem;
-    font-weight: 700;
-    color:       $color-vanilla;
     margin-bottom: 0.5rem;
 
     @include bp-up(lg) {
-      font-size:     1.125rem;
+      font-size: 1.125rem;
       margin-bottom: 0;
     }
   }
 
   &__item-desc {
-    font-size:   0.9375rem;
+    font-size: 0.9375rem;
     line-height: 1.65;
-    color:       rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 0;
 
     @include bp-up(lg) {

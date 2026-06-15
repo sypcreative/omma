@@ -11,7 +11,7 @@ import { initBlockData }           from "./blockData.js";
 import { initBlockEcosystem }      from "./blockEcosystem.js";
 import { initBlockLogos }          from "./blockLogos.js";
 import { initBlockCapabilities }   from "./blockCapabilities.js";
-import { initBlockMap }            from "./blockMap.js";
+import { initBlockMap, initBlockMap2D } from "./blockMap.js";
 import { initBlockContact, initContactReveal } from "./blockContact.js";
 import { initBlockAboutIntro }     from "./blockAboutIntro.js";
 import { initBlockAboutCeo }       from "./blockAboutCeo.js";
@@ -54,6 +54,7 @@ function initAllBlocks() {
   initBlockLogos();
   initBlockCapabilities();
   initBlockMap();
+  initBlockMap2D();
   initBlockContact();
   initContactReveal();
   // About
