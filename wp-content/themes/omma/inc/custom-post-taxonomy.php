@@ -46,7 +46,7 @@ function omma_cpt_case_studies(): void
 		'description'         => __('Añade y gestiona todos tus case studies', 'omma'),
 		'labels'              => $labels,
 		'supports'            => array('title', 'editor', 'custom-fields', 'page-attributes', 'revisions', 'thumbnail'),
-		'taxonomies'          => array( 'sector', 'servicios' ),
+		'taxonomies'          => array( 'cliente', 'servicios' ),
 		'hierarchical'        => false,
 		'public'              => true,
 		'show_ui'             => true,
@@ -122,28 +122,80 @@ function omma_cpt_news(): void
 add_action('init', 'omma_cpt_news');
 
 
+// ── Podcast ───────────────────────────────────────────────────────────────────
+
+function omma_cpt_podcast(): void
+{
+	$labels = array(
+		'name'                  => _x('Podcasts', 'omma'),
+		'singular_name'         => _x('Podcast', 'omma'),
+		'menu_name'             => __('Podcasts', 'omma'),
+		'name_admin_bar'        => __('Podcast', 'omma'),
+		'all_items'             => __('Todos los podcasts', 'omma'),
+		'add_new_item'          => __('Añadir nuevo podcast', 'omma'),
+		'add_new'               => __('Añadir nuevo', 'omma'),
+		'new_item'              => __('Nuevo podcast', 'omma'),
+		'edit_item'             => __('Editar podcast', 'omma'),
+		'update_item'           => __('Actualizar podcast', 'omma'),
+		'view_item'             => __('Ver podcast', 'omma'),
+		'view_items'            => __('Ver podcasts', 'omma'),
+		'search_items'          => __('Buscar podcast', 'omma'),
+		'not_found'             => __('No se han encontrado podcasts', 'omma'),
+		'not_found_in_trash'    => __('No se han encontrado podcasts en la papelera', 'omma'),
+		'featured_image'        => __('Imagen destacada', 'omma'),
+		'set_featured_image'    => __('Establecer imagen destacada', 'omma'),
+	);
+
+	$args = array(
+		'label'               => __('Podcast', 'omma'),
+		'description'         => __('Añade y gestiona todos los podcasts', 'omma'),
+		'labels'              => $labels,
+		'supports'            => array('title', 'editor', 'custom-fields', 'revisions', 'thumbnail', 'excerpt'),
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => 7,
+		'menu_icon'           => 'dashicons-microphone',
+		'show_in_admin_bar'   => true,
+		'show_in_nav_menus'   => true,
+		'show_in_rest'        => true,
+		'can_export'          => true,
+		'has_archive'         => false,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'rewrite'             => [ 'slug' => 'podcast', 'with_front' => false ],
+		'capability_type'     => 'page',
+	);
+
+	register_post_type('podcast', $args);
+}
+
+add_action('init', 'omma_cpt_podcast');
+
+
 // ── Taxonomías de Case Studies ────────────────────────────────────────────────
 
 function omma_taxonomies_case_studies(): void
 {
-	// Sector
-	register_taxonomy( 'sector', 'case-studies', [
+	// Cliente
+	register_taxonomy( 'cliente', 'case-studies', [
 		'labels' => [
-			'name'              => __( 'Sectores', 'omma' ),
-			'singular_name'     => __( 'Sector', 'omma' ),
-			'search_items'      => __( 'Buscar sectores', 'omma' ),
-			'all_items'         => __( 'Todos los sectores', 'omma' ),
-			'edit_item'         => __( 'Editar sector', 'omma' ),
-			'update_item'       => __( 'Actualizar sector', 'omma' ),
-			'add_new_item'      => __( 'Añadir nuevo sector', 'omma' ),
-			'new_item_name'     => __( 'Nuevo sector', 'omma' ),
-			'menu_name'         => __( 'Sectores', 'omma' ),
+			'name'              => __( 'Clientes', 'omma' ),
+			'singular_name'     => __( 'Cliente', 'omma' ),
+			'search_items'      => __( 'Buscar clientes', 'omma' ),
+			'all_items'         => __( 'Todos los clientes', 'omma' ),
+			'edit_item'         => __( 'Editar cliente', 'omma' ),
+			'update_item'       => __( 'Actualizar cliente', 'omma' ),
+			'add_new_item'      => __( 'Añadir nuevo cliente', 'omma' ),
+			'new_item_name'     => __( 'Nuevo cliente', 'omma' ),
+			'menu_name'         => __( 'Clientes', 'omma' ),
 		],
 		'hierarchical'      => true,
 		'show_ui'           => true,
 		'show_in_rest'      => true,
 		'show_admin_column' => true,
-		'rewrite'           => [ 'slug' => 'sector' ],
+		'rewrite'           => [ 'slug' => 'cliente' ],
 	] );
 
 	// Servicios

@@ -34,7 +34,7 @@ if (! $items) return;
 						<div class="col-12 <?php echo $icon ? 'col-lg-6 order-2 order-lg-1' : ''; ?>">
 
 							<?php if ($title) : ?>
-								<h2 class="msans-3 text-vanilla mb-3"><?php echo esc_html($title); ?></h2>
+								<h2 class="msans-4 msans-lg-3 text-vanilla mb-3"><?php echo esc_html($title); ?></h2>
 							<?php endif; ?>
 
 							<?php if ($desc) : ?>

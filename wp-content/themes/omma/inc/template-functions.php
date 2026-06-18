@@ -7,6 +7,15 @@
  */
 
 /**
+ * Extrae el ID de un vídeo de YouTube de cualquier formato de URL.
+ * Soporta youtube.com/watch?v= y youtu.be/
+ */
+function omma_youtube_id( string $url ): string {
+	preg_match( '/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $m );
+	return $m[1] ?? '';
+}
+
+/**
  * SVG de flecha para botones. fill="currentColor" hereda el color del texto.
  */
 function omma_btn_arrow(): string {

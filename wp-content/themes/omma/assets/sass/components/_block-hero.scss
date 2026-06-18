@@ -1,4 +1,4 @@
-@use '../abstracts/mixins' as *;
+@use "../abstracts/mixins" as *;
 
 // ── Landing hero (untouched) ───────────────────────────────────────────────────
 
@@ -8,7 +8,7 @@
 
   // Overlay so text reads cleanly over the image
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: rgba(0, 10, 25, 0.35);
@@ -16,7 +16,11 @@
     z-index: 0;
 
     @include bp-up(lg) {
-      background: linear-gradient(to bottom, transparent 0%, rgba(0, 10, 25, 0.75) 100%);
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 10, 25, 0.75) 100%
+      );
       inset: 40% 0 0 0;
     }
   }
@@ -51,11 +55,19 @@
   top: 0;
   z-index: 0;
 
+  // override Bootstrap's vh-100 !important — svh excludes mobile browser chrome
+  @media (max-width: 767px) {
+    min-height: 100svh !important;
+    height: 100svh !important;
+  }
+
   .container {
     padding-top: 10rem;
+    padding-bottom: 9rem;
 
     @media (min-width: 992px) {
       padding-top: 14rem;
+      padding-bottom: 7rem;
     }
   }
 }

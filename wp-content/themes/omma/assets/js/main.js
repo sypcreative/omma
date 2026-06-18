@@ -24,7 +24,9 @@ import "./blockCsMoreProjects.js";
 import "./blockCsAnimations.js";
 import "./blockServicesAnimations.js";
 import "./blockListingAnimations.js";
+import "./blockNewsGrid.js";
 import "./scrollProgress.js";
+import "./mobileNav.js";
 
 initLenis();
 initPageTransitions();

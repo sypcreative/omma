@@ -6,7 +6,7 @@
  * Campos consumidos:
  *   get_field('block_abt_ceo_title')       → text    (nombre — grande izquierda)
  *   get_field('block_abt_ceo_subtitle')    → text    (cargo — pequeño bajo el nombre)
- *   get_field('block_abt_ceo_description') → textarea (párrafos de cuerpo)
+ *   get_field('block_abt_ceo_description') → wysiwyg (párrafos de cuerpo)
  *   get_field('block_abt_ceo_image')       → image array (retrato derecha, sangra al fondo)
  */
 
@@ -22,10 +22,10 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 		<div class="row g-4 g-lg-5">
 
 			<!-- Columna izquierda: nombre + cargo + descripción -->
-			<div class="col-12 col-lg-6 pb-lg-6 block-about-ceo__text-col">
+			<div class="col-12 col-lg-8 col-xl-7 pb-lg-6 block-about-ceo__text-col">
 
 				<?php if ($title) : ?>
-					<h2 class="h-2 h-lg-3 text-vanilla mb-2">
+					<h2 class="h-4 h-lg-3 h-xl-2 text-vanilla mb-2">
 						<?php echo esc_html($title); ?>
 					</h2>
 				<?php endif; ?>
@@ -38,7 +38,7 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 
 				<?php if ($description) : ?>
 					<div class="block-about-ceo__body fs-6">
-						<?php echo wpautop(esc_html($description)); ?>
+						<?php echo wp_kses_post($description); ?>
 					</div>
 				<?php endif; ?>
 
@@ -46,7 +46,7 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 
 			<!-- Columna derecha: retrato -->
 			<?php if ($image) : ?>
-				<div class="col-12 col-lg-5 offset-lg-1">
+				<div class="col-12 col-lg-4 col-xl-5 order-first order-lg-last pe-lg-0">
 					<figure class="block-about-ceo__figure m-0 rounded-2">
 						<img
 							src="<?php echo esc_url($image['url']); ?>"

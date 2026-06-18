@@ -14,9 +14,14 @@
 
   &__icon {
     img {
-      width: 160px;
-      height: 160px;
+      width: 64px;
+      height: 64px;
       object-fit: contain;
+
+      @media (min-width: 992px) {
+        width: 160px;
+        height: 160px;
+      }
     }
   }
 
@@ -24,32 +29,12 @@
 
   &__buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.75rem;
 
-    // Botones a ancho completo en mobile
-    .btn-omma,
-    .btn-omma-outline-dark {
-      width: 100%;
-
-      .button-020__inner {
-        width: 100%;
-      }
-    }
-
     @media (min-width: 992px) {
-      flex-direction: row;
-      flex-wrap: wrap;
       gap: 1rem;
-
-      .btn-omma,
-      .btn-omma-outline-dark {
-        width: auto;
-
-        .button-020__inner {
-          width: auto;
-        }
-      }
     }
   }
 

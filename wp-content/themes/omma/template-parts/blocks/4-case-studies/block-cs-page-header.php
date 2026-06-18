@@ -9,7 +9,7 @@ $desc  = get_field( 'block_cs_pg_desc' );
     <?php if ( $title ) : ?>
       <div class="row">
         <div class="col-12">
-          <h1 class="block-cs-page-header__title h-1 text-vanilla">
+          <h1 class="block-cs-page-header__title h-3 h-lg-1 text-vanilla">
             <?php echo esc_html( $title ); ?>
           </h1>
         </div>

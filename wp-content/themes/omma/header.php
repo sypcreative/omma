@@ -64,48 +64,76 @@ $menu_principal = [
 					]);
 					?>
 				</nav>
-				<!-- Menú fullscreen móvil -->
-				<nav data-navigation-status="not-active" class="bold-nav-full d-md-none d-flex" aria-label="Toggle navigation">
-					<div class="bold-nav-full__bar">
-						<!-- <a href="#" class="bold-nav-full__logo w-inline-block">
-							<svg id="Capa_2" width="100%" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1221.44 277.36" fill="none">
-								<g id="Capa_1-2" data-name="Capa 1">
-									<path class="cls-2" d="M187.95,70.43c-7-9.1-15.87-16.1-26.6-21-10.73-4.9-21.82-7.35-33.25-7.35-14,0-26.66,2.62-37.97,7.88-11.32,5.25-21,12.42-29.05,21.52-8.05,9.1-14.3,19.78-18.73,32.03-4.44,12.25-6.65,25.38-6.65,39.37,0,13.07,2.1,25.43,6.3,37.1,4.2,11.67,10.26,21.94,18.2,30.8,7.93,8.87,17.61,15.87,29.05,21,11.43,5.14,24.38,7.7,38.85,7.7s26.71-2.92,37.45-8.75c10.73-5.83,19.83-14,27.3-24.5l28.35,21.35c-1.87,2.57-5.14,6.25-9.8,11.02-4.67,4.79-10.85,9.57-18.55,14.35-7.7,4.79-16.97,8.98-27.82,12.6s-23.4,5.42-37.62,5.42c-19.6,0-37.27-3.74-53.02-11.2s-29.17-17.26-40.25-29.4c-11.09-12.13-19.55-25.84-25.38-41.12-5.84-15.28-8.75-30.74-8.75-46.38,0-19.13,3.15-36.8,9.45-53.03,6.3-16.21,15.1-30.21,26.43-42,11.31-11.78,24.9-20.94,40.77-27.47,15.86-6.53,33.36-9.8,52.5-9.8,16.33,0,32.38,3.15,48.12,9.45,15.75,6.3,28.64,15.99,38.67,29.05l-28,21.35Z" />
-									<path class="cls-2" d="M257.75.08h31.5v124.25h.7c3.96-8.87,10.85-16.04,20.65-21.53,9.8-5.48,21.11-8.22,33.95-8.22,7.93,0,15.57,1.22,22.92,3.67s13.77,6.25,19.25,11.38c5.48,5.13,9.85,11.72,13.12,19.77,3.27,8.05,4.9,17.56,4.9,28.53v106.75h-31.5v-98c0-7.7-1.05-14.29-3.15-19.78-2.1-5.48-4.9-9.91-8.4-13.3-3.5-3.38-7.52-5.83-12.08-7.35-4.55-1.51-9.27-2.28-14.17-2.28-6.54,0-12.6,1.05-18.2,3.15-5.6,2.1-10.5,5.42-14.7,9.97-4.2,4.55-7.47,10.33-9.8,17.33-2.33,7-3.5,15.29-3.5,24.85v85.4h-31.5V.08Z" />
-									<path class="cls-2" d="M480.15,193.28c0,7.24,1.57,13.83,4.73,19.78,3.15,5.95,7.29,11.03,12.42,15.22,5.13,4.2,11.08,7.47,17.85,9.8,6.76,2.33,13.76,3.5,21,3.5,9.8,0,18.31-2.28,25.55-6.83,7.23-4.55,13.88-10.55,19.95-18.03l23.8,18.2c-17.5,22.63-42,33.95-73.5,33.95-13.07,0-24.91-2.22-35.52-6.65-10.62-4.43-19.6-10.55-26.95-18.38-7.35-7.81-13.01-17.03-16.97-27.65-3.97-10.62-5.95-22.11-5.95-34.48s2.15-23.85,6.48-34.47c4.31-10.62,10.26-19.83,17.85-27.65,7.58-7.81,16.62-13.94,27.12-18.38,10.5-4.43,21.93-6.65,34.3-6.65,14.7,0,27.12,2.57,37.28,7.7,10.15,5.14,18.49,11.85,25.02,20.12,6.53,8.29,11.25,17.62,14.17,28,2.92,10.39,4.38,20.95,4.38,31.68v11.2h-133ZM579.55,168.08c-.24-7-1.35-13.42-3.33-19.25-1.99-5.83-4.96-10.91-8.92-15.23-3.97-4.31-8.92-7.7-14.88-10.15-5.95-2.45-12.9-3.68-20.83-3.68s-14.76,1.46-21.17,4.38c-6.42,2.92-11.85,6.71-16.27,11.37-4.44,4.67-7.88,9.86-10.33,15.58-2.45,5.72-3.67,11.38-3.67,16.98h99.4Z" />
-									<path class="cls-2" d="M773.6,142.88c-5.83-6.07-11.96-10.67-18.38-13.83-6.42-3.15-14.06-4.72-22.92-4.72s-16.16,1.57-22.58,4.72c-6.42,3.15-11.79,7.47-16.1,12.95-4.32,5.49-7.58,11.79-9.8,18.9-2.22,7.12-3.33,14.53-3.33,22.23s1.28,15,3.85,21.88c2.56,6.88,6.18,12.9,10.85,18.02,4.67,5.14,10.26,9.16,16.8,12.08,6.53,2.92,13.88,4.38,22.05,4.38,8.86,0,16.45-1.58,22.75-4.72,6.3-3.15,12.13-7.75,17.5-13.83l22.4,22.4c-8.17,9.1-17.67,15.63-28.52,19.6-10.85,3.96-22.35,5.95-34.48,5.95-12.83,0-24.56-2.1-35.17-6.3-10.62-4.2-19.78-10.09-27.47-17.68-7.7-7.58-13.65-16.68-17.85-27.3-4.2-10.61-6.3-22.34-6.3-35.17s2.1-24.62,6.3-35.35c4.2-10.73,10.09-19.95,17.67-27.65,7.58-7.7,16.68-13.71,27.3-18.03,10.61-4.31,22.45-6.47,35.52-6.47,12.13,0,23.74,2.16,34.83,6.47,11.08,4.32,20.71,10.91,28.88,19.78l-23.8,21.7Z" />
-									<path class="cls-1" d="M1220.15,26.52l-267.95,249.5c-2.05,1.91-5.27,1.75-7.13-.35l-85.65-97.14v86.1h-31.5V.03h31.5v170.8l71.4-71.75h43.75l-77.35,75.25,53.66,59.4L1196.14,1.11c1.62-1.53,4.17-1.47,5.71.15l18.49,19.54c1.54,1.63,1.46,4.2-.18,5.72Z" />
-								</g>
-							</svg>
-						</a> -->
-						<button data-navigation-toggle="toggle" class="bold-nav-full__hamburger">
-							<div class="bold-nav-full__hamburger-bar"></div>
-							<div class="bold-nav-full__hamburger-bar"></div>
-							<div class="bold-nav-full__hamburger-bar"></div>
-						</button>
-					</div>
-					<div class="bold-nav-full__tile">
-						<ul class="bold-nav-full__ul">
-							<li class="bold-nav-full__group bold-nav-full__group--left">
+				<!-- Navbar móvil -->
+				<nav data-navigation-status="not-active" class="mobile-nav d-md-none" aria-label="Menú principal">
+
+					<!-- Overlay oscuro -->
+					<div data-navigation-toggle="close" class="mobile-nav__overlay" aria-hidden="true"></div>
+
+					<!-- Card centrada -->
+					<div class="mobile-nav__card">
+						<div class="mobile-nav__card-bg"></div>
+
+						<!-- Cabecera (siempre visible) -->
+						<div class="mobile-nav__header">
+							<a href="<?= get_home_url(); ?>" class="mobile-nav__logo">
+								<?php $mob_logo = function_exists('get_field') ? (get_field('site_logo_positive', 'option') ?: get_field('site_logo', 'option')) : null; ?>
+								<?php if ($mob_logo) : ?>
+									<img
+										src="<?= esc_url($mob_logo['url']); ?>"
+										alt="<?= esc_attr($mob_logo['alt'] ?: get_bloginfo('name')); ?>"
+										height="28"
+										decoding="async">
+								<?php endif; ?>
+							</a>
+							<button data-navigation-toggle="toggle" class="mobile-nav__hamburger" aria-label="Abrir menú" aria-expanded="false">
+								<svg class="mobile-nav__hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+									<path d="M4.69995 16.0998C4.69995 14.3325 6.13264 12.8998 7.89995 12.8998C9.66726 12.8998 11.1 14.3325 11.1 16.0998C11.1 17.8671 9.66726 19.2998 7.89995 19.2998C6.13264 19.2998 4.69995 17.8671 4.69995 16.0998Z" fill="currentColor" />
+									<rect x="5.69995" y="5.69995" width="4.8" height="4.8" rx="2.4" fill="currentColor" />
+									<rect x="13.5" y="13.5" width="4.8" height="4.8" rx="2.4" fill="currentColor" />
+									<rect x="12.8999" y="4.69995" width="6.4" height="6.4" rx="3.2" fill="currentColor" />
+								</svg>
+								<svg class="mobile-nav__hamburger-close" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+									<path d="M1.5 1.5l13 13M14.5 1.5l-13 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+								</svg>
+							</button>
+						</div>
+
+						<!-- Contenido expandible -->
+						<div class="mobile-nav__content">
+							<div class="mobile-nav__inner">
+
 								<?php
 								wp_nav_menu([
-									'theme_location' => 'menu-mobile',
+									'theme_location' => 'menu-header',
 									'container'      => false,
-									'items_wrap'     => '%3$s', // 👈 QUITA el <ul>
+									'items_wrap'     => '<ul class="mobile-nav__ul text-center text-uppercase">%3$s</ul>',
 									'fallback_cb'    => false,
-									'link_before'    => '<span class="bold-nav-full__link-text">',
-									'link_after'     => '</span>',
 								]);
 								?>
-							</li>
-						</ul>
-						<div class="bold-nav__bottom">
-							<?php $nav_phone = function_exists('get_field') ? get_field('opciones_sitio_phone', 'option') : ''; ?>
-							<?php if ($nav_phone) : ?>
-								<a class="bold-nav__word text-decoration-none" href="tel:<?= esc_attr($nav_phone); ?>"><?= esc_html($nav_phone); ?></a>
-							<?php endif; ?>
+
+								<!-- Banner CTA Contacto -->
+								<div class="mobile-nav__banner-w">
+									<a href="<?= esc_url(get_permalink(get_page_by_path('contacto'))); ?>" class="mobile-nav__banner">
+										<div class="mobile-nav__banner-row">
+											<div data-css-marquee-list class="mobile-nav__banner-track">
+												<?php for ($i = 0; $i < 6; $i++) : ?>
+													<div class="mobile-nav__banner-item">Contacto</div>
+												<?php endfor; ?>
+											</div>
+											<div data-css-marquee-list class="mobile-nav__banner-track">
+												<?php for ($i = 0; $i < 6; $i++) : ?>
+													<div class="mobile-nav__banner-item">Contacto</div>
+												<?php endfor; ?>
+											</div>
+										</div>
+									</a>
+								</div>
+
+							</div>
 						</div>
 					</div>
+
 				</nav>
 			</div>
 		</header>

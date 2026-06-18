@@ -37,7 +37,7 @@ $buttons  = get_field('block_hero_home_buttons');
 	<div class="block-hero-home__overlay position-absolute top-0 start-0 bottom-0 end-0" aria-hidden="true"></div>
 
 	<!-- Contenido — flex-column ocupa toda la altura, mt-auto empuja al fondo -->
-	<div class="container position-relative z-1 pb-5 d-flex flex-column flex-grow-1">
+	<div class="container position-relative z-1 d-flex flex-column flex-grow-1">
 
 		<!-- Título: top-left -->
 		<?php if ($title) : ?>
@@ -57,13 +57,13 @@ $buttons  = get_field('block_hero_home_buttons');
 					<div class="col-12 col-lg-6">
 
 						<?php if ($subtitle) : ?>
-							<p class="block-hero-home__subtitle fs-6 fs-md-5 text-vanilla mb-4">
+							<p class="block-hero-home__subtitle fs-6 fs-md-5 text-vanilla mb-4 text-end text-sm-start">
 								<?php echo esc_html($subtitle); ?>
 							</p>
 						<?php endif; ?>
 
 						<?php if ($buttons) : ?>
-							<div class="block-hero-home__actions d-flex flex-wrap gap-3">
+							<div class="block-hero-home__actions d-flex flex-wrap gap-3 justify-content-end justify-content-sm-start">
 								<?php foreach ($buttons as $btn) :
 									$text = $btn['block_hero_home_btn_text'] ?? '';
 									$url  = $btn['block_hero_home_btn_url']  ?? '';

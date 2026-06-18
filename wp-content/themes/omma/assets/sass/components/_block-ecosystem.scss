@@ -5,6 +5,14 @@
 // Block Ecosystem — Bento grid de sectores con color personalizado por card
 // =============================================================================
 
+// El pin-spacer de GSAP es transparente por defecto — rellenamos con charcoal
+// para que el hero no se vea a través de él durante el stacking en mobile.
+@media (max-width: 767px) {
+  .pin-spacer:has(.block-ecosystem) {
+    background-color: $color-charcoal;
+  }
+}
+
 .block-ecosystem {
   // ── Cabecera ─────────────────────────────────────────────────────────────────
 
@@ -43,7 +51,6 @@
     justify-content: space-between;
     overflow: hidden;
 
-    // Fondo con opacidad independiente del contenido
     &::before {
       content: "";
       position: absolute;
@@ -55,7 +62,6 @@
       z-index: 0;
     }
 
-    // Contenido por encima del pseudo-fondo
     > * {
       position: relative;
       z-index: 1;
@@ -90,6 +96,46 @@
         max-height: 124px;
         max-width: 124px;
       }
+    }
+  }
+
+  // ── Stacking cards mobile ─────────────────────────────────────────────────────
+
+  &__stack {
+    // clip-path allows cards pushed up (negative y) to be visible above the wrap
+    // while still hiding cards that haven't entered yet (below the wrap bottom)
+    clip-path: inset(-100px 0 0 0);
+  }
+
+  &__stack-wrap {
+    position: relative;
+  }
+
+  &__stack-card {
+    position: relative;
+    border-radius: 18px;
+    border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+    padding: 1.75rem 1.5rem;
+    height: clamp(360px, 75svh, 440px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--card-bg, #2e3a30);
+      opacity: 1;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    > * {
+      position: relative;
+      z-index: 1;
     }
   }
 

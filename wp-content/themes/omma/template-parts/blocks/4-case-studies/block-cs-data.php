@@ -18,15 +18,15 @@ if (! $items) return;
 				$numero = $item['block_cs_dat_numero'] ?? '';
 				$texto  = $item['block_cs_dat_texto']  ?? '';
 			?>
-				<div class="col-12 col-md-4">
+				<div class="col-6 col-md-4">
 					<div class="block-cs-data__item">
 						<?php if ($numero) : ?>
-							<p class="block-cs-data__numero msans-display text-vanilla mb-0">
+							<p class="block-cs-data__numero msans-3 msans-lg-display text-vanilla mb-0">
 								<?php echo esc_html($numero); ?>
 							</p>
 						<?php endif; ?>
 						<?php if ($texto) : ?>
-							<p class="block-cs-data__texto fs-5 mt-2 mb-0">
+							<p class="block-cs-data__texto fs-6 fs-md-5 mt-2 mb-0">
 								<?php echo esc_html($texto); ?>
 							</p>
 						<?php endif; ?>

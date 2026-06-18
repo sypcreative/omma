@@ -13,11 +13,12 @@ $col   = match ( $count ) {
 <section class="block-cs-images py-5">
   <div class="container">
     <div class="row g-3">
-      <?php foreach ( $items as $item ) :
+      <?php foreach ( $items as $i => $item ) :
         $img = $item['block_cs_img_image'] ?? null;
         if ( ! $img ) continue;
+        $hide_mobile = ( $count > 1 && $i > 0 ) ? ' d-none d-md-block' : '';
       ?>
-        <div class="<?php echo $col; ?>">
+        <div class="<?php echo $col . $hide_mobile; ?>">
           <div class="block-cs-images__item">
             <img src="<?php echo esc_url( $img['url'] ); ?>"
                  alt="<?php echo esc_attr( $img['alt'] ); ?>"

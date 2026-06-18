@@ -3,14 +3,14 @@
 .block-about-team {
 
   &__card {
-    border-radius: 8px;
-    overflow:      hidden;
+    // sin overflow clip — la imagen tiene su propio border-radius
   }
 
   &__photo-wrap {
-    display:      block;
-    aspect-ratio: 1 / 1;
-    overflow:     hidden;
+    display:       block;
+    aspect-ratio:  1 / 1;
+    overflow:      hidden;
+    border-radius: 8px;
   }
 
   &__photo {

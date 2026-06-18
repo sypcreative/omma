@@ -9,7 +9,7 @@ $desc  = get_field('block_srv_intro_desc');
 		<?php if ($title) : ?>
 			<div class="row">
 				<div class="col-12">
-					<h2 class="h-1 text-vanilla block-services-intro__title"><?php echo esc_html($title); ?></h2>
+					<h2 class="h-3 h-lg-1 text-vanilla block-services-intro__title"><?php echo esc_html($title); ?></h2>
 				</div>
 			</div>
 		<?php endif; ?>

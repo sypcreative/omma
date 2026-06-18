@@ -48,21 +48,102 @@ $bot_cards = array_slice($cards ?: [], 3);
 			</div>
 		</div>
 
-		<!-- Fila superior: 3 cards -->
-		<?php if ($top_cards) : ?>
-			<div class="row g-3 g-lg-4 mb-3 mb-lg-4">
-				<?php foreach ($top_cards as $card) :
-					$card_title        = $card['block_ecosystem_card_title']        ?? '';
-					$card_color        = $card['block_ecosystem_card_color']        ?? '#2e3a30';
-					$card_border_color = $card['block_ecosystem_card_border_color'] ?? '#ffffff';
-					$card_icon         = $card['block_ecosystem_card_icon']         ?? null;
-					$card_text         = $card['block_ecosystem_card_text']         ?? '';
-				?>
-					<div class="col-12 col-md-6 col-lg-4">
-						<div class="block-ecosystem__card" style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
+		<!-- Desktop: grid de cards (oculto en mobile) -->
+		<div class="d-none d-md-block">
+
+			<?php if ($top_cards) : ?>
+				<div class="row g-3 g-lg-4 mb-3 mb-lg-4">
+					<?php foreach ($top_cards as $card) :
+						$card_title        = $card['block_ecosystem_card_title']        ?? '';
+						$card_color        = $card['block_ecosystem_card_color']        ?? '#2e3a30';
+						$card_border_color = $card['block_ecosystem_card_border_color'] ?? '#ffffff';
+						$card_icon         = $card['block_ecosystem_card_icon']         ?? null;
+						$card_text         = $card['block_ecosystem_card_text']         ?? '';
+					?>
+						<div class="col-12 col-md-6 col-lg-4">
+							<div class="block-ecosystem__card" style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
+
+								<?php if ($card_title) : ?>
+									<p class="block-ecosystem__card-title msans-4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
+								<?php endif; ?>
+
+								<?php if ($card_icon) : ?>
+									<div class="block-ecosystem__card-icon">
+										<img
+											src="<?php echo esc_url($card_icon['url']); ?>"
+											alt="<?php echo esc_attr($card_icon['alt'] ?: $card_title); ?>"
+											width="<?php echo (int) $card_icon['width']; ?>"
+											height="<?php echo (int) $card_icon['height']; ?>"
+											loading="lazy"
+											decoding="async">
+									</div>
+								<?php endif; ?>
+
+								<?php if ($card_text) : ?>
+									<p class="block-ecosystem__card-text text-vanilla"><?php echo nl2br(esc_html($card_text)); ?></p>
+								<?php endif; ?>
+
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+
+			<?php if ($bot_cards) : ?>
+				<div class="row g-3 g-lg-4 justify-content-center">
+					<?php foreach ($bot_cards as $card) :
+						$card_title        = $card['block_ecosystem_card_title']        ?? '';
+						$card_color        = $card['block_ecosystem_card_color']        ?? '#2e3a30';
+						$card_border_color = $card['block_ecosystem_card_border_color'] ?? '#ffffff';
+						$card_icon         = $card['block_ecosystem_card_icon']         ?? null;
+						$card_text         = $card['block_ecosystem_card_text']         ?? '';
+					?>
+						<div class="col-12 col-md-6 col-lg-4">
+							<div class="block-ecosystem__card" style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
+
+								<?php if ($card_title) : ?>
+									<p class="block-ecosystem__card-title msans-4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
+								<?php endif; ?>
+
+								<?php if ($card_icon) : ?>
+									<div class="block-ecosystem__card-icon">
+										<img
+											src="<?php echo esc_url($card_icon['url']); ?>"
+											alt="<?php echo esc_attr($card_icon['alt'] ?: $card_title); ?>"
+											width="<?php echo (int) $card_icon['width']; ?>"
+											height="<?php echo (int) $card_icon['height']; ?>"
+											loading="lazy"
+											decoding="async">
+									</div>
+								<?php endif; ?>
+
+								<?php if ($card_text) : ?>
+									<p class="block-ecosystem__card-text text-vanilla"><?php echo nl2br(esc_html($card_text)); ?></p>
+								<?php endif; ?>
+
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+
+		</div>
+
+		<!-- Mobile: stacking cards (oculto en desktop) -->
+		<?php if ($cards) : ?>
+			<div class="block-ecosystem__stack d-md-none" data-ecosystem-stack>
+				<div class="block-ecosystem__stack-wrap" data-ecosystem-stack-wrap>
+					<?php foreach ($cards as $card) :
+						$card_title        = $card['block_ecosystem_card_title']        ?? '';
+						$card_color        = $card['block_ecosystem_card_color']        ?? '#2e3a30';
+						$card_border_color = $card['block_ecosystem_card_border_color'] ?? '#ffffff';
+						$card_icon         = $card['block_ecosystem_card_icon']         ?? null;
+						$card_text         = $card['block_ecosystem_card_text']         ?? '';
+					?>
+						<div class="block-ecosystem__stack-card" data-ecosystem-card style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
 
 							<?php if ($card_title) : ?>
-								<p class="block-ecosystem__card-title h4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
+								<p class="block-ecosystem__card-title msans-4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
 							<?php endif; ?>
 
 							<?php if ($card_icon) : ?>
@@ -82,47 +163,8 @@ $bot_cards = array_slice($cards ?: [], 3);
 							<?php endif; ?>
 
 						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
-
-		<!-- Fila inferior: resto de cards centradas y más anchas -->
-		<?php if ($bot_cards) : ?>
-			<div class="row g-3 g-lg-4 justify-content-center">
-				<?php foreach ($bot_cards as $card) :
-					$card_title        = $card['block_ecosystem_card_title']        ?? '';
-					$card_color        = $card['block_ecosystem_card_color']        ?? '#2e3a30';
-					$card_border_color = $card['block_ecosystem_card_border_color'] ?? '#ffffff';
-					$card_icon         = $card['block_ecosystem_card_icon']         ?? null;
-					$card_text         = $card['block_ecosystem_card_text']         ?? '';
-				?>
-					<div class="col-12 col-md-6 col-lg-4">
-						<div class="block-ecosystem__card" style="--card-bg: <?php echo esc_attr($card_color); ?>; --card-border: <?php echo esc_attr($card_border_color); ?>">
-
-							<?php if ($card_title) : ?>
-								<p class="block-ecosystem__card-title h4 text-vanilla text-center"><?php echo esc_html($card_title); ?></p>
-							<?php endif; ?>
-
-							<?php if ($card_icon) : ?>
-								<div class="block-ecosystem__card-icon">
-									<img
-										src="<?php echo esc_url($card_icon['url']); ?>"
-										alt="<?php echo esc_attr($card_icon['alt'] ?: $card_title); ?>"
-										width="<?php echo (int) $card_icon['width']; ?>"
-										height="<?php echo (int) $card_icon['height']; ?>"
-										loading="lazy"
-										decoding="async">
-								</div>
-							<?php endif; ?>
-
-							<?php if ($card_text) : ?>
-								<p class="block-ecosystem__card-text text-vanilla"><?php echo nl2br(esc_html($card_text)); ?></p>
-							<?php endif; ?>
-
-						</div>
-					</div>
-				<?php endforeach; ?>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		<?php endif; ?>
 

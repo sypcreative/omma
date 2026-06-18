@@ -4,16 +4,12 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-export function initBlockAboutTeam() {
-  const section = document.querySelector(".block-about-team");
-  if (!section) return;
-
+function initSection(section) {
   const title = section.querySelector("h2");
   const cards = section.querySelectorAll(".block-about-team__card");
 
   if (cards.length) gsap.set(cards, { scale: 0.88, autoAlpha: 0 });
 
-  // Título: SplitText con su propio trigger
   if (title) {
     const split = new SplitText(title, { type: "lines,words", linesClass: "split-line-mask" });
     gsap.set(split.lines, {
@@ -32,7 +28,6 @@ export function initBlockAboutTeam() {
     });
   }
 
-  // Cards: trigger individual por card
   cards.forEach(card => {
     gsap.to(card, {
       scale:     1,
@@ -42,6 +37,11 @@ export function initBlockAboutTeam() {
       scrollTrigger: { trigger: card, start: "top 88%", once: true },
     });
   });
+}
+
+export function initBlockAboutTeam() {
+  const sections = document.querySelectorAll(".block-about-team");
+  sections.forEach(initSection);
 }
 
 document.addEventListener("DOMContentLoaded", () => initBlockAboutTeam());

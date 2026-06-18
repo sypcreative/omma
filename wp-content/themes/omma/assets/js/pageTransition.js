@@ -30,6 +30,7 @@ import { initDirectionalListHover } from "./directionalHover.js";
 import { initProgressNavigation }      from "./progressNav.js";
 import { initBlockServicesAnimations } from "./blockServicesAnimations.js";
 import { initBlockListingAnimations }  from "./blockListingAnimations.js";
+import { initBlockNewsGrid }           from "./blockNewsGrid.js";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
@@ -66,6 +67,7 @@ function initAllBlocks() {
   initBlockServicesAnimations();
   // Listing pages (CS + news)
   initBlockListingAnimations();
+  initBlockNewsGrid();
   // Case Studies
   initBlockCsAnimations();
   initBlockCsMoreProjects();
@@ -87,12 +89,24 @@ function initAllBlocks() {
 function updateNavActive(nextUrl) {
   const norm = p => p.replace(/\/$/, '') || '/';
   const currentPath = norm(nextUrl || window.location.pathname);
+
+  // Desktop nav — active via class on <li>
   document.querySelectorAll('.site-nav__item').forEach(li => {
     const link = li.querySelector('a');
     if (!link) return;
-    const linkPath = norm(new URL(link.href, window.location.origin).pathname);
-    li.classList.toggle('current-menu-item', linkPath === currentPath);
+    const isActive = norm(new URL(link.href, window.location.origin).pathname) === currentPath;
+    li.classList.toggle('current-menu-item', isActive);
     li.classList.toggle('current-menu-ancestor', false);
+  });
+
+  // Mobile nav — active via aria-current on <a>
+  document.querySelectorAll('.mobile-nav__ul li a').forEach(link => {
+    const isActive = norm(new URL(link.href, window.location.origin).pathname) === currentPath;
+    if (isActive) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
   });
 }
 

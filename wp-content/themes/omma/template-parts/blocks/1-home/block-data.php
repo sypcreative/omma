@@ -21,7 +21,7 @@ if (! $items) {
 		<?php if ($subtitle) : ?>
 			<div class="row mb-4 mb-lg-5">
 				<div class="col-12 col-lg-8">
-					<p class="block-data__subtitle h-3 h-lg-2 text-vanilla mb-0">
+					<p class="block-data__subtitle fs-5 h-lg-2 text-vanilla mb-0">
 						<?php echo esc_html($subtitle); ?>
 					</p>
 				</div>
@@ -33,16 +33,16 @@ if (! $items) {
 				$text_1 = $item['block_data_item_text_1'] ?? '';
 				$text_2 = $item['block_data_item_text_2'] ?? '';
 			?>
-				<div class="col-6 col-lg-5">
+				<div class="col-12 col-lg-5">
 
 					<?php if ($text_1) : ?>
-						<p class="block-data__counter text-pink mb-0 lh-1 msans-display">
+						<p class="block-data__counter text-pink mb-0 lh-1 msans-3 msans-lg-display">
 							<?php echo esc_html($text_1); ?>
 						</p>
 					<?php endif; ?>
 
 					<?php if ($text_2) : ?>
-						<p class="block-data__label fs-5 text-vanilla mb-0">
+						<p class="block-data__label fs-6 text-vanilla mb-0">
 							<?php echo esc_html($text_2); ?>
 						</p>
 					<?php endif; ?>

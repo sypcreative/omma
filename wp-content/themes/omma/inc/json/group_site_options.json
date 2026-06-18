@@ -47,6 +47,32 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_site_logo_positive",
+            "label": "Logo positivo",
+            "name": "site_logo_positive",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Versión oscura del logo, para fondos claros (ej: navbar móvil).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg, png, webp",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_site_icon",
             "label": "Icon",
             "name": "site_icon",
@@ -132,6 +158,23 @@
             "rows": 4,
             "placeholder": "",
             "new_lines": "br"
+        },
+        {
+            "key": "field_cs_links_enabled",
+            "label": "Activar enlaces a ficha de proyecto",
+            "name": "cs_links_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Si está activado, las tarjetas del grid enlazan a la página de detalle de cada proyecto.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "Activado",
+            "ui_off_text": "Desactivado"
         },
         {
             "key": "field_site_tab_locations",

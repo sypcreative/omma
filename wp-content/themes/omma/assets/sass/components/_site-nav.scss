@@ -1,4 +1,4 @@
-@use '../abstracts/mixins' as *;
+@use "../abstracts/mixins" as *;
 
 // ── Header z-index ────────────────────────────────────────────────────────────
 
@@ -20,55 +20,313 @@ header.position-fixed {
   }
 }
 
-// ── Desktop navbar ─────────────────────────────────────────────────────────────
+// ── Mobile navbar (centered scaling pattern) ──────────────────────────────────
 
-.site-nav {
-  padding-top:     1.125rem;
-  padding-bottom:  1.125rem;
-  align-items:     center;
-  justify-content: space-between;
+$-nav-ease: cubic-bezier(0.625, 0.05, 0, 1);
+$-nav-ease-toggle: cubic-bezier(0.65, 0, 0, 1);
 
-  &__brand {
-    display:     flex;
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+
+  // ── Overlay oscuro ────────────────────────────────────────────────────────
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: auto;
+    transition:
+      opacity 0.7s $-nav-ease,
+      visibility 0.7s $-nav-ease;
+  }
+
+  [data-navigation-status="active"] &__overlay {
+    opacity: 0.2;
+    visibility: visible;
+  }
+
+  // ── Card centrada ─────────────────────────────────────────────────────────
+  &__card {
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+  }
+
+  &__card-bg {
+    background-color: $color-vanilla;
+    border-radius: 0.75rem;
+    position: absolute;
+    inset: 0;
+  }
+
+  // ── Cabecera ──────────────────────────────────────────────────────────────
+  &__header {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.125rem 1.25rem 1.125rem 1.5rem;
+    pointer-events: auto;
+  }
+
+  &__logo {
+    display: flex;
     align-items: center;
     flex-shrink: 0;
 
     img {
-      height:     28px;
-      width:      auto;
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  // ── Hamburger ─────────────────────────────────────────────────────────────
+  &__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    color: $color-charcoal;
+  }
+
+  &__hamburger-icon,
+  &__hamburger-close {
+    display: block;
+    position: absolute;
+    transition:
+      opacity 0.35s $-nav-ease-toggle,
+      transform 0.4s $-nav-ease-toggle;
+  }
+
+  &__hamburger-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  &__hamburger-close {
+    opacity: 0;
+    transform: scale(0.6) rotate(-45deg);
+  }
+
+  [data-navigation-status="active"] &__hamburger &__hamburger-icon {
+    opacity: 0;
+    transform: scale(0.6) rotate(45deg);
+  }
+
+  [data-navigation-status="active"] &__hamburger &__hamburger-close {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  // ── Contenido expandible (grid trick) ────────────────────────────────────
+  &__content {
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    display: grid;
+    grid-template-rows: 0fr;
+    position: relative;
+    overflow: hidden;
+    transition: grid-template-rows 0.6s $-nav-ease;
+  }
+
+  [data-navigation-status="active"] &__content {
+    grid-template-rows: 1fr;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    height: 10000%;
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+
+  // ── Menu items ────────────────────────────────────────────────────────────
+  &__ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+  }
+
+  &__ul li {
+    overflow: clip;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 1.5rem;
+      right: 1.5rem;
+      height: 1px;
+      background: rgba($color-charcoal, 0.12);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.6s $-nav-ease-toggle;
+      transition-delay: inherit;
+    }
+  }
+
+  [data-navigation-status="active"] &__ul li::after {
+    transform: scaleX(1);
+  }
+
+  &__ul li a {
+    display: block;
+    padding: 0.875rem 1.5rem;
+    color: $color-charcoal;
+    font-family: $font-family-black;
+    font-size: $font-h4;
+    line-height: 1.15;
+    text-decoration: none;
+    transform: translateY(150%);
+    transition:
+      transform 0.6s $-nav-ease-toggle,
+      opacity 0.2s ease;
+    transition-delay: inherit;
+
+    &:hover {
+      opacity: 0.55;
+    }
+
+    &[aria-current="page"] {
+      opacity: 0.45;
+    }
+  }
+
+  [data-navigation-status="active"] &__ul li a {
+    transform: translateY(0);
+  }
+
+  // ── Banner CTA marquee ────────────────────────────────────────────────────
+  &__banner-w {
+    display: flex;
+    width: 100%;
+  }
+
+  &__banner {
+    display: block;
+    width: 100%;
+    background-color: $color-charcoal;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    padding: 0.875rem 0;
+    text-decoration: none;
+    overflow: hidden;
+    transition: opacity 0.15s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__banner-row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__banner-track {
+    display: flex;
+    flex: none;
+    align-items: center;
+    animation: mobile-nav-marquee 18s linear infinite;
+    animation-play-state: paused;
+  }
+
+  [data-navigation-status="active"] &__banner-track {
+    animation-play-state: running;
+  }
+
+  &__banner-item {
+    flex: none;
+    padding-right: 2rem;
+    color: $color-vanilla;
+    font-family: $font-family-light;
+    font-size: $font-small;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+}
+
+@keyframes mobile-nav-marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+// ── Desktop navbar ─────────────────────────────────────────────────────────────
+
+.site-nav {
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;
+  align-items: center;
+  justify-content: space-between;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    img {
+      height: 38px;
+      width: auto;
       object-fit: contain;
     }
   }
 
   &__list {
-    list-style:  none;
-    display:     flex;
+    list-style: none;
+    display: flex;
     align-items: center;
-    gap:         2rem;
-    margin:      0;
-    padding:     0;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
   }
 
   &__link {
-    display:         inline-flex;
-    align-items:     center;
-    color:           rgba($color-vanilla, 0.55);
-    font-family:     $font-family-light;
-    font-size:       $font-small;
+    display: inline-flex;
+    align-items: center;
+    color: rgba($color-vanilla, 0.55);
+    font-family: $font-family-light;
+    font-size: $font-small;
     text-decoration: none;
-    white-space:     nowrap;
-    transition:      color 0.25s ease;
+    white-space: nowrap;
+    transition: color 0.25s ease;
 
     &::before {
-      content:       '';
-      width:         5px;
-      height:        5px;
+      content: "";
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background:    currentColor;
-      margin-right:  7px;
-      opacity:       0;
-      flex-shrink:   0;
-      transition:    opacity 0.25s ease;
+      background: currentColor;
+      margin-right: 7px;
+      opacity: 0;
+      flex-shrink: 0;
+      transition: opacity 0.25s ease;
     }
 
     &:hover {

@@ -25,7 +25,7 @@ if (! $items) {
 		<?php if ($title) : ?>
 			<div class="row mb-4 mb-lg-5">
 				<div class="col-12">
-					<h2 class="h-2 h-lg-1 text-vanilla">
+					<h2 class="h-3 h-lg-2 h-xl-0 text-vanilla">
 						<?php echo esc_html($title); ?>
 					</h2>
 				</div>
@@ -50,8 +50,7 @@ if (! $items) {
 									height="<?php echo (int) $photo['height']; ?>"
 									loading="lazy"
 									decoding="async"
-									class="block-about-team__photo"
-								>
+									class="block-about-team__photo">
 							</figure>
 						<?php endif; ?>
 
@@ -62,7 +61,7 @@ if (! $items) {
 								</p>
 							<?php endif; ?>
 							<?php if ($role) : ?>
-								<p class="block-about-team__role fs-small mb-0 text-end">
+								<p class="block-about-team__role fs-small mb-0 text-end w-50">
 									<?php echo esc_html($role); ?>
 								</p>
 							<?php endif; ?>

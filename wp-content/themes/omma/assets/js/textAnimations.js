@@ -99,26 +99,19 @@ function animChars(el, o) {
 // data-anim="fade-up"
 // No split — whole element fades and slides up.
 function animFadeUp(el, o) {
-  gsap.from(el, {
-    y:             40,
-    autoAlpha:     0,
-    duration:      o.duration,
-    ease:          o.ease,
-    delay:         o.delay,
-    scrollTrigger: scrollTrigger(el, o.start),
-  });
+  gsap.fromTo(el,
+    { y: 40, autoAlpha: 0 },
+    { y: 0, autoAlpha: 1, duration: o.duration, ease: o.ease, delay: o.delay, scrollTrigger: scrollTrigger(el, o.start) }
+  );
 }
 
 // data-anim="fade"
 // No split — whole element fades in.
 function animFade(el, o) {
-  gsap.from(el, {
-    autoAlpha:     0,
-    duration:      o.duration,
-    ease:          o.ease,
-    delay:         o.delay,
-    scrollTrigger: scrollTrigger(el, o.start),
-  });
+  gsap.fromTo(el,
+    { autoAlpha: 0 },
+    { autoAlpha: 1, duration: o.duration, ease: o.ease, delay: o.delay, scrollTrigger: scrollTrigger(el, o.start) }
+  );
 }
 
 // ── Registry ──────────────────────────────────────────────────────────────────

@@ -41,7 +41,7 @@ $offices = $has_acf ? get_field('site_offices', 'option') : [];
 					$text    = $office['site_office_text']    ?? '';
 				?>
 					<div class="col-12 col-md-6 col-lg-4">
-						<div class="site-footer__office">
+						<div class="site-footer__office px-5">
 
 							<?php if ($name) : ?>
 								<p class="site-footer__office-name h-6 text-vanilla mb-2">
@@ -84,11 +84,11 @@ $offices = $has_acf ? get_field('site_offices', 'option') : [];
 
 	<!-- ── Icono decorativo fondo (aria-hidden, no semántico) ────────────────── -->
 	<?php if ($icon) : ?>
-		<div class="site-footer__deco position-absolute top-0 end-0 h-100 d-none d-lg-block" aria-hidden="true">
+		<div class="site-footer__deco position-absolute bottom-0 end-0 d-none d-lg-block" aria-hidden="true">
 			<img
 				src="<?php echo esc_url($icon['url']); ?>"
 				alt=""
-				class="site-footer__deco-img h-100 w-auto"
+				class="site-footer__deco-img w-auto"
 				loading="lazy"
 				decoding="async"
 				width="<?php echo (int) $icon['width']; ?>"

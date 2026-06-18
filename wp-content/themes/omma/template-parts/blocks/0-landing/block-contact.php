@@ -5,9 +5,10 @@
  * Template: template-parts/blocks/0-landing/block-contact.php
  */
 
-$title    = get_field('block_contact_title')    ?: 'Contact Us';
-$subtitle = get_field('block_contact_subtitle') ?: 'Start your project with confidence &mdash; request a free consultation today.';
-$image    = get_field('block_contact_image');
+$title      = get_field('block_contact_title')    ?: 'Contact Us';
+$subtitle   = get_field('block_contact_subtitle') ?: 'Start your project with confidence &mdash; request a free consultation today.';
+$image      = get_field('block_contact_image');
+$btn_class  = is_page_template('template-landing.php') ? 'btn-omma-blue' : 'btn-omma-primary';
 
 ?>
 
@@ -63,7 +64,7 @@ $image    = get_field('block_contact_image');
 
 				<div class="block-contact__footer">
 					<p class="block-contact__feedback" data-contact-feedback="" aria-live="polite" hidden></p>
-					<button type="submit" class="btn btn-omma-blue">
+					<button type="submit" class="btn <?php echo $btn_class; ?>">
 						<span class="button-020__inner">
 							<span class="button-020__default">
 								<span class="button-020__default-bg"></span>

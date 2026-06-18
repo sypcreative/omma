@@ -521,3 +521,33 @@ function omma_acf_json_load_point( array $paths ): array
 }
 
 add_filter( 'acf/settings/load_json', 'omma_acf_json_load_point' );
+
+
+// ── Campos del post type Podcast ──────────────────────────────────────────────
+
+add_action( 'acf/init', function () {
+	acf_add_local_field_group( [
+		'key'      => 'group_podcast',
+		'title'    => 'Podcast',
+		'fields'   => [
+			[
+				'key'          => 'field_podcast_youtube_url',
+				'label'        => 'URL de YouTube',
+				'name'         => 'podcast_youtube_url',
+				'type'         => 'url',
+				'instructions' => 'Pega la URL del vídeo (ej: https://www.youtube.com/watch?v=xxxxx). La miniatura y el enlace se generan automáticamente.',
+				'required'     => 1,
+				'placeholder'  => 'https://www.youtube.com/watch?v=',
+			],
+		],
+		'location' => [
+			[
+				[
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'podcast',
+				],
+			],
+		],
+	] );
+} );

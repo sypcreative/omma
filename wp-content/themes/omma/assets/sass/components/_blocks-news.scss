@@ -8,6 +8,22 @@
   }
 }
 
+// ── News / Podcast Filter ─────────────────────────────────────────────────────
+
+.block-news-filter {
+  display: flex;
+  gap: 0.5rem;
+  font-size: $font-h6;
+
+  &__btn .button-020__default-text,
+  &__btn .btn-arrow {
+    transition: none !important;
+    translate: none !important;
+    scale: none !important;
+    transform: none !important;
+  }
+}
+
 // ── News Grid ─────────────────────────────────────────────────────────────────
 
 .block-news-grid {
