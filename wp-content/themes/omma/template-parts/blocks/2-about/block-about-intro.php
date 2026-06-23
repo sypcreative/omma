@@ -33,15 +33,15 @@ $text     = function_exists('get_field') ? get_field('block_abt_intro_text')    
 		<div class="row g-4 g-lg-5 align-items-end py-3">
 
 			<?php if ($subtitle) : ?>
-				<div class="col-12 col-lg-7 col-xl-6">
-					<div class="block-about-intro__body">
+				<div class="col-12 col-lg-8 col-xl-6">
+					<div class="block-about-intro__body fs-6 fs-xl-5 text-justify">
 						<?php echo wp_kses_post($subtitle); ?>
 					</div>
 				</div>
 			<?php endif; ?>
 
 			<?php if ($text || $image) : ?>
-				<div class="col-12 col-lg-3 col-xl-4 offset-lg-2 block-about-intro__aside">
+				<div class="col-12 col-lg-3 col-xl-4 offset-lg-1 block-about-intro__aside">
 
 					<?php if ($text) : ?>
 						<p class="block-about-intro__eyebrow fs-small mb-3">

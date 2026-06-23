@@ -37,7 +37,7 @@ $image       = function_exists('get_field') ? get_field('block_abt_ceo_image')  
 				<?php endif; ?>
 
 				<?php if ($description) : ?>
-					<div class="block-about-ceo__body fs-6">
+					<div class="block-about-ceo__body fs-6 text-justify">
 						<?php echo wp_kses_post($description); ?>
 					</div>
 				<?php endif; ?>

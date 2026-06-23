@@ -27,14 +27,14 @@ $color-blue-800: #0c6197;
 $color-blue-1000: #001019;
 
 // ─── Familias tipográficas ────────────────────────────────────────────────────
-$font-family-light:  "PlusJakarta-Light", system-ui, sans-serif;
-$font-family-black:  "PlusJakarta-Bold",  system-ui, sans-serif;
-$font-family-relieo:  "Relieo",            system-ui, sans-serif;
-$font-family-miguer:  "MiguerSans",        system-ui, sans-serif;
+$font-family-light: "PlusJakarta-Light", system-ui, sans-serif;
+$font-family-black: "PlusJakarta-Bold", system-ui, sans-serif;
+$font-family-relieo: "Relieo", system-ui, sans-serif;
+$font-family-miguer: "MiguerSans", system-ui, sans-serif;
 
 // Pesos asociados a cada familia — deben coincidir con font-weight en _fonts.scss
-$font-weight-light:  300;
-$font-weight-black:  700;
+$font-weight-light: 300;
+$font-weight-black: 700;
 $font-weight-relieo: 400;
 $font-weight-miguer: 900; // Black por defecto; 800 = ExtraBold, 700 = Bold
 
@@ -52,9 +52,9 @@ $lh-h3: 1.15;
 $font-h4: to-rem(32);
 $lh-h4: 1.35;
 $font-h5: to-rem(24);
-$lh-h5: 1.35;
-$font-h6: to-rem(16);
-$lh-h6: 1.35;
+$lh-h5: 1.45;
+$font-h6: to-rem(18);
+$lh-h6: 1.55;
 $font-small: to-rem(14);
 $lh-small: 1.35;
 

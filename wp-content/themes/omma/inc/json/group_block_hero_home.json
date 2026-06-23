@@ -3,6 +3,28 @@
     "title": "Block Hero Home",
     "fields": [
         {
+            "key": "field_bhh_media_type",
+            "label": "Tipo de fondo",
+            "name": "block_hero_home_media_type",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "image": "Imagen",
+                "video": "Vídeo"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "image",
+            "return_format": "value",
+            "allow_in_bindings": 0,
+            "save_other_choice": 0,
+            "layout": "horizontal"
+        },
+        {
             "key": "field_bhh_image",
             "label": "Imagen de fondo",
             "name": "block_hero_home_image",
@@ -10,7 +32,15 @@
             "type": "image",
             "instructions": "Imagen a pantalla completa. Mínimo recomendado: 1920×1080px.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_bhh_media_type",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
             "wrapper": { "width": "", "class": "", "id": "" },
             "return_format": "array",
             "library": "all",
@@ -23,6 +53,31 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_bhh_video",
+            "label": "Vídeo de fondo",
+            "name": "block_hero_home_video",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Archivo de vídeo (MP4 recomendado). Se reproducirá en bucle, silenciado y sin controles.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_bhh_media_type",
+                        "operator": "==",
+                        "value": "video"
+                    }
+                ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "mp4,webm,ogg",
+            "allow_in_bindings": 0
         },
         {
             "key": "field_bhh_title",
@@ -130,5 +185,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1749772800
+    "modified": 1782172800
 }

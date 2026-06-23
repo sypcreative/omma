@@ -2,21 +2,37 @@
 
 /**
  * Block: Hero Home
- * Fields: block_hero_home_image, block_hero_home_title,
+ * Fields: block_hero_home_media_type, block_hero_home_image,
+ *         block_hero_home_video, block_hero_home_title,
  *         block_hero_home_subtitle, block_hero_home_buttons
  */
 
-$image    = get_field('block_hero_home_image');
-$title    = get_field('block_hero_home_title');
-$subtitle = get_field('block_hero_home_subtitle');
-$buttons  = get_field('block_hero_home_buttons');
+$media_type = get_field('block_hero_home_media_type') ?: 'image';
+$image      = get_field('block_hero_home_image');
+$video      = get_field('block_hero_home_video');
+$title      = get_field('block_hero_home_title');
+$subtitle   = get_field('block_hero_home_subtitle');
+$buttons    = get_field('block_hero_home_buttons');
 
 ?>
 
 <section class="block-hero-home overflow-hidden vh-100 d-flex flex-column">
 
-	<!-- Imagen de fondo -->
-	<?php if ($image) : ?>
+	<!-- Fondo: imagen o vídeo -->
+	<?php if ($media_type === 'video' && $video) : ?>
+		<div class="block-hero-home__bg position-absolute top-0 start-0 w-100 h-100">
+			<video
+				class="w-100 h-100 object-fit-cover"
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="auto"
+			>
+				<source src="<?php echo esc_url($video['url']); ?>" type="<?php echo esc_attr($video['mime_type']); ?>">
+			</video>
+		</div>
+	<?php elseif ($image) : ?>
 		<div class="block-hero-home__bg position-absolute top-0 start-0 w-100 h-100">
 			<?php echo wp_get_attachment_image(
 				$image['ID'],
